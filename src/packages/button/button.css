@@ -1,0 +1,113 @@
+.btn-button {
+    backface-visibility: hidden;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+    background: #446ade;
+    border-radius: 0100px;
+    border: 3px solid #ffffff;
+    padding: 13px 16px 12px 16px;
+    color: #ffffff;
+    height: 54px;
+    font-size: 16px;
+    font-family: arial, serif;
+    font-weight: 300;
+    font-style: normal;
+    width: 100%;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .btn-button {
+        font-size: 16px;
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .btn-button {
+        font-size: 14px;
+        height: 46px;
+    }
+}
+
+
+.btn-button[disabled] {
+    cursor: not-allowed;
+    background: #999999;
+    transition: all .3s;
+}
+
+.btn-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Button Loading Start */
+
+.btn-loading-wrapper {
+    /*display: flex;*/
+}
+
+.btn-loading-start {
+    opacity: 1;
+    animation: show-dot .3s ease-in-out both;
+}
+
+@keyframes show-dot {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 20px;
+        opacity: 1;
+    }
+}
+
+.btn-loading-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+    margin-left: 8px;
+
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bounce-delay 1.4s infinite ease-in-out both;
+    animation: sk-bounce-delay 1.4s infinite ease-in-out both;
+}
+
+.bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bounce-delay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes sk-bounce-delay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+}
+
+/* Button Loading End */

@@ -1,26 +1,44 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "rootDir": ".",
+    "declaration": false,
+    "noEmit": true,
+    "emitDeclarationOnly": false,
+    "outDir": "dist",
+    "target": "esnext",
+    "module": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "sourceMap": true,
+    "jsx": "react",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": true, //删除注释
+    // "downlevelIteration": true,
+    // "allowJs": true,
+    // "skipLibCheck": true,
+    // "strict": true,
+    // "forceConsistentCasingInFileNames": true,
+    // "resolveJsonModule": true,
+    // "noEmit": true,
+    // "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "packages/**/*.stories.tsx",
+    "packages/**/*.test.tsx",
+    "packages/**/__example__"
   ]
 }
