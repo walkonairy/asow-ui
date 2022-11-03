@@ -1,11 +1,9 @@
 const path = require("path");
 const { writeFile } = require("fs-extra");
-const packageInfo = require("../dist/package.json");
+const packageInfo = require("../package.json");
 const { exec } = require("child_process");
 
 const { name } = packageInfo;
-
-const distCwd = path.resolve(__dirname, "..", "dist");
 
 const runCommand = (command, cwd) => {
   return new Promise((resolve, reject) => {
@@ -36,6 +34,9 @@ const writeJson = (targetPath, obj) =>
 
   await writeJson(targetPath, newPackageData);
 
-  await runCommand("npm version patch", distCwd);
-  await runCommand("npm publish", distCwd);
+  await runCommand("git add .");
+  await runCommand("git commit -m 'publish to npm'");
+
+  await runCommand("npm version patch");
+  await runCommand("npm publish");
 })();

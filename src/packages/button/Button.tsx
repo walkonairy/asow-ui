@@ -4,8 +4,7 @@ import classNames from "classnames";
 import { getPrefixCls } from "@/utils/prefixCls";
 // import "./button.css";
 import "./styles/_index.scss";
-import { ResponsiveObj, Token, useSize } from "@/hooks/useSize";
-import { Box } from "@chakra-ui/react";
+import { ResponsiveObj, useSize } from "@/hooks/useSize";
 
 export type ButtonType =
   | "default"
@@ -60,7 +59,6 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
 
   return (
     <>
-      <Box w={{ base: "123" }} />
       <button
         {...(rest as NativeButtonProps)}
         className={_classNames}
