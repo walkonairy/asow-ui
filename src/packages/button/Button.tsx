@@ -2,9 +2,8 @@ import React, { forwardRef } from "react";
 import classNames from "classnames";
 
 import { getPrefixCls } from "@/utils/prefixCls";
-// import "./button.css";
+import { ResponsiveObj } from "@/hooks/useSize";
 import "./styles/_index.scss";
-import { ResponsiveObj, useSize } from "@/hooks/useSize";
 
 export type ButtonType =
   | "default"
@@ -53,9 +52,6 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
 
   const prefixCls: string = getPrefixCls("btn");
   const _classNames = classNames(prefixCls, {}, className);
-
-  const re_size = useSize({ base: "red", md: "#333", lg: "#666" });
-  console.log(re_size);
 
   return (
     <>
