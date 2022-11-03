@@ -1,9 +1,13 @@
 const fs = require("fs");
+
 export const getFolders = (entry) => {
   const dirs = fs.readdirSync(entry);
-  return dirs
-    .filter((name) => name !== "index.ts")
-    .filter((name) => name !== "utils");
+  return (
+    dirs
+      // 不编译src下的 index.ts 跟 bin文件夹
+      .filter((name) => name !== "index.ts")
+      .filter((name) => name !== "bin")
+  );
 };
 
 export const getFiles = (entry, extensions = [], excludeExtensions = []) => {

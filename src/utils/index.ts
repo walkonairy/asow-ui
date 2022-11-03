@@ -1,0 +1,1 @@
+export { getPrefixCls } from "./prefixCls";

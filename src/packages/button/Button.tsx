@@ -1,79 +1,76 @@
-import React, {
-  AnchorHTMLAttributes,
-  forwardRef,
-  MouseEventHandler,
-  useEffect,
-} from "react";
-import { Box, ButtonProps as ChakraButtonProps } from "@chakra-ui/react";
+import React, { forwardRef } from "react";
+import classNames from "classnames";
 
-import "./button.css";
+import { getPrefixCls } from "@/utils/prefixCls";
+// import "./button.css";
+import "./styles/_index.scss";
+import { ResponsiveObj, Token, useSize } from "@/hooks/useSize";
+import { Box } from "@chakra-ui/react";
 
-export type AnchorButtonProps = {
-  href?: string;
-  target?: string;
-  onClick?: MouseEventHandler<HTMLElement>;
-} & BaseButtonProps &
-  // 去除AnchorHTMLAttributes<any>中的type和onClick
-  Omit<AnchorHTMLAttributes<any>, "type" | "onClick">;
+export type ButtonType =
+  | "default"
+  | "primary"
+  | "ghost"
+  | "dashed"
+  | "link"
+  | "text";
 
-export interface BaseButtonProps extends ChakraButtonProps {
+export type ButtonHTMLType = "submit" | "button" | "reset";
+
+export interface BaseButtonProps {
+  type?: ButtonType | ResponsiveObj<ButtonType>;
   className?: string;
-  ghost?: boolean;
   danger?: boolean;
   disabled?: boolean;
   loading?: boolean;
-  children?: React.ReactElement;
+  children?: React.ReactElement | string;
 }
 
-export type ButtonProps = Partial<AnchorButtonProps>;
+export type NativeButtonProps = {
+  htmlType?: ButtonHTMLType;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+} & BaseButtonProps &
+  Omit<React.ButtonHTMLAttributes<any>, "type" | "onClick">;
 
-const btnWrapperId = `btn-${Math.random().toString(36).slice(-8)}`;
-const loadingWrapperId = `btn-loading-${Math.random().toString(36).slice(-8)}`;
+export type AnchorButtonProps = {
+  href: string;
+  target?: string;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+} & BaseButtonProps &
+  Omit<React.AnchorHTMLAttributes<any>, "type" | "onClick">;
+
+export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>;
 
 const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
-  const { children, id, loading = false, disabled = false, ...rest } = props;
-  const _btnWrapperId = id || btnWrapperId;
+  const {
+    children,
+    id,
+    loading = false,
+    disabled = false,
+    className,
+    htmlType = "button" as ButtonProps["htmlType"],
+    ...rest
+  } = props;
 
-  useEffect(() => {
-    const loadingWrapperElements = document.getElementById(loadingWrapperId);
+  const prefixCls: string = getPrefixCls("btn");
+  const _classNames = classNames(prefixCls, {}, className);
 
-    if (loading) {
-      loadingWrapperElements.classList.add("btn-loading-start");
-      for (let i = 0; i < loadingWrapperElements.children.length; i++) {
-        loadingWrapperElements.children[i].classList.add("btn-loading-dot");
-      }
-    } else {
-      loadingWrapperElements?.classList?.remove("btn-loading-start");
-      for (let i = 0; i < loadingWrapperElements?.children?.length; i++) {
-        loadingWrapperElements.children[i].classList.remove("btn-loading-dot");
-      }
-    }
-  }, [loading]);
+  const re_size = useSize({ base: "red", md: "#333", lg: "#666" });
+  console.log(re_size);
 
   return (
-    <Box
-      as="button"
-      id={_btnWrapperId}
-      className="btn-button"
-      ref={ref}
-      disabled={disabled}
-      _hover={{
-        filter: disabled ? "unset" : "brightness(1.2)",
-        transition: "all .3s",
-      }}
-      {...rest}
-    >
-      <div className="btn-content">
+    <>
+      <Box w={{ base: "123" }} />
+      <button
+        {...(rest as NativeButtonProps)}
+        className={_classNames}
+        type={htmlType}
+        ref={ref}
+        disabled={disabled}
+      >
         <div>{children}</div>
-        {loading && (
-          <div id={loadingWrapperId} className="btn-loading-wrapper">
-            <div className="bounce1" />
-            <div className="bounce2" />
-            <div />
-          </div>
-        )}
-      </div>
-    </Box>
+      </button>
+    </>
   );
 });
 

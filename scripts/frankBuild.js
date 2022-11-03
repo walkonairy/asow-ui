@@ -14,6 +14,7 @@ async function createPackageFile() {
   );
   const { scripts, devDependencies, ...packageOthers } =
     JSON.parse(packageData);
+
   const newPackageData = {
     ...packageOthers,
     private: false,

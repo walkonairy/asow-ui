@@ -1,0 +1,30 @@
+@import "./src/styles/core/prefixcls";
+@import "./mixins";
+
+.#{$prefix-cls}btn {
+  @include btn();
+
+  &-default {
+
+  }
+
+  &-primary {
+
+  }
+
+  &-dashed {
+
+  }
+
+  &-link {
+
+  }
+
+  &-ghost {
+
+  }
+
+  &-text {
+
+  }
+}

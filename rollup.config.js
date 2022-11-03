@@ -21,7 +21,7 @@ const componentsEntry = componentsName.map(
   (name) => `${componentsDir}/${name}/index.ts`
 );
 
-// const utilsEntry = "src/utils/index.ts";
+const utilsEntry = "src/utils/index.ts";
 
 console.log("=============", componentsEntry, "=============");
 
@@ -91,7 +91,7 @@ const processScss = function (context) {
 // ES Module打包输出
 const esmOutput = {
   preserveModules: true,
-  // preserveModulesRoot: 'src',
+  // preserveModulesRoot: "src",
   // exports: 'named',
   assetFileNames: ({ name }) => {
     const { ext, dir, base } = path.parse(name);
@@ -104,7 +104,7 @@ const esmOutput = {
 export default () => {
   return [
     {
-      input: [entry, ...componentsEntry],
+      input: [entry, ...componentsEntry, utilsEntry],
       output: { ...esmOutput, dir: "dist/", format: "es" },
       external: externalConfig,
       plugins: [
@@ -116,7 +116,7 @@ export default () => {
       ],
     },
     {
-      input: [entry, ...componentsEntry],
+      input: [entry, ...componentsEntry, utilsEntry],
       output: { ...esmOutput, dir: "dist/type", format: "es" },
       external: externalConfig,
       plugins: [
