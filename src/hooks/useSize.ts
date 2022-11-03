@@ -48,7 +48,6 @@ export const useSize = (size: ResponsiveObj<string>) => {
 
   const response = useResponsive();
   const computeResponsiveObj = computeSizeObj(size);
-  console.log(computeResponsiveObj);
 
   let responseKey;
   for (const boolean in response) {

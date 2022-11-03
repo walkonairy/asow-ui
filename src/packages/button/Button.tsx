@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import classNames from "classnames";
 
 import { getPrefixCls } from "@/utils/prefixCls";
-import { ResponsiveObj } from "@/hooks/useSize";
+import { Token, useSize } from "@/hooks/useSize";
 import "./styles/_index.scss";
 
 export type ButtonType =
@@ -15,8 +15,11 @@ export type ButtonType =
 
 export type ButtonHTMLType = "submit" | "button" | "reset";
 
+export type ButtonSize = "small" | "middle" | "large";
+
 export interface BaseButtonProps {
-  type?: ButtonType | ResponsiveObj<ButtonType>;
+  type?: Token<ButtonType>;
+  size?: Token<ButtonSize>;
   className?: string;
   danger?: boolean;
   disabled?: boolean;
@@ -46,12 +49,27 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
     loading = false,
     disabled = false,
     className,
+    type,
+    size,
     htmlType = "button" as ButtonProps["htmlType"],
     ...rest
   } = props;
 
   const prefixCls: string = getPrefixCls("btn");
-  const _classNames = classNames(prefixCls, {}, className);
+
+  const _type = useSize(type);
+  const _size = useSize(size);
+
+  console.log(_type, _size);
+
+  const _classNames = classNames(
+    prefixCls,
+    {
+      [`${prefixCls}-${_type}`]: _type,
+      [`${prefixCls}-${_size}`]: _size,
+    },
+    className
+  );
 
   return (
     <>

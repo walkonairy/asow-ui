@@ -1,14 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-// import "./styles/index.scss";
-
-import Button from "@/packages/button";
-import "@asow/ui/dist/index.css";
+import ExButton from "@/packages/button/__expample__/ExButton";
 
 ReactDOM.render(
   <>
-    <Button type="link">button</Button>
+    <ExButton />
   </>,
   document.getElementById("root")
 );
