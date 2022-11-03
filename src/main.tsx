@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 
 // import "./styles/index.scss";
 
-import Button from "@/packages/button";
+import { Button } from "@asow/ui";
+import "@asow/ui/dist/index.css";
 
 ReactDOM.render(
   <>
