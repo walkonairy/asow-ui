@@ -10,67 +10,11 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@asow/ui@^0.2.10":
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.2.10.tgz#88fcfde998a76bdb42f03b17a6ff575ba5740948"
-  integrity sha512-V2KsJFz3QDMrbZZQKcShDpYEg8BXQXCtiKcfMILitY+dyM02l7hqVmUkB1CLta5YrWDFFFkWGzolifqCDhs9jQ==
+"@asow/ui@^0.2.22":
+  version "0.2.22"
+  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.2.22.tgz#253816008bb7ef5d31fd6ae4b7b1ff91206db1e9"
+  integrity sha512-3cxKNHoBnAcemkiaQ2BjcWpHlKR0z9/XYLnJ69/4mUeX4sFA2iWAk427GO1VcppNtgJzxr7bvoUg/NerpXnOTQ==
   dependencies:
-    "@asow/ui" "^0.2.9"
-    "@types/node" "^17.0.21"
-    "@types/react" "^17.0.33"
-    classnames "^2.3.1"
-    react "^17.0.2"
-    react-dom "^17.0.2"
-    react-is "^18.0.0"
-    typescript "^4.5.4"
-
-"@asow/ui@^0.2.12":
-  version "0.2.12"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.2.12.tgz#38333c9be347eaf1681658c217cd2f73f35a3837"
-  integrity sha512-89KKrj8nra/muwpy711wngluJmzFAN9WPIK5rDZjBh7Rrg4JzBd8O8KROvXQr9FeCcQc+1Y1IFVTdN5KWVNGag==
-  dependencies:
-    "@asow/ui" "^0.2.10"
-    "@types/node" "^17.0.21"
-    "@types/react" "^17.0.33"
-    classnames "^2.3.1"
-    react "^17.0.2"
-    react-dom "^17.0.2"
-    react-is "^18.0.0"
-    typescript "^4.5.4"
-
-"@asow/ui@^0.2.21":
-  version "0.2.21"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.2.21.tgz#15b29f20720e5c4c01f4c4a1f2aba05535c34d9a"
-  integrity sha512-xSRjhv+p+ouvnWxKmt7OunRlqHG4KyqapfEWNw86MzziGXewHVOUnn+uV84jmJOutBekYcI82AyH4K26p7wnxg==
-  dependencies:
-    "@asow/ui" "^0.2.12"
-    "@types/node" "^17.0.21"
-    "@types/react" "^17.0.33"
-    classnames "^2.3.1"
-    react "^17.0.2"
-    react-dom "^17.0.2"
-    react-is "^18.0.0"
-    typescript "^4.5.4"
-
-"@asow/ui@^0.2.8":
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.2.8.tgz#8c8b39226b6aaa0c8fd5967c47c88b2cb89176fd"
-  integrity sha512-PUUmdT9EyY9v/B8ek3Ydirm9YbEJStt7/yfhsYNROj39tyB8PlFQSuciAemmo97F/t5hjeCA2sKeGV5MV3PIzg==
-  dependencies:
-    "@types/node" "^17.0.21"
-    "@types/react" "^17.0.33"
-    classnames "^2.3.1"
-    react "^17.0.2"
-    react-dom "^17.0.2"
-    react-is "^18.0.0"
-    typescript "^4.5.4"
-
-"@asow/ui@^0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.2.9.tgz#cd6795b532d6fa40418c6cefe0a853fdd0499aa0"
-  integrity sha512-MRRnABwA5RxDn3UM+nrwgbChCWOEEwA38ROX74dC4zQFgLQu7VIxwN0Xe2N65hjoEx0RjAhKDQEDKGlsUy/26A==
-  dependencies:
-    "@asow/ui" "^0.2.8"
     "@types/node" "^17.0.21"
     "@types/react" "^17.0.33"
     classnames "^2.3.1"

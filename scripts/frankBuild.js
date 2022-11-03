@@ -40,7 +40,6 @@ async function run() {
   try {
     await createPackageFile();
     await includeFileInBuild("./README.md");
-    // await includeFileInBuild('../../LICENSE');
   } catch (err) {
     console.error(err);
     process.exit(1);
