@@ -1,0 +1,134 @@
+$white: #FFFFFF !default;
+$black: #000000 !default;
+
+$whiteAlpha-50: rgba(255, 255, 255, 0.04) !default;
+$whiteAlpha-100: rgba(255, 255, 255, 0.06) !default;
+$whiteAlpha-200: rgba(255, 255, 255, 0.08) !default;
+$whiteAlpha-300: rgba(255, 255, 255, 0.16) !default;
+$whiteAlpha-400: rgba(255, 255, 255, 0.24) !default;
+$whiteAlpha-500: rgba(255, 255, 255, 0.36) !default;
+$whiteAlpha-600: rgba(255, 255, 255, 0.48) !default;
+$whiteAlpha-700: rgba(255, 255, 255, 0.64) !default;
+$whiteAlpha-800: rgba(255, 255, 255, 0.80) !default;
+$whiteAlpha-900: rgba(255, 255, 255, 0.92) !default;
+
+$blackAlpha-50: rgba(0, 0, 0, 0.04) !default;
+$blackAlpha-100: rgba(0, 0, 0, 0.06) !default;
+$blackAlpha-200: rgba(0, 0, 0, 0.08) !default;
+$blackAlpha-300: rgba(0, 0, 0, 0.16) !default;
+$blackAlpha-400: rgba(0, 0, 0, 0.24) !default;
+$blackAlpha-500: rgba(0, 0, 0, 0.36) !default;
+$blackAlpha-600: rgba(0, 0, 0, 0.48) !default;
+$blackAlpha-700: rgba(0, 0, 0, 0.64) !default;
+$blackAlpha-800: rgba(0, 0, 0, 0.80) !default;
+$blackAlpha-900: rgba(0, 0, 0, 0.92) !default;
+
+$gray-50: #F7FAFC !default;
+$gray-100: #EDF2F7 !default;
+$gray-200: #E2E8F0 !default;
+$gray-300: #CBD5E0 !default;
+$gray-400: #A0AEC0 !default;
+$gray-500: #718096 !default;
+$gray-600: #4A5568 !default;
+$gray-700: #2D3748 !default;
+$gray-800: #1A202C !default;
+$gray-900: #171923 !default;
+
+$red-50: #FFF5F5 !default;
+$red-100: #FED7D7 !default;
+$red-200: #FEB2B2 !default;
+$red-300: #FC8181 !default;
+$red-400: #F56565 !default;
+$red-500: #E53E3E !default;
+$red-600: #C53030 !default;
+$red-700: #9B2C2C !default;
+$red-800: #822727 !default;
+$red-900: #63171B !default;
+
+$orange-50: #FFFAF0 !default;
+$orange-100: #FEEBC8 !default;
+$orange-200: #FBD38D !default;
+$orange-300: #F6AD55 !default;
+$orange-400: #ED8936 !default;
+$orange-500: #DD6B20 !default;
+$orange-600: #C05621 !default;
+$orange-700: #9C4221 !default;
+$orange-800: #7B341E !default;
+$orange-900: #652B19 !default;
+
+$yellow-50: #FFFFF0 !default;
+$yellow-100: #FEFCBF !default;
+$yellow-200: #FAF089 !default;
+$yellow-300: #F6E05E !default;
+$yellow-400: #ECC94B !default;
+$yellow-500: #D69E2E !default;
+$yellow-600: #B7791F !default;
+$yellow-700: #975A16 !default;
+$yellow-800: #744210 !default;
+$yellow-900: #5F370E !default;
+
+$green-50: #F0FFF4 !default;
+$green-100: #C6F6D5 !default;
+$green-200: #9AE6B4 !default;
+$green-300: #68D391 !default;
+$green-400: #48BB78 !default;
+$green-500: #38A169 !default;
+$green-600: #2F855A !default;
+$green-700: #276749 !default;
+$green-800: #22543D !default;
+$green-900: #1C4532 !default;
+
+$teal-50: #E6FFFA !default;
+$teal-100: #B2F5EA !default;
+$teal-200: #81E6D9 !default;
+$teal-300: #4FD1C5 !default;
+$teal-400: #38B2AC !default;
+$teal-500: #319795 !default;
+$teal-600: #2C7A7B !default;
+$teal-700: #285E61 !default;
+$teal-800: #234E52 !default;
+$teal-900: #1D4044 !default;
+
+$blue-50: #ebf8ff !default;
+$blue-100: #bee3f8 !default;
+$blue-200: #90cdf4 !default;
+$blue-300: #63b3ed !default;
+$blue-400: #4299e1 !default;
+$blue-500: #3182ce !default;
+$blue-600: #2b6cb0 !default;
+$blue-700: #2c5282 !default;
+$blue-800: #2a4365 !default;
+$blue-900: #1A365D !default;
+
+$cyan-50: #EDFDFD !default;
+$cyan-100: #C4F1F9 !default;
+$cyan-200: #9DECF9 !default;
+$cyan-300: #76E4F7 !default;
+$cyan-400: #0BC5EA !default;
+$cyan-500: #00B5D8 !default;
+$cyan-600: #00A3C4 !default;
+$cyan-700: #0987A0 !default;
+$cyan-800: #086F83 !default;
+$blue-900: #065666 !default;
+
+$purple-50: #FAF5FF !default;
+$purple-100: #E9D8FD !default;
+$purple-200: #D6BCFA !default;
+$purple-300: #B794F4 !default;
+$purple-400: #9F7AEA !default;
+$purple-500: #805AD5 !default;
+$purple-600: #6B46C1 !default;
+$purple-700: #553C9A !default;
+$purple-800: #44337A !default;
+$purple-900: #322659 !default;
+
+$pink-50: #FFF5F7 !default;
+$pink-100: #FED7E2 !default;
+$pink-200: #FBB6CE !default;
+$pink-300: #F687B3 !default;
+$pink-400: #ED64A6 !default;
+$pink-500: #D53F8C !default;
+$pink-600: #B83280 !default;
+$pink-700: #97266D !default;
+$pink-800: #702459 !default;
+$pink-900: #521B41 !default;

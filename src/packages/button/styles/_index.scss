@@ -4,27 +4,46 @@
 .#{$prefix-cls}btn {
   @include btn();
 
-  &-default {
+  /**
+   Size
+  */
+  &-sm {
+    @include btn-variable-size(14px, $btn-height-sm, 0px 7px)
+  }
 
+  &-md {
+    @include btn-variable-size(14px, $btn-height-md, 4px 15px)
+  }
+
+  &-lg {
+    @include btn-variable-size(16px, $btn-height-lg, 6.4px 15px)
+  }
+
+
+  /**
+   Type
+  */
+  &-default {
+    @include btn-default();
   }
 
   &-primary {
-
+    @include btn-primary();
   }
 
   &-dashed {
-
+    @include btn-dashed();
   }
 
   &-link {
-
+    @include btn-link();
   }
 
   &-ghost {
-
+    @include btn-ghost();
   }
 
   &-text {
-
+    @include btn-text();
   }
 }

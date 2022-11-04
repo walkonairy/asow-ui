@@ -4,7 +4,44 @@ import Button from "@/packages/button";
 const ExButton = () => {
   return (
     <>
-      <Button type={{ base: "link", md: "default" }}>123</Button>
+      <div
+        style={{
+          display: "flex",
+          gap: "16px",
+          flexFlow: "wrap",
+        }}
+      >
+        <Button
+          type="primary"
+          size={{ base: "small", md: "middle", lg: "large" }}
+        >
+          Responsive
+        </Button>
+
+        <Button type="primary" size="large">
+          Large
+        </Button>
+
+        <Button type="default" size="large">
+          Default
+        </Button>
+
+        <Button type="dashed" size="large">
+          Dashed
+        </Button>
+
+        <Button type="link" size="large">
+          Link
+        </Button>
+
+        <Button type="text" size="large">
+          Text
+        </Button>
+
+        <Button type="primary" size="large" disabled>
+          Disabled
+        </Button>
+      </div>
     </>
   );
 };

@@ -57,7 +57,7 @@
     "typescript": "^4.5.4"
   },
   "devDependencies": {
-    "@asow/ui": "^0.2.23",
+    "@asow/ui": "^0.2.25",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",

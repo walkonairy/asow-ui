@@ -1,18 +1,133 @@
-@mixin btn(){
-  backface-visibility: hidden;
+@import "../../../styles/core/default";
+@import "../../../styles/core/variabel";
+
+@mixin btn() {
   position: relative;
   cursor: pointer;
   display: inline-block;
   white-space: nowrap;
-  background: #446ade;
-  border-radius: 0100px;
-  border: 3px solid #ffffff;
-  padding: 13px 16px 12px 16px;
-  color: #ffffff;
-  height: 54px;
-  font-size: 16px;
-  font-family: arial, serif;
-  font-weight: 300;
-  font-style: normal;
-  //width: 100%;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid transparent;
+  user-select: none;
+  outline: none;
+  border-radius: 6px;
+}
+
+@mixin btn-default() {
+  @include btn-variable-color($black, $white, $gray-300);
+
+  &:hover {
+    color: $primary;
+    border-color: $primary;
+    background: $gray-50;
+  }
+  &:active {
+    color: $blue-400;
+    border-color: $blue-400;
+  }
+
+  @include btn-disabled()
+}
+
+@mixin btn-primary() {
+  @include btn-variable-color($white, $primary, transparent);
+
+  &:hover {
+    background: $blue-600;
+  }
+  &:active {
+    background: $blue-900;
+  }
+
+  @include btn-disabled()
+}
+
+@mixin btn-dashed() {
+  @include btn-variable-color($black, $white, #d9d9d9);
+  border-style: dashed;
+
+  &:hover {
+    color: $primary;
+    border-color: $primary;
+  }
+  &:active {
+    color: $blue-400;
+    border-color: $blue-400;
+  }
+
+  @include btn-disabled()
+}
+
+@mixin btn-ghost() {
+  @include btn-variable-color($white, transparent, $white);
+  @include btn-disabled()
+}
+
+@mixin btn-link() {
+  @include btn-variable-color($blue-500, $white, transparent);
+
+  &:hover {
+    text-decoration: underline;
+  }
+  &:active {
+    color: $blue-800;
+  }
+
+  @include btn-disabled($btn-disabled-color, transparent, transparent)
+}
+
+@mixin btn-text() {
+  @include btn-variable-color($black, transparent, transparent);
+  box-shadow: none;
+
+  &:hover,
+  &:focus {
+    background: $gray-50;
+  }
+  &:active {
+    background: $gray-100;
+  }
+
+  @include btn-disabled($btn-disabled-color, transparent, transparent)
+}
+
+
+/*
+大小尺寸
+*/
+@mixin btn-variable-size($font-size, $height, $padding) {
+  font-size: $font-size;
+  height: $height;
+  padding: $padding;
+}
+
+/*
+颜色
+*/
+@mixin btn-variable-color($color, $background, $border) {
+  color: $color;
+  background: $background;
+  border-color: $border;
+}
+
+/*
+disabled
+ */
+@mixin btn-disabled(
+  $color: $btn-disabled-color,
+  $background: $btn-disabled-bg,
+  $border: $btn-border-color
+) {
+  &[disabled] {
+    cursor: not-allowed;
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      @include btn-variable-color($color, $background, $border);
+      text-shadow: none;
+      box-shadow: none;
+    }
+  }
 }

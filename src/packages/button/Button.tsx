@@ -3,6 +3,8 @@ import classNames from "classnames";
 
 import { getPrefixCls } from "@/utils/prefixCls";
 import { Token, useSize } from "@/hooks/useSize";
+import { Size, str2size } from "@/utils";
+
 import "./styles/_index.scss";
 
 export type ButtonType =
@@ -15,7 +17,7 @@ export type ButtonType =
 
 export type ButtonHTMLType = "submit" | "button" | "reset";
 
-export type ButtonSize = "small" | "middle" | "large";
+export type ButtonSize = Size;
 
 export interface BaseButtonProps {
   type?: Token<ButtonType>;
@@ -49,8 +51,8 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
     loading = false,
     disabled = false,
     className,
-    type,
-    size,
+    type = "default",
+    size = "middle",
     htmlType = "button" as ButtonProps["htmlType"],
     ...rest
   } = props;
@@ -60,13 +62,11 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
   const _type = useSize(type);
   const _size = useSize(size);
 
-  console.log(_type, _size);
-
   const _classNames = classNames(
     prefixCls,
     {
       [`${prefixCls}-${_type}`]: _type,
-      [`${prefixCls}-${_size}`]: _size,
+      [`${prefixCls}-${str2size(_size)}`]: _size,
     },
     className
   );

@@ -1,6 +1,6 @@
 import { useResponsive } from "@/hooks/useResponsive";
 
-type ResponsiveType = "base" | "sm" | "md" | "lg" | "xl";
+export type ResponsiveType = "base" | "sm" | "md" | "lg" | "xl";
 export type ResponsiveObj<T> = Partial<Record<ResponsiveType, T>> | string;
 export type Token<T> = T | ResponsiveObj<T>;
 
@@ -42,7 +42,8 @@ const computeSizeObj = (obj) => {
 };
 
 export const useSize = (size: ResponsiveObj<string>) => {
-  if (typeof size === "string") {
+  // 没传值或者传了个string的时候就直接返回
+  if (!size || typeof size === "string") {
     return size;
   }
 
