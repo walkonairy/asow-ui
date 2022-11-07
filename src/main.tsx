@@ -12,9 +12,8 @@ ReactDOM.render(
       <ExButton />
     </div>
     <div>
-      <Button size="large" type="primary">
-        Submit
-      </Button>
+      <Button size={{ base: "small", md: "middle" }}>Submit</Button>
+      <Button size="large">Submit</Button>
     </div>
   </div>,
   document.getElementById("root")

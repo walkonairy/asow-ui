@@ -37,6 +37,7 @@
   "exclude": [
     "node_modules",
     "lib",
+    "stories/**",
     "packages/**/*.stories.tsx",
     "packages/**/*.test.tsx",
     "packages/**/__example__"
