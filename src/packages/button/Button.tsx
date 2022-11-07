@@ -5,8 +5,6 @@ import { getPrefixCls } from "@/utils/prefixCls";
 import { Token, useSize } from "@/hooks/useSize";
 import { Size, str2size } from "@/utils";
 
-import "./styles/_index.scss";
-
 export type ButtonType =
   | "default"
   | "primary"

@@ -4,6 +4,8 @@
 .#{$prefix-cls}btn {
   @include btn();
 
+  line-height: 1.5715;
+
   /**
    Size
   */
