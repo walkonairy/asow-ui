@@ -34,8 +34,8 @@ const writeJson = (targetPath, obj) =>
 
   await writeJson(targetPath, newPackageData);
 
-  await runCommand("git add .");
-  await runCommand("git commit -m 'publish to npm'");
+  // await runCommand("git add .");
+  // await runCommand("git commit -m 'publish to npm'");
 
   await runCommand("npm version patch");
   await runCommand("npm publish");

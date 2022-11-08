@@ -1,0 +1,32 @@
+@import "./src/styles/core/prefixcls";
+
+.#{$prefix-cls}btn-loading-icon-true {
+  width: 1em;
+  height: 1em;
+  margin-right: 8px;
+  border-radius: 100%;
+  display: inline-block;
+  opacity: 1;
+
+  border: 0.05em solid transparent;
+  border-top-color: currentColor;
+  border-right-color: currentColor;
+
+  animation: circle infinite 1s linear;
+  transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.#{$prefix-cls}btn-loading-icon-false {
+  opacity: 0;
+  width: 0;
+  transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+@keyframes circle {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

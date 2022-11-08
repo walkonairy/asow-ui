@@ -1,5 +1,6 @@
 @import "./src/styles/core/prefixcls";
 @import "./mixins";
+@import "./loading";
 
 .#{$prefix-cls}btn {
   @include btn();

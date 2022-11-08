@@ -13,25 +13,28 @@ const ExButton = () => {
       >
         <Button
           type="default"
-          danger
           size={{ base: "small", md: "middle", lg: "large" }}
+          onClick={(event) => {
+            console.log(event);
+          }}
+          loading={false}
         >
           Responsive
         </Button>
 
-        <Button type="primary" size="large">
-          Large
+        <Button type="primary" size="large" loading={false}>
+          确认提交
         </Button>
 
-        <Button type="default" size="large">
+        <Button type="default" size="large" danger loading={true}>
           Default
         </Button>
 
-        <Button type="dashed" size="large">
+        <Button type="dashed" size="large" danger>
           Dashed
         </Button>
 
-        <Button type="link" size="large">
+        <Button type="link" size="large" danger loading={false}>
           Link
         </Button>
 

@@ -12,6 +12,12 @@
   user-select: none;
   outline: none;
   border-radius: 6px;
+  background: $white;
+
+  &-loading {
+    cursor: default;
+    @include btn-shadow-none(null, null, null);
+  }
 }
 
 @mixin btn-default() {
@@ -28,7 +34,7 @@
   }
 
   &-danger {
-    @include btn-variable-danger($white, $red-400, $red-400, $white, $red-300, $red-500);
+    @include btn-variable-danger($red-400, $white, $red-400, $red-400, $white, $red-400, null);
   }
 
   @include btn-box-shadow();
@@ -43,6 +49,10 @@
   }
   &:active {
     background: $blue-900;
+  }
+
+  &-danger {
+    @include btn-variable-danger($white, $red-400, $red-400, $white, $red-300, $red-300, $red-500);
   }
 
   @include btn-box-shadow();
@@ -60,6 +70,10 @@
   &:active {
     color: $blue-400;
     border-color: $blue-400;
+  }
+
+  &-danger {
+    @include btn-variable-danger($red-400, $white, $red-400, $red-400, $white, $red-400, null);
   }
 
   @include btn-box-shadow();
@@ -81,6 +95,10 @@
     color: $blue-800;
   }
 
+  &-danger {
+    @include btn-variable-danger($red-400, null, null, $red-400, null, null, null);
+  }
+
   @include btn-disabled($btn-disabled-color, transparent, transparent)
 }
 
@@ -94,6 +112,10 @@
   }
   &:active {
     background: $gray-100;
+  }
+
+  &-danger {
+    @include btn-variable-danger($red-400, null, null, $red-400, null, null, null);
   }
 
   @include btn-disabled($btn-disabled-color, transparent, transparent)
@@ -127,12 +149,13 @@
   $border,
   $hover-color,
   $hover-bg,
+  $hover-border,
   $active-bg,
 ) {
   @include btn-variable-color($color, $background, $border);
 
   &:hover {
-    @include btn-variable-color($hover-color, $hover-bg, $hover-bg);
+    @include btn-variable-color($hover-color, $hover-bg, $hover-border);
   }
   &:active {
     @include btn-variable-color($hover-color, $active-bg, $active-bg);
@@ -150,36 +173,40 @@ disabled
   &[disabled] {
     cursor: not-allowed;
 
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-      @include btn-variable-color($color, $background, $border);
-      text-shadow: none;
-      box-shadow: none;
-    }
+    @include btn-shadow-none($color, $background, $border);
+  }
+}
+
+@mixin btn-shadow-none($color,$background,$border) {
+  &,
+  &:hover,
+  &:focus,
+  &:active,
+  &:active::after,
+  &::after {
+    @include btn-variable-color($color, $background, $border);
+    text-shadow: none !important;
+    box-shadow: none !important;
+    opacity: .5;
+    text-decoration: none !important;
   }
 }
 
 /*
 点击动画
 */
-@mixin btn-box-shadow () {
+@mixin btn-box-shadow() {
   &::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    box-shadow: 0 0 0 6px $primary;
+    box-shadow: 0 0 0 7px $primary;
     opacity: 0;
-    transition: .3s;
+    transition: .4s;
   }
 
-  &:active {
-    filter: brightness(.9);
-  }
-
-  &:active:not([type="text"])::after {
+  &:active::after {
     transition: 0s;
     box-shadow: none;
     opacity: 0.4;
