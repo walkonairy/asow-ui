@@ -10,10 +10,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@asow/ui@^0.2.28":
-  version "0.2.28"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.2.28.tgz#53c1e926f4ade05046d3c2648630135d86096ab5"
-  integrity sha512-uUikKQjh0MQ2UvjhK98YB13SyfjGzEZVGcgn8nofeGBtwXws0v1vzJDt0ZTHnMylcAziqistKDP9AuWbXqgXvA==
+"@asow/ui@^0.2.29":
+  version "0.2.29"
+  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.2.29.tgz#3ad322cd4ccbc0d7bf3ddc50552c2b883a075273"
+  integrity sha512-W9cf5ONlMUn/4EelhnQjIFhyxlSGYvB1Hdud4pJy0MS5X44QLfQPoeNhIv06mazXzOWGphMVW/2Ss/R76JC99A==
   dependencies:
     "@types/node" "^17.0.21"
     "@types/react" "^17.0.33"

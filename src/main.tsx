@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import ExButton from "@/packages/button/__expample__/ExButton";
 
 import { Button } from "@asow/ui";
-import "@asow/ui/dist/index.css";
+import "./styles/index.scss";
 
 ReactDOM.render(
   <div style={{ gap: 16, display: "flex", flexDirection: "column" }}>

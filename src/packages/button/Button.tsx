@@ -42,11 +42,12 @@ export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>;
 
 const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
   const {
-    children,
     id,
+    children,
+    className,
     loading = false,
     disabled = false,
-    className,
+    danger = false,
     type = "default",
     size = "middle",
     htmlType = "button" as ButtonProps["htmlType"],
@@ -63,6 +64,7 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
     {
       [`${prefixCls}-${_type}`]: _type,
       [`${prefixCls}-${str2size(_size)}`]: _size,
+      [`${prefixCls}-${type}-danger`]: type && danger,
     },
     className
   );

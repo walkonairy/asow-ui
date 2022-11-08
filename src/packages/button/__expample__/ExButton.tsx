@@ -12,7 +12,8 @@ const ExButton = () => {
         }}
       >
         <Button
-          type="primary"
+          type="default"
+          danger
           size={{ base: "small", md: "middle", lg: "large" }}
         >
           Responsive

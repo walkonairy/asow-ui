@@ -27,7 +27,12 @@
     border-color: $blue-400;
   }
 
-  @include btn-disabled()
+  &-danger {
+    @include btn-variable-danger($white, $red-400, $red-400, $white, $red-300, $red-500);
+  }
+
+  @include btn-box-shadow();
+  @include btn-disabled();
 }
 
 @mixin btn-primary() {
@@ -40,6 +45,7 @@
     background: $blue-900;
   }
 
+  @include btn-box-shadow();
   @include btn-disabled()
 }
 
@@ -56,6 +62,7 @@
     border-color: $blue-400;
   }
 
+  @include btn-box-shadow();
   @include btn-disabled()
 }
 
@@ -112,6 +119,27 @@
 }
 
 /*
+危险类型
+*/
+@mixin btn-variable-danger(
+  $color,
+  $background,
+  $border,
+  $hover-color,
+  $hover-bg,
+  $active-bg,
+) {
+  @include btn-variable-color($color, $background, $border);
+
+  &:hover {
+    @include btn-variable-color($hover-color, $hover-bg, $hover-bg);
+  }
+  &:active {
+    @include btn-variable-color($hover-color, $active-bg, $active-bg);
+  }
+}
+
+/*
 disabled
  */
 @mixin btn-disabled(
@@ -121,6 +149,7 @@ disabled
 ) {
   &[disabled] {
     cursor: not-allowed;
+
     &,
     &:hover,
     &:focus,
@@ -129,5 +158,30 @@ disabled
       text-shadow: none;
       box-shadow: none;
     }
+  }
+}
+
+/*
+点击动画
+*/
+@mixin btn-box-shadow () {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 6px $primary;
+    opacity: 0;
+    transition: .3s;
+  }
+
+  &:active {
+    filter: brightness(.9);
+  }
+
+  &:active:not([type="text"])::after {
+    transition: 0s;
+    box-shadow: none;
+    opacity: 0.4;
   }
 }
