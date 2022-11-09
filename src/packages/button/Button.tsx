@@ -60,8 +60,8 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
 
   const prefixCls: string = getPrefixCls("btn");
 
-  const _type = useSize(type);
-  const _size = useSize(size);
+  const _type = useSize<ButtonType>(type);
+  const _size = useSize<ButtonSize>(size);
   const innerLoading = !!loading;
 
   const _classNames = classNames(
@@ -93,10 +93,8 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
   if (type === "link" && href) {
     return (
       <a href={href} className={_classNames} onClick={handleClick} {...rest}>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          {iconNode}
-          {children}
-        </div>
+        {iconNode}
+        {children}
       </a>
     );
   }
@@ -110,10 +108,8 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
       disabled={disabled}
       onClick={handleClick}
     >
-      <div style={{ display: "flex", alignItems: "center" }}>
-        {iconNode}
-        {children}
-      </div>
+      {iconNode}
+      <span>{children}</span>
     </button>
   );
 });

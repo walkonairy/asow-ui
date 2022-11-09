@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "./styles/index.scss";
 
 import ExButton from "@/packages/button/__expample__/ExButton";
-
-import { Button } from "@asow/ui";
-import "./styles/index.scss";
+import ExInput from "@/packages/input/__expample__/ExInput";
 
 ReactDOM.render(
   <div style={{ gap: 16, display: "flex", flexDirection: "column" }}>
@@ -12,8 +11,7 @@ ReactDOM.render(
       <ExButton />
     </div>
     <div>
-      <Button size={{ base: "small", md: "middle" }}>Submit</Button>
-      <Button size="large">Submit</Button>
+      <ExInput />
     </div>
   </div>,
   document.getElementById("root")
