@@ -1,0 +1,37 @@
+@import "./src/styles/core/prefixcls";
+@import "./src/styles/core/variabel";
+@import "./mixins";
+
+.#{$prefix-cls}input {
+  @include input();
+
+  line-height: 1.5715;
+
+  /**
+   Size
+  */
+  &-sm {
+    @include input-variable-size(14px, $input-height-sm, 0px 7px)
+  }
+
+  &-md {
+    @include input-variable-size(14px, $input-height-md, 4px 11px)
+  }
+
+  &-lg {
+    @include input-variable-size(16px, $input-height-lg, 6.4px 15px)
+  }
+
+  &-outline {
+
+  }
+
+  &-unstyled {
+    @include input-unstyled();
+  }
+
+  &-status-error {
+    @include input-status-error();
+  }
+
+}
