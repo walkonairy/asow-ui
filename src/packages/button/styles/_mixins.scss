@@ -1,5 +1,6 @@
 @import "../../../styles/core/default";
 @import "../../../styles/core/variabel";
+@import "../../../styles/core/theme";
 
 @mixin btn() {
   position: relative;
@@ -14,108 +15,109 @@
   border-radius: 6px;
   background: $white;
 
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: 1;
+    display: none;
+    background: #fff;
+    border-radius: inherit;
+    opacity: .35;
+    transition: opacity .2s;
+    pointer-events: none;
+  }
+
   &-loading {
     cursor: default;
-    @include btn-shadow-none(null, null, null);
-  }
-}
 
-@mixin btn-default() {
-  @include btn-variable-color($black, $white, $gray-300);
-
-  &:hover {
-    color: $primary;
-    border-color: $primary;
-    background: $gray-50;
+    &::before {
+      display: block;
+    }
   }
-  &:active {
-    color: $blue-400;
-    border-color: $blue-400;
-  }
-
-  &-danger {
-    @include btn-variable-danger($red-400, $white, $red-400, $red-400, $white, $red-400, null);
-  }
-
-  @include btn-box-shadow();
-  @include btn-disabled();
 }
 
 @mixin btn-primary() {
-  @include btn-variable-color($white, $primary, transparent);
-
-  &:hover {
-    background: $blue-600;
-  }
-  &:active {
-    background: $blue-900;
-  }
+  @include btn-color-base($white, $color-primary, transparent);
+  @include btn-color-hover(null, $blue-300, null);
+  @include btn-color-active(null, $color-primary, null);
 
   &-danger {
-    @include btn-variable-danger($white, $red-400, $red-400, $white, $red-300, $red-300, $red-500);
+    @include btn-color-base($white, $red-400, $red-400);
+    @include btn-color-hover($white, $red-300, $red-300);
+    @include btn-color-active(null, $red-500, null);
   }
 
-  @include btn-box-shadow();
   @include btn-disabled()
+}
+
+@mixin btn-default() {
+  @include btn-color-base($color-text, $white, $gray-300);
+  @include btn-color-hover($blue-600, $cyan-50, $blue-100);
+  @include btn-color-active($blue-400, null, $blue-600);
+
+  &-danger {
+    @include btn-color-base($red-400, $white, $red-400);
+    @include btn-color-hover($red-200, $white, $red-200);
+    @include btn-color-active($red-400, $white, $red-400);
+  }
+
+  @include btn-disabled();
 }
 
 @mixin btn-dashed() {
-  @include btn-variable-color($black, $white, #d9d9d9);
+  @include btn-color-base($color-text, $white, $gray-300);
+  @include btn-color-hover($primary, null, $primary);
+  @include btn-color-active($blue-400, null, $blue-400);
+
   border-style: dashed;
 
-  &:hover {
-    color: $primary;
-    border-color: $primary;
-  }
-  &:active {
-    color: $blue-400;
-    border-color: $blue-400;
-  }
-
   &-danger {
-    @include btn-variable-danger($red-400, $white, $red-400, $red-400, $white, $red-400, null);
+    @include btn-color-base($red-400, $white, $red-400);
+    @include btn-color-hover($red-200, $white, $red-200);
+    @include btn-color-active($red-400, $white, $red-400);
   }
 
-  @include btn-box-shadow();
   @include btn-disabled()
 }
 
+/*
+//todo 下个版本再说吧
+ */
 @mixin btn-ghost() {
   @include btn-variable-color($white, transparent, $white);
   @include btn-disabled()
 }
 
 @mixin btn-link() {
-  @include btn-variable-color($blue-500, $white, transparent);
+  @include btn-color-base($blue-500, $white, transparent);
+  @include btn-color-hover($blue-300, null, null);
+  @include btn-color-active($blue-600, null, null);
 
-  &:hover {
+  &:hover, &:focus {
     text-decoration: underline;
-  }
-  &:active {
-    color: $blue-800;
   }
 
   &-danger {
-    @include btn-variable-danger($red-400, null, null, $red-400, null, null, null);
+    @include btn-color-base($red-400, null, null);
+    @include btn-color-hover($red-200, null, null);
+    @include btn-color-active($red-400, null, null);
   }
 
   @include btn-disabled($btn-disabled-color, transparent, transparent)
 }
 
 @mixin btn-text() {
-  @include btn-variable-color($black, transparent, transparent);
+  @include btn-color-base($color-text, transparent, transparent);
+  @include btn-color-hover(null, $gray-50, null);
+  @include btn-color-active(null, $gray-100, null);
+
   box-shadow: none;
 
-  &:hover,
-  &:focus {
-    background: $gray-50;
-  }
-  &:active {
-    background: $gray-100;
-  }
-
   &-danger {
-    @include btn-variable-danger($red-400, null, null, $red-400, null, null, null);
+    @include btn-color-base($red-400, null, null);
+    @include btn-color-hover($red-400, null, null);
+    @include btn-color-active(null, null, null);
   }
 
   @include btn-disabled($btn-disabled-color, transparent, transparent)
@@ -140,25 +142,33 @@
   border-color: $border;
 }
 
-/*
-危险类型
-*/
-@mixin btn-variable-danger(
-  $color,
-  $background,
-  $border,
-  $hover-color,
-  $hover-bg,
-  $hover-border,
-  $active-bg,
+@mixin btn-color-base(
+  $color: null,
+  $background: null,
+  $border: null,
 ) {
   @include btn-variable-color($color, $background, $border);
+}
 
-  &:hover {
-    @include btn-variable-color($hover-color, $hover-bg, $hover-border);
+@mixin btn-color-hover(
+  $color: null,
+  $background: null,
+  $border: null,
+) {
+  &:hover, &:focus {
+    transition: none;
+    @include btn-variable-color($color, $background, $border);
   }
+}
+
+@mixin btn-color-active(
+  $color: null,
+  $background: null,
+  $border: null,
+) {
   &:active {
-    @include btn-variable-color($hover-color, $active-bg, $active-bg);
+    transition: none;
+    @include btn-variable-color($color, $background, $border);
   }
 }
 
@@ -166,14 +176,14 @@
 disabled
  */
 @mixin btn-disabled(
-  $color: $btn-disabled-color,
-  $background: $btn-disabled-bg,
-  $border: $btn-border-color
+  $color: null,
+  $background: null,
+  $border: null
 ) {
   &[disabled] {
     cursor: not-allowed;
 
-    @include btn-shadow-none($color, $background, $border);
+    @include btn-shadow-none($disabled-color-text, $disabled-bg-color, $disabled-border-color);
   }
 }
 
@@ -187,28 +197,6 @@ disabled
     @include btn-variable-color($color, $background, $border);
     text-shadow: none !important;
     box-shadow: none !important;
-    opacity: .5;
     text-decoration: none !important;
-  }
-}
-
-/*
-点击动画
-*/
-@mixin btn-box-shadow() {
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    box-shadow: 0 0 0 7px $primary;
-    opacity: 0;
-    transition: .4s;
-  }
-
-  &:active::after {
-    transition: 0s;
-    box-shadow: none;
-    opacity: 0.4;
   }
 }

@@ -1,0 +1,35 @@
+$white: #FFFFFF !default;
+$black: #000000 !default;
+
+// 主题颜色、危险颜色、警告颜色、字体颜色
+$color-primary: #3491F1;
+$color-danger: #F45151;
+$color-warning: #FFDF76;
+
+$color-text: #292A2C !default;
+$color-text-placeholder: #C0C4CC !default;
+$color-bg: #F3F6F9 !default;
+
+// 边框颜色
+$color-border-base: #C9CDD7 !default;
+$color-border-light: #DDE2EB !default;
+$color-border-lighter: #E5E8F1 !default;
+$color-border-extra-light: #F0F5FC !default;
+
+// disabled的字体颜色、边框颜色、背景颜色
+$disabled-color-text: rgba(0, 0, 0, 0.3) !default;
+$disabled-color-bg: #F5F5F5 !default;
+$disabled-color-border: #E9E9EB !default;
+
+// border-radius
+$border-radius-2: 2px !default;
+$border-radius-4: 4px !default;
+$border-radius-6: 6px !default;
+$border-radius-8: 8px !default;
+
+
+// 组件高度
+$height-xs: 16px !default;
+$height-sm: 24px !default;
+$height-md: 32px !default;
+$height-lg: 40px !default;

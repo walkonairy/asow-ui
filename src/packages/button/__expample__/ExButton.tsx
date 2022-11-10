@@ -1,9 +1,10 @@
 import React from "react";
 import Button from "@/packages/button";
+import { ButtonSize, ButtonType } from "@/packages/button/Button";
 
 const ExButton = () => {
   return (
-    <>
+    <div style={{ display: "flex", gap: 16, flexDirection: "column" }}>
       <div
         style={{
           display: "flex",
@@ -11,42 +12,91 @@ const ExButton = () => {
           flexFlow: "wrap",
         }}
       >
-        <Button
-          type="default"
-          size={{ base: "small", md: "middle", lg: "large" }}
-          onClick={(event) => {
-            console.log(event);
-          }}
-          loading={false}
-        >
+        <Button size={{ base: "small", md: "middle", lg: "large" }}>
           Responsive
         </Button>
-
-        <Button type="primary" size="large" loading={false}>
-          确认提交
-        </Button>
-
-        <Button type="default" size="large" danger loading={true}>
-          Default
-        </Button>
-
-        <Button type="dashed" size="large" danger>
-          Dashed
-        </Button>
-
-        <Button type="link" size="large" danger loading={false}>
-          Link
-        </Button>
-
-        <Button type="text" size="large">
-          Text
-        </Button>
-
-        <Button type="primary" size="large" disabled>
-          Disabled
-        </Button>
       </div>
-    </>
+
+      {["large", "middle", "small"].map((size: ButtonSize) => {
+        return ["primary", "default", "dashed", "link", "text"].map(
+          (type: ButtonType) => (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "16px",
+                  flexFlow: "wrap",
+                }}
+              >
+                <Button
+                  style={{ textTransform: "capitalize" }}
+                  type={type}
+                  size={size}
+                  debounce={1000}
+                  onClick={(e) => {
+                    console.log("111", e);
+                  }}
+                >
+                  {type}
+                </Button>
+
+                <Button
+                  style={{ textTransform: "capitalize" }}
+                  type={type}
+                  size={size}
+                  loading
+                >
+                  {type}
+                </Button>
+
+                <Button
+                  style={{ textTransform: "capitalize" }}
+                  type={type}
+                  size={size}
+                  danger
+                  onClick={(e) => {
+                    console.log("222", e);
+                  }}
+                >
+                  {type}
+                </Button>
+
+                <Button
+                  style={{ textTransform: "capitalize" }}
+                  type={type}
+                  size={size}
+                  danger
+                  loading
+                >
+                  {type}
+                </Button>
+
+                <Button
+                  style={{ textTransform: "capitalize" }}
+                  type={type}
+                  size={size}
+                  danger
+                  disabled
+                >
+                  {type}
+                </Button>
+
+                <Button
+                  style={{ textTransform: "capitalize" }}
+                  type={type}
+                  size={size}
+                  danger
+                  disabled
+                  loading
+                >
+                  {type}
+                </Button>
+              </div>
+            </>
+          )
+        );
+      })}
+    </div>
   );
 };
 

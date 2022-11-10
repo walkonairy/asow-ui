@@ -2,6 +2,10 @@
 @import "./core/default";
 @import "./core/variabel";
 @import "./core/prefixcls";
+@import "./core/theme";
 
 // button
 @import "../packages/button/styles/index";
+
+// input
+@import "../packages/input/styles/index";

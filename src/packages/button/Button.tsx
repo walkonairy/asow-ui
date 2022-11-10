@@ -3,13 +3,14 @@ import classNames from "classnames";
 
 import { getPrefixCls } from "@/utils/prefixCls";
 import { Token, useSize } from "@/hooks/useSize";
+import { useDebounce } from "@/hooks/useDebounce";
 import { Size, str2size } from "@/utils";
 import LoadingIcon from "@/packages/button/LoadingIcon";
 
 export type ButtonType =
   | "default"
   | "primary"
-  | "ghost"
+  // | "ghost"
   | "dashed"
   | "link"
   | "text";
@@ -19,13 +20,14 @@ export type ButtonHTMLType = "submit" | "button" | "reset";
 export type ButtonSize = Size;
 
 export interface BaseButtonProps {
-  type?: Token<ButtonType>;
-  size?: Token<ButtonSize>;
-  className?: string;
-  danger?: boolean;
-  disabled?: boolean;
-  loading?: boolean;
-  icon?: React.ReactNode;
+  type: Token<ButtonType>;
+  size: Token<ButtonSize>;
+  className: string;
+  danger: boolean;
+  disabled: boolean;
+  loading: boolean;
+  icon: React.ReactNode;
+  debounce: boolean | number;
   children: React.ReactNode;
 }
 
@@ -55,6 +57,8 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
     htmlType = "button" as ButtonProps["htmlType"],
     href,
     icon,
+    debounce,
+    onClick,
     ...rest
   } = props;
 
@@ -82,12 +86,21 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
       <LoadingIcon loading={innerLoading} />
     );
 
+  const debounceClick = useDebounce(
+    (e: React.MouseEvent) => onClick?.(e),
+    debounce
+  );
+
   const handleClick = (e) => {
     const { onClick } = props;
     if (innerLoading) {
       return;
     }
-    onClick?.(e);
+    if (!!debounce) {
+      debounceClick(e).then();
+    } else {
+      onClick?.(e);
+    }
   };
 
   if (type === "link" && href) {

@@ -10,6 +10,10 @@ $btn-disabled-bg: rgba(0, 0, 0, 7%);
 $btn-disabled-color: rgba(0, 0, 0, 25%);
 $btn-border-color: rgba(0, 0, 0, 7%);
 
-$inp-height-sm: $height-sm !default;
-$inp-height-md: $height-md !default;
-$inp-height-lg: $height-lg !default;
+$input-height-sm: $height-sm !default;
+$input-height-md: $height-md !default;
+$input-height-lg: $height-lg !default;
+
+$disabled-font-color: #c0c4cc;
+$disabled-bg-color: #f5f7fa;
+$disabled-border-color: #e4e7ed;
