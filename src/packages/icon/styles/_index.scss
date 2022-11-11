@@ -1,0 +1,13 @@
+@import "../../../styles/core/theme";
+
+$theme-colors: (
+        "primary": $color-primary,
+        "danger": $color-danger,
+        "warning": $color-warning
+);
+
+@each $key, $val in $theme-colors {
+  .icon-#{$key} {
+    color: $val
+  }
+}
