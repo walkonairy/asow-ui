@@ -16,7 +16,7 @@ import classNames from "classnames";
 
 export type InputType = "unstyled" | "outline";
 
-export interface BaseInputProps
+export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   size?: Token<Size>;
   type?: InputType;
@@ -24,58 +24,49 @@ export interface BaseInputProps
   className?: string;
   disabled?: boolean;
   label?: string;
+  allowClear?: boolean;
 }
 
-export interface SearchProps extends BaseInputProps {
-  //
-}
+const Input = forwardRef(
+  (props: InputProps, ref: React.RefObject<HTMLInputElement>) => {
+    const {
+      value,
+      defaultValue,
+      size = "middle",
+      type = "outline",
+      hasError = false,
+      disabled = false,
+      label,
+      className,
+      onChange,
+      ...rest
+    } = props;
+    const prefixCls: string = getPrefixCls("input");
 
-export interface PasswordProps extends BaseInputProps {
-  //
-}
+    const _size = useSize<Size>(size);
 
-export interface AreaProps extends BaseInputProps {
-  //
-}
+    const _classNames = classNames(
+      prefixCls,
+      {
+        [`${prefixCls}-${str2size(_size)}`]: _size,
+        [`${prefixCls}-${type}`]: type,
+        [`${prefixCls}-status-error`]: hasError,
+      },
+      className
+    );
 
-const Input = forwardRef((props: BaseInputProps, ref: React.RefObject<any>) => {
-  const {
-    value,
-    defaultValue,
-    size = "middle",
-    type = "outline",
-    hasError = false,
-    disabled = false,
-    label,
-    className,
-    onChange,
-    ...rest
-  } = props;
-  const prefixCls: string = getPrefixCls("input");
-
-  const _size = useSize<Size>(size);
-
-  const _classNames = classNames(
-    prefixCls,
-    {
-      [`${prefixCls}-${str2size(_size)}`]: _size,
-      [`${prefixCls}-${type}`]: type,
-      [`${prefixCls}-status-error`]: hasError,
-    },
-    className
-  );
-
-  return (
-    <>
-      <input
-        ref={ref}
-        defaultValue={defaultValue}
-        disabled={disabled}
-        className={_classNames}
-        {...rest}
-      />
-    </>
-  );
-});
+    return (
+      <>
+        <input
+          ref={ref}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          className={_classNames}
+          {...rest}
+        />
+      </>
+    );
+  }
+);
 
 export default Input;
