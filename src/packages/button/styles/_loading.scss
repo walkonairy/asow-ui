@@ -14,13 +14,13 @@
   border-right-color: currentColor;
 
   animation: circle infinite 1s linear;
-  transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .#{$prefix-cls}btn-loading-icon-false {
   opacity: 0;
   width: 0;
-  transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 @keyframes circle {

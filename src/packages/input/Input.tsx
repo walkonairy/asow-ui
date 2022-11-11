@@ -23,6 +23,7 @@ export interface BaseInputProps
   hasError?: boolean;
   className?: string;
   disabled?: boolean;
+  label?: string;
 }
 
 export interface SearchProps extends BaseInputProps {
@@ -40,11 +41,14 @@ export interface AreaProps extends BaseInputProps {
 const Input = forwardRef((props: BaseInputProps, ref: React.RefObject<any>) => {
   const {
     value,
+    defaultValue,
     size = "middle",
     type = "outline",
     hasError = false,
     disabled = false,
+    label,
     className,
+    onChange,
     ...rest
   } = props;
   const prefixCls: string = getPrefixCls("input");
@@ -65,8 +69,8 @@ const Input = forwardRef((props: BaseInputProps, ref: React.RefObject<any>) => {
     <>
       <input
         ref={ref}
+        defaultValue={defaultValue}
         disabled={disabled}
-        value={value}
         className={_classNames}
         {...rest}
       />
