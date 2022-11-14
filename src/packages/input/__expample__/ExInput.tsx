@@ -19,6 +19,7 @@ const ExInput = () => {
       />
 
       <Input
+        disabled
         placeholder="请输入"
         label="密码"
         defaultValue={"Hello World! 123~"}

@@ -10,6 +10,12 @@
   position: relative;
   height: 42px;
 
+  &[disabled] {
+    cursor: not-allowed;
+    background: $disabled-color-bg;
+    color: $disabled-color-text;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -25,6 +31,10 @@
     }
   }
 
+  &[disabled]::before {
+    opacity: 0;
+  }
+
 
   &-box {
     display: flex;
@@ -37,11 +47,9 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
   }
 
-  &-icon {
-
-  }
 }
 
 @mixin input() {
@@ -63,6 +71,7 @@
     cursor: text;
     color: $gray-200;
     margin-top: 8px;
+    z-index: 1;
 
     &-sm {
       color: $color-text;
@@ -72,17 +81,32 @@
     &-md {
       margin-top: 6px;
     }
+
+    &[disabled] {
+      cursor: not-allowed;
+      color: $disabled-color-text;
+    }
   }
 
   &-suffix {
+    color: #FFF;
+    z-index: 1;
+
     &-sm {
       padding-left: 10px;
     }
+
     &-md {
       padding-left: 12px;
     }
+
     &-lg {
       padding-left: 16px;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      color: $disabled-color-text;
     }
   }
 
@@ -133,5 +157,9 @@
     &:hover, &:focus {
       //border-color: $disabled-color-border;
     }
+  }
+
+  &[disabled]::placeholder {
+    color: $disabled-color-text;
   }
 }

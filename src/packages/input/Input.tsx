@@ -1,10 +1,15 @@
-import React, { CSSProperties, forwardRef, InputHTMLAttributes } from "react";
+import React, {
+  useRef,
+  CSSProperties,
+  forwardRef,
+  InputHTMLAttributes,
+} from "react";
 import { getPrefixCls, Size, str2size } from "@/utils";
 import { Token, useSize } from "@/hooks/useSize";
 import { Icon, IconProps } from "@/index";
 import classNames from "classnames";
 
-// size：sm、md、lg
+// size：sm、md、lg 🌟
 // type：outline、unstyled
 // hover、focus 动画
 // disabled
@@ -77,6 +82,8 @@ const Input = forwardRef(
       }
       return (
         <label
+          // @ts-ignore
+          disabled={disabled}
           htmlFor={id || label || "input-label"}
           className={`${inputCls}-label ${inputCls}-label-${str2size(_size)}`}
         >
@@ -89,7 +96,12 @@ const Input = forwardRef(
       <>
         <div>
           {size === "small" && renderLabel()}
-          <div className={wrapperClassNames} style={wrapperStyle}>
+          <div
+            // @ts-ignore
+            disabled={disabled}
+            className={wrapperClassNames}
+            style={wrapperStyle}
+          >
             <div className={`${wrapperCls}-box`}>
               <div className={`${wrapperCls}-content`}>
                 {size !== "small" && renderLabel()}
@@ -104,11 +116,13 @@ const Input = forwardRef(
               </div>
               {suffixIcon && (
                 <span
+                  // @ts-ignore
+                  disabled={disabled}
                   className={`${inputCls}-suffix ${inputCls}-suffix-${str2size(
                     _size
                   )}`}
                 >
-                  <Icon icon={suffixIcon} color="#FFF" />
+                  <Icon icon={suffixIcon} />
                 </span>
               )}
             </div>
