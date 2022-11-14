@@ -1,6 +1,7 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { CSSProperties, forwardRef, InputHTMLAttributes } from "react";
 import { getPrefixCls, Size, str2size } from "@/utils";
 import { Token, useSize } from "@/hooks/useSize";
+import { Icon, IconProps } from "@/index";
 import classNames from "classnames";
 
 // size：sm、md、lg
@@ -22,15 +23,18 @@ export interface InputProps
   type?: InputType;
   hasError?: boolean;
   className?: string;
+  wrapperClassName?: string;
+  wrapperStyle?: CSSProperties;
   disabled?: boolean;
   label?: string;
   allowClear?: boolean;
+  suffixIcon?: IconProps["icon"];
 }
 
 const Input = forwardRef(
   (props: InputProps, ref: React.RefObject<HTMLInputElement>) => {
     const {
-      value,
+      id,
       defaultValue,
       size = "middle",
       type = "outline",
@@ -38,32 +42,78 @@ const Input = forwardRef(
       disabled = false,
       label,
       className,
-      onChange,
+      wrapperClassName,
+      wrapperStyle,
+      suffixIcon,
       ...rest
     } = props;
-    const prefixCls: string = getPrefixCls("input");
 
     const _size = useSize<Size>(size);
 
-    const _classNames = classNames(
-      prefixCls,
+    const wrapperCls: string = getPrefixCls("input-wrapper");
+    const wrapperClassNames = classNames(
+      wrapperCls,
       {
-        [`${prefixCls}-${str2size(_size)}`]: _size,
-        [`${prefixCls}-${type}`]: type,
-        [`${prefixCls}-status-error`]: hasError,
+        [`${wrapperCls}-status-error`]: hasError,
+        [`${wrapperCls}-${str2size(_size)}`]: _size,
+      },
+      wrapperClassName
+    );
+
+    const inputCls: string = getPrefixCls("input");
+    const inputClassNames = classNames(
+      inputCls,
+      {
+        [`${inputCls}-${str2size(_size)}`]: _size,
+        [`${inputCls}-${type}`]: type,
+        [`${inputCls}-status-error`]: hasError,
       },
       className
     );
 
+    const renderLabel = () => {
+      if (!label) {
+        return;
+      }
+      return (
+        <label
+          htmlFor={id || label || "input-label"}
+          className={`${inputCls}-label ${inputCls}-label-${str2size(_size)}`}
+        >
+          {label}
+        </label>
+      );
+    };
+
     return (
       <>
-        <input
-          ref={ref}
-          defaultValue={defaultValue}
-          disabled={disabled}
-          className={_classNames}
-          {...rest}
-        />
+        <div>
+          {size === "small" && renderLabel()}
+          <div className={wrapperClassNames} style={wrapperStyle}>
+            <div className={`${wrapperCls}-box`}>
+              <div className={`${wrapperCls}-content`}>
+                {size !== "small" && renderLabel()}
+                <input
+                  id={id || label || "input-label"}
+                  ref={ref}
+                  defaultValue={defaultValue}
+                  disabled={disabled}
+                  className={inputClassNames}
+                  {...rest}
+                />
+              </div>
+              {suffixIcon && (
+                <span
+                  className={`${inputCls}-suffix ${inputCls}-suffix-${str2size(
+                    _size
+                  )}`}
+                >
+                  <Icon icon={suffixIcon} color="#FFF" />
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
       </>
     );
   }

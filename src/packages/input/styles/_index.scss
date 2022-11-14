@@ -2,24 +2,32 @@
 @import "./src/styles/core/variabel";
 @import "./mixins";
 
+.#{$prefix-cls}input-wrapper {
+  @include input-wrapper();
+
+  /**
+ Size
+*/
+  &-sm {
+    @include input-variable-size(14px, 40px)
+  }
+
+  &-md {
+    @include input-variable-size(14px, 52px)
+  }
+
+  &-lg {
+    @include input-variable-size(16px, 60px)
+  }
+}
+
 .#{$prefix-cls}input {
   @include input();
 
   line-height: 1.5715;
 
-  /**
-   Size
-  */
-  &-sm {
-    @include input-variable-size(14px, $input-height-sm, 0px 7px)
-  }
-
-  &-md {
-    @include input-variable-size(14px, $input-height-md, 4px 11px)
-  }
-
   &-lg {
-    @include input-variable-size(16px, $input-height-lg, 6.4px 15px)
+    @include input-variable-size(16px, null)
   }
 
   &-outline {

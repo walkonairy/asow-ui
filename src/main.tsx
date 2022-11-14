@@ -10,6 +10,8 @@ ReactDOM.render(
   <div style={{ gap: 32, display: "flex", flexDirection: "column" }}>
     <div>
       <ExInput />
+      {/*<ExButton />*/}
+      {/*<EXIcon />*/}
     </div>
   </div>,
   document.getElementById("root")

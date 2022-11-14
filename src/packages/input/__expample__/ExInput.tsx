@@ -2,23 +2,41 @@ import React from "react";
 import Input from "@/packages/input";
 
 const ExInput = () => {
+  const [value, setValue] = React.useState("");
+
   return (
-    <>
-      <div style={{ display: "flex", gap: 16, flexFlow: "wrap" }}>
-        <Input defaultValue={"Hello World! 123~"} size={"small"} />
-        <Input defaultValue={"Hello World! 123~"} size={"middle"} />
-        <Input defaultValue={"Hello World! 123~"} size={"large"} />
-        <Input
-          defaultValue={"Hello World! 123~"}
-          type={"unstyled"}
-          size={"large"}
-        />
-        <Input defaultValue={"Hello World! 123~"} size={"large"} hasError />
-        <Input defaultValue={"Hello World! 123~"} size={"large"} disabled />
-        <Input.Password visibilityToggle={true} />
-        <Input.TextArea allowClear={true} />
-      </div>
-    </>
+    <div style={{ display: "flex", gap: 16, flexFlow: "wrap" }}>
+      <Input
+        label="账号"
+        defaultValue={"Hello World! 123~"}
+        placeholder="请输入"
+        size={"large"}
+        suffixIcon="eyedropper"
+        value={value}
+        onChange={(event) => {
+          setValue(event.target.value);
+        }}
+      />
+
+      <Input
+        placeholder="请输入"
+        label="密码"
+        defaultValue={"Hello World! 123~"}
+        size={"middle"}
+        suffixIcon="eye"
+        onChange={() => {
+          console.log(value);
+        }}
+      />
+
+      <Input
+        placeholder="请输入"
+        label="二次密码"
+        defaultValue={"Hello World! 123~"}
+        size={"small"}
+        suffixIcon="eye-slash"
+      />
+    </div>
   );
 };
 
