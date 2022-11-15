@@ -8,24 +8,22 @@ import { getPrefixCls, Size, str2size } from "@/utils";
 import { Token, useSize } from "@/hooks/useSize";
 import { Icon, IconProps } from "@/index";
 import classNames from "classnames";
+import { useOnClickOutside } from "@/hooks/useOnclickOutSide";
 
 // size：sm、md、lg 🌟
 // type：outline、unstyled
-// hover、focus 动画
-// disabled
+// hover、focus 动画 🌟
+// disabled 🌟
 // error
-// 前缀（prefix）、后缀（suffix）
+// 前缀（prefix）、后缀（suffix）🌟
 // TextArea、Password
 // allow clear
 // 输入数量  1 / 30
 // autocomplete、远程搜索
 
-export type InputType = "unstyled" | "outline";
-
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   size?: Token<Size>;
-  type?: InputType;
   hasError?: boolean;
   className?: string;
   wrapperClassName?: string;
@@ -42,7 +40,6 @@ const Input = forwardRef(
       id,
       defaultValue,
       size = "middle",
-      type = "outline",
       hasError = false,
       disabled = false,
       label,
@@ -70,7 +67,6 @@ const Input = forwardRef(
       inputCls,
       {
         [`${inputCls}-${str2size(_size)}`]: _size,
-        [`${inputCls}-${type}`]: type,
         [`${inputCls}-status-error`]: hasError,
       },
       className
@@ -92,6 +88,23 @@ const Input = forwardRef(
       );
     };
 
+    /**
+     * ======= 聚焦按钮时，手动添加样式 =======
+     */
+    const divRef = useRef<HTMLDivElement>(null);
+    useOnClickOutside(() => {
+      divRef.current.classList.remove(`${wrapperCls}-focus`);
+    }, divRef);
+    const onClickInside = () => {
+      if (disabled) {
+        return;
+      }
+      divRef.current.classList.add(`${wrapperCls}-focus`);
+    };
+    /**
+     * ====================================
+     */
+
     return (
       <>
         <div>
@@ -101,9 +114,10 @@ const Input = forwardRef(
             disabled={disabled}
             className={wrapperClassNames}
             style={wrapperStyle}
+            ref={divRef}
           >
             <div className={`${wrapperCls}-box`}>
-              <div className={`${wrapperCls}-content`}>
+              <div className={`${wrapperCls}-content`} onClick={onClickInside}>
                 {size !== "small" && renderLabel()}
                 <input
                   id={id || label || "input-label"}

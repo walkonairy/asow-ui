@@ -8,7 +8,11 @@ export { default as Button } from "@/packages/button";
 export type { ButtonProps } from "@/packages/button";
 
 export { default as Input } from "@/packages/input";
-export type { InputType } from "@/packages/input";
+export type {
+  InputProps,
+  PasswordProps,
+  TextAreaProps,
+} from "@/packages/input";
 
 export { default as Icon } from "@/packages/icon";
 export type { IconProps } from "@/packages/icon";

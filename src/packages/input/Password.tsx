@@ -1,8 +1,13 @@
 import React, { forwardRef } from "react";
 import Input, { InputProps } from "@/packages/input/Input";
 
+type VisibilityToggle = {
+  visible?: boolean;
+  onVisibleChange?: (visible: boolean) => void;
+};
+
 export interface PasswordProps extends InputProps {
-  visibilityToggle?: boolean;
+  visibilityToggle?: boolean | VisibilityToggle;
   iconRender?: (visible: boolean) => React.ReactNode;
 }
 

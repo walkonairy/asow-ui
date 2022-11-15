@@ -21,6 +21,10 @@
   }
 }
 
+.#{$prefix-cls}input-wrapper-focus {
+  @include input-wrapper-focus(1);
+}
+
 .#{$prefix-cls}input {
   @include input();
 
@@ -30,13 +34,6 @@
     @include input-variable-size(16px, null)
   }
 
-  &-outline {
-
-  }
-
-  &-unstyled {
-    @include input-unstyled();
-  }
 
   &-status-error {
     @include input-status-error();
