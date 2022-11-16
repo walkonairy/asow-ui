@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "@/packages/input";
+import { Icon } from "@/index";
 
 const ExInput = () => {
   const [value, setValue] = React.useState("");
@@ -11,7 +12,7 @@ const ExInput = () => {
           label="账号"
           placeholder="请输入"
           size={"large"}
-          suffixIcon="eyedropper"
+          suffixIcon={<Icon icon="user" />}
           value={value}
           onChange={(event) => {
             setValue(event.target.value);
@@ -35,11 +36,12 @@ const ExInput = () => {
           suffixIcon="eye-slash"
         />
 
-        <Input
+        <Input.Password
           placeholder="请输入"
           label="密码类型"
           defaultValue={"Hello World! 123~"}
-          size={"small"}
+          size={"large"}
+          disabled={false}
         />
       </div>
     </>

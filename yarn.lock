@@ -10,11 +10,14 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@asow/ui@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.3.2.tgz#d2aa25ede012a22e1aa9557d7d919413e0f453a1"
-  integrity sha512-Qqs4DYUJufVk9jQ/MXYINuIi9IIXm+jLFOvp8LDkLzJ4ZnvAxGDtxtxXJqJM/uzqnKnU2DBUJBE7N//VmUaATg==
+"@asow/ui@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.3.4.tgz#90bc81b96d310b565e674e90a8ba11f045716ae1"
+  integrity sha512-D2+CeMoIInYHqgsFBbgB1i6VQnNqjqxQL84Zi994MpCptamgDhk3hF60mQMReAlJPofCLirHVa47dG1W5NZcKA==
   dependencies:
+    "@fortawesome/fontawesome-svg-core" "^6.2.0"
+    "@fortawesome/free-solid-svg-icons" "^6.2.0"
+    "@fortawesome/react-fontawesome" "^0.2.0"
     "@types/node" "^17.0.21"
     "@types/react" "^17.0.33"
     classnames "^2.3.1"
@@ -62,7 +65,7 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/core@^7.1.0", "@babel/core@^7.12.10", "@babel/core@^7.12.3", "@babel/core@^7.19.6", "@babel/core@^7.20.2", "@babel/core@^7.7.5":
+"@babel/core@^7.1.0", "@babel/core@^7.12.10", "@babel/core@^7.12.3", "@babel/core@^7.17.10", "@babel/core@^7.19.6", "@babel/core@^7.20.2", "@babel/core@^7.7.5":
   version "7.20.2"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.20.2.tgz#8dc9b1620a673f92d3624bd926dc49a52cf25b92"
   integrity sha512-w7DbG8DtMrJcFOi4VrLm+8QM4az8Mo+PuLBKLp2zrYRCow8W/f9xiXm5sN53C8HksCyDQwCKha9JiDoIyPjT2g==
@@ -77,27 +80,6 @@
     "@babel/template" "^7.18.10"
     "@babel/traverse" "^7.20.1"
     "@babel/types" "^7.20.2"
-    convert-source-map "^1.7.0"
-    debug "^4.1.0"
-    gensync "^1.0.0-beta.2"
-    json5 "^2.2.1"
-    semver "^6.3.0"
-
-"@babel/core@^7.17.10":
-  version "7.19.6"
-  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.19.6.tgz#7122ae4f5c5a37c0946c066149abd8e75f81540f"
-  integrity sha512-D2Ue4KHpc6Ys2+AxpIx1BZ8+UegLLLE2p3KJEuJRKmokHOtl49jQ5ny1773KsGLZs8MQvBidAF6yWUJxRqtKtg==
-  dependencies:
-    "@ampproject/remapping" "^2.1.0"
-    "@babel/code-frame" "^7.18.6"
-    "@babel/generator" "^7.19.6"
-    "@babel/helper-compilation-targets" "^7.19.3"
-    "@babel/helper-module-transforms" "^7.19.6"
-    "@babel/helpers" "^7.19.4"
-    "@babel/parser" "^7.19.6"
-    "@babel/template" "^7.18.10"
-    "@babel/traverse" "^7.19.6"
-    "@babel/types" "^7.19.4"
     convert-source-map "^1.7.0"
     debug "^4.1.0"
     gensync "^1.0.0-beta.2"
@@ -122,7 +104,7 @@
     "@jridgewell/gen-mapping" "^0.3.2"
     jsesc "^2.5.1"
 
-"@babel/generator@^7.19.6", "@babel/generator@^7.20.1":
+"@babel/generator@^7.20.1":
   version "7.20.1"
   resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.20.1.tgz#ef32ecd426222624cbd94871a7024639cf61a9fa"
   integrity sha512-u1dMdBUmA7Z0rBB97xh8pIhviK7oItYOkjbsCxTWMknyvbQRBwX7/gn4JXurRdirWMFh+ZtYARqkA6ydogVZpg==
@@ -405,7 +387,7 @@
     "@babel/traverse" "^7.19.0"
     "@babel/types" "^7.19.0"
 
-"@babel/helpers@^7.12.5", "@babel/helpers@^7.19.4", "@babel/helpers@^7.20.1":
+"@babel/helpers@^7.12.5", "@babel/helpers@^7.20.1":
   version "7.20.1"
   resolved "https://registry.yarnpkg.com/@babel/helpers/-/helpers-7.20.1.tgz#2ab7a0fcb0a03b5bf76629196ed63c2d7311f4c9"
   integrity sha512-J77mUVaDTUJFZ5BpP6mMn6OIl3rEWymk2ZxDBQJUG3P+PbmyMcF3bYWvz0ma69Af1oobDqT/iAsvzhB58xhQUg==
@@ -433,7 +415,7 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.19.4.tgz#03c4339d2b8971eb3beca5252bafd9b9f79db3dc"
   integrity sha512-qpVT7gtuOLjWeDTKLkJ6sryqLliBaFpAtGeqw5cs5giLldvh+Ch0plqnUMKoVAUS6ZEueQQiZV+p5pxtPitEsA==
 
-"@babel/parser@^7.19.6", "@babel/parser@^7.20.1":
+"@babel/parser@^7.20.1":
   version "7.20.1"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.20.1.tgz#3e045a92f7b4623cafc2425eddcb8cf2e54f9cc5"
   integrity sha512-hp0AYxaZJhxULfM1zyp7Wgr+pSUKBcP3M+PHnSzWGdXOzg/kHWIgiUWARvubhUKGOEw3xqY4x+lyZ9ytBVcELw==
@@ -11436,9 +11418,9 @@ vite-tsconfig-paths@^3.5.2:
     tsconfig-paths "^4.0.0"
 
 vite@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-3.2.2.tgz#280762bfaf47bcea1d12698427331c0009ac7c1f"
-  integrity sha512-pLrhatFFOWO9kS19bQ658CnRYzv0WLbsPih6R+iFeEEhDOuYgYCX2rztUViMz/uy/V8cLCJvLFeiOK7RJEzHcw==
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-3.2.3.tgz#7a68d9ef73eff7ee6dc0718ad3507adfc86944a7"
+  integrity sha512-h8jl1TZ76eGs3o2dIBSsvXDLb1m/Ec1iej8ZMdz+PsaFUsftZeWe2CZOI3qogEsMNaywc17gu0q6cQDzh/weCQ==
   dependencies:
     esbuild "^0.15.9"
     postcss "^8.4.18"

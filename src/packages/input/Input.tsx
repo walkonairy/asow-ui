@@ -31,7 +31,7 @@ export interface InputProps
   disabled?: boolean;
   label?: string;
   allowClear?: boolean;
-  suffixIcon?: IconProps["icon"];
+  suffixIcon?: IconProps["icon"] | React.ReactNode;
 }
 
 const Input = forwardRef(
@@ -88,6 +88,25 @@ const Input = forwardRef(
       );
     };
 
+    const renderSuffix = () => {
+      let _suffix =
+        typeof suffixIcon === "object" ? (
+          suffixIcon
+        ) : (
+          <Icon icon={suffixIcon as IconProps["icon"]} />
+        );
+
+      return (
+        <span
+          // @ts-ignore
+          disabled={disabled}
+          className={`${inputCls}-suffix ${inputCls}-suffix-${str2size(_size)}`}
+        >
+          {_suffix}
+        </span>
+      );
+    };
+
     /**
      * ======= 聚焦按钮时，手动添加样式 =======
      */
@@ -106,43 +125,31 @@ const Input = forwardRef(
      */
 
     return (
-      <>
-        <div>
-          {size === "small" && renderLabel()}
-          <div
-            // @ts-ignore
-            disabled={disabled}
-            className={wrapperClassNames}
-            style={wrapperStyle}
-            ref={divRef}
-          >
-            <div className={`${wrapperCls}-box`}>
-              <div className={`${wrapperCls}-content`} onClick={onClickInside}>
-                {size !== "small" && renderLabel()}
-                <input
-                  id={id || label || "input-label"}
-                  ref={ref}
-                  defaultValue={defaultValue}
-                  disabled={disabled}
-                  className={inputClassNames}
-                  {...rest}
-                />
-              </div>
-              {suffixIcon && (
-                <span
-                  // @ts-ignore
-                  disabled={disabled}
-                  className={`${inputCls}-suffix ${inputCls}-suffix-${str2size(
-                    _size
-                  )}`}
-                >
-                  <Icon icon={suffixIcon} />
-                </span>
-              )}
+      <div>
+        {size === "small" && renderLabel()}
+        <div
+          // @ts-ignore
+          disabled={disabled}
+          className={wrapperClassNames}
+          style={wrapperStyle}
+          ref={divRef}
+        >
+          <div className={`${wrapperCls}-box`}>
+            <div className={`${wrapperCls}-content`} onClick={onClickInside}>
+              {size !== "small" && renderLabel()}
+              <input
+                id={id || label || "input-label"}
+                ref={ref}
+                defaultValue={defaultValue}
+                disabled={disabled}
+                className={inputClassNames}
+                {...rest}
+              />
             </div>
+            {suffixIcon && renderSuffix()}
           </div>
         </div>
-      </>
+      </div>
     );
   }
 );
