@@ -1,3 +1,5 @@
+@import "./color";
+
 $white: #FFFFFF !default;
 $black: #000000 !default;
 
@@ -5,6 +7,7 @@ $black: #000000 !default;
 $color-primary: #3491F1;
 $color-danger: #F45151;
 $color-warning: #FFDF76;
+$color-error: $red-400;
 
 $color-text: #292A2C !default;
 $color-text-placeholder: #C0C4CC !default;

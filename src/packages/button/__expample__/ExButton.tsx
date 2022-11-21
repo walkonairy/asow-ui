@@ -12,7 +12,10 @@ const ExButton = () => {
           flexFlow: "wrap",
         }}
       >
-        <Button size={{ base: "small", md: "middle", lg: "large" }}>
+        <Button
+          size={{ base: "small", md: "middle", lg: "large" }}
+          loading={true}
+        >
           Responsive
         </Button>
       </div>

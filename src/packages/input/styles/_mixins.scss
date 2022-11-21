@@ -22,30 +22,29 @@
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px rgba(51, 54, 67, .6);
   }
 
+}
 
-  &-box {
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    height: 100%;
-  }
+@mixin input-wrapper-box() {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 100%;
+}
 
-  &-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-  }
-
+@mixin input-wrapper-content() {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 
-@mixin input-wrapper-focus($opacity: 0) {
+@mixin input-wrapper-focus($opacity: 0, $border-color: $white) {
   &::before {
     content: '';
     position: absolute;
     inset: 2px;
-    border: 2px solid #FFF;
+    border: 2px solid $border-color;
     border-radius: 16px;
     opacity: $opacity;
     transition: all 0.3s ease-in-out;
@@ -74,52 +73,6 @@
   color: white;
   height: 100%;
 
-  &-label {
-    font-size: 12px;
-    line-height: 12px;
-    font-weight: 600;
-    cursor: text;
-    color: $gray-200;
-    margin-top: 8px;
-    z-index: 1;
-
-    &-sm {
-      color: $color-text;
-      padding-left: 20px;
-    }
-
-    &-md {
-      margin-top: 6px;
-    }
-
-    &[disabled] {
-      cursor: not-allowed;
-      color: $disabled-color-text;
-    }
-  }
-
-  &-suffix {
-    color: #FFF;
-    z-index: 1;
-
-    &-sm {
-      padding-left: 10px;
-    }
-
-    &-md {
-      padding-left: 12px;
-    }
-
-    &-lg {
-      padding-left: 16px;
-    }
-
-    &[disabled] {
-      cursor: not-allowed;
-      color: $disabled-color-text;
-    }
-  }
-
   &:hover {
     //border-color: $color-primary;
   }
@@ -131,16 +84,84 @@
   @include input-disabled();
 }
 
+@mixin input-label() {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  cursor: text;
+  color: $gray-200;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  display: flex;
+  z-index: 1;
+
+  &-sm {
+    color: $color-text;
+    padding-left: 12px;
+  }
+
+  &-md {
+    margin-top: 6px;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    color: $disabled-color-text;
+  }
+
+  &-error {
+    @include input-status-error();
+  }
+}
+
+@mixin input-suffix() {
+  color: #FFF;
+  z-index: 1;
+
+  &-sm {
+    padding-left: 10px;
+  }
+
+  &-md {
+    padding-left: 12px;
+  }
+
+  &-lg {
+    padding-left: 16px;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    color: $disabled-color-text;
+  }
+
+  &-error {
+    @include input-status-error();
+  }
+}
+
+@mixin input-message() {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  margin-left: 12px;
+  margin-top: 4px;
+  color: $disabled-color-text;
+  display: flex;
+
+  &[disabled] {
+    cursor: not-allowed;
+    color: $disabled-color-text;
+  }
+
+  &-error {
+    @include input-status-error();
+  }
+}
+
 
 @mixin input-status-error() {
-  border-color: $red-400;
-  &:hover {
-    border-color: $red-400;
-  }
-  &:focus {
-    border-color: $red-400;
-    box-shadow: 0 0 0 2px rgba(255, 77, 79, .2);
-  }
+  color: $color-error;
 }
 
 @mixin input-variable-size($font-size, $height) {

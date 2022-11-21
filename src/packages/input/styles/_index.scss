@@ -5,9 +5,6 @@
 .#{$prefix-cls}input-wrapper {
   @include input-wrapper();
 
-  /**
- Size
-*/
   &-sm {
     @include input-variable-size(14px, 40px)
   }
@@ -19,10 +16,26 @@
   &-lg {
     @include input-variable-size(16px, 60px)
   }
+
+  &-box {
+    @include input-wrapper-box()
+  }
+
+  &-content {
+    @include input-wrapper-content()
+  }
+
+  &-status-error {
+    @include input-wrapper-focus(0, $color-error);
+  }
 }
 
 .#{$prefix-cls}input-wrapper-focus {
   @include input-wrapper-focus(1);
+
+  &-status-error {
+    @include input-wrapper-focus(1, $color-error);
+  }
 }
 
 .#{$prefix-cls}input {
@@ -32,6 +45,18 @@
 
   &-lg {
     @include input-variable-size(16px, null)
+  }
+
+  &-label {
+    @include input-label()
+  }
+
+  &-suffix {
+    @include input-suffix()
+  }
+
+  &-message {
+    @include input-message()
   }
 
 

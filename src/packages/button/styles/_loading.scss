@@ -2,16 +2,10 @@
 
 .#{$prefix-cls}btn-loading-icon-true {
   width: 1em;
-  height: 1em;
   margin-right: 8px;
-  border-radius: 100%;
   display: inline-block;
-  vertical-align: -0.2em;
+  vertical-align: -0.15em;
   opacity: 1;
-
-  border: 0.05em solid transparent;
-  border-top-color: currentColor;
-  border-right-color: currentColor;
 
   animation: circle infinite 1s linear;
   transition: all 0.3s ease-in-out;

@@ -1,5 +1,6 @@
 import React from "react";
 import { getPrefixCls } from "@/utils";
+import { Icon } from "@/index";
 
 export type LoadingProps = { loading: boolean };
 
@@ -9,7 +10,7 @@ const LoadingIcon = (props: LoadingProps) => {
 
   return (
     <>
-      <span className={className} />
+      <Icon icon={["fas", "spinner"]} className={className} />
     </>
   );
 };

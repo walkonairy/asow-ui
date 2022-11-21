@@ -25,6 +25,7 @@ const Password = forwardRef(
 
     const onVisibleChange = (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const { disabled } = props;
       if (disabled) {
         return;
