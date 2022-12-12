@@ -19,11 +19,13 @@ const ExInput = () => {
           label="账号"
           placeholder="请输入"
           size={{ base: "small", md: "large" }}
-          suffixIcon={<Icon icon="xmark-circle" />}
+          // suffixIcon={<Icon icon="xmark-circle" />}
           value={value}
           onChange={(event) => {
             setValue(event.target.value);
           }}
+          allowClear={true}
+          toolTip="*账号只能是字母加数字的组合"
         />
 
         <Input

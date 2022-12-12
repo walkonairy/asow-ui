@@ -124,7 +124,10 @@ const Input = forwardRef(
       );
     };
 
-    const renderSuffix = () => {
+    const renderSuffix = (suffixIcon) => {
+      if (!suffixIcon) {
+        return;
+      }
       const _suffix =
         typeof suffixIcon === "object" ? (
           suffixIcon
@@ -181,7 +184,7 @@ const Input = forwardRef(
      */
 
     return (
-      <div>
+      <div style={{ width: "100%" }}>
         {_size === "small" && renderLabel()}
         <div
           // @ts-ignore
@@ -202,7 +205,7 @@ const Input = forwardRef(
                 {...rest}
               />
             </span>
-            {suffixIcon && renderSuffix()}
+            {renderSuffix(allowClear ? "xmark-circle" : suffixIcon)}
           </span>
         </div>
         {renderMessage()}
