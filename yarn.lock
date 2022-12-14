@@ -10,10 +10,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@asow/ui@^0.3.5":
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.3.5.tgz#f0e36200d927b6a05eeb0cbd086e6376b55fe2ea"
-  integrity sha512-5rG+mD/cv69TdA8JH1wmPk+IYgCE7/gbXvnBW47iDUk02PMYsmHPwm+GYKEUmx3JInbciraHgHFqusL7xOIJwA==
+"@asow/ui@^0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.3.6.tgz#543d8b157481206f2178e71c896f1076f72b57b2"
+  integrity sha512-YLkytaqkCLZOf9S1JyoxNmLzlz9RFMwAck1H1pDBJydZw1kcZM6ACxWPknaP2TcKrZwUyVsr7o0nYJtDggij8g==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.2.0"
     "@fortawesome/free-solid-svg-icons" "^6.2.0"

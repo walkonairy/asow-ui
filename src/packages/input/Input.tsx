@@ -139,13 +139,16 @@ const Input = forwardRef(
     };
 
     const renderSuffix = (suffixIcon) => {
-      if (!suffixIcon) return;
-      const _suffix =
-        typeof suffixIcon === "object" ? (
-          suffixIcon
-        ) : (
-          <Icon icon={suffixIcon as IconProps["icon"]} />
-        );
+      let _suffix = null;
+
+      if (suffixIcon) {
+        _suffix =
+          typeof suffixIcon === "object" ? (
+            suffixIcon
+          ) : (
+            <Icon icon={suffixIcon as IconProps["icon"]} />
+          );
+      }
 
       return (
         <span
@@ -154,7 +157,7 @@ const Input = forwardRef(
           className={suffixClassNames}
         >
           {hasClearIcon && clearIcon}
-          {_suffix}
+          {_suffix && _suffix}
         </span>
       );
     };
