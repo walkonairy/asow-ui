@@ -35,6 +35,7 @@ const ExInput = () => {
           defaultValue={"Hello World! 123~"}
           size={"middle"}
           suffixIcon="eye"
+          allowClear={true}
         />
 
         <Input
@@ -51,6 +52,7 @@ const ExInput = () => {
           defaultValue={"Hello World! 123~"}
           size={"large"}
           disabled={false}
+          allowClear={true}
         />
 
         {["large", "middle", "small"].map((size: Size) => (
@@ -62,6 +64,7 @@ const ExInput = () => {
             size={size}
             suffixIcon="eye-slash"
             hasError={true}
+            allowClear={true}
             toolTip="Tool tip message"
           />
         ))}

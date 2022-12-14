@@ -117,6 +117,8 @@
 @mixin input-suffix() {
   color: #FFF;
   z-index: 1;
+  display: flex;
+  gap: 8px;
 
   &-sm {
     padding-left: 10px;

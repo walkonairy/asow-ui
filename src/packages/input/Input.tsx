@@ -3,6 +3,8 @@ import React, {
   CSSProperties,
   forwardRef,
   InputHTMLAttributes,
+  ChangeEvent,
+  useState,
 } from "react";
 import { getPrefixCls, Size, str2size } from "@/utils";
 import { Token, useSize } from "@/hooks/useSize";
@@ -17,7 +19,7 @@ import { useOnClickOutside } from "@/hooks/useOnclickOutSide";
 // error
 // 前缀（prefix）、后缀（suffix）🌟
 // TextArea、Password
-// allow clear
+// allow clear 🌟
 // 输入数量  1 / 30
 // autocomplete、远程搜索
 
@@ -33,6 +35,8 @@ export interface InputProps
   hasError?: boolean | string;
   toolTip?: string;
   suffixIcon?: IconProps["icon"] | React.ReactNode;
+  defaultValue?: string;
+  value?: string;
 }
 
 const Input = forwardRef(
@@ -50,10 +54,15 @@ const Input = forwardRef(
       wrapperStyle,
       suffixIcon,
       toolTip,
+      value,
+      onChange,
       ...rest
     } = props;
 
     const _size = useSize<Size>(size);
+
+    const _ref = ref || useRef<HTMLInputElement>(null);
+    const [_value, setValue] = useState(defaultValue || value);
 
     /**
      * Wrapper ClassName
@@ -125,9 +134,6 @@ const Input = forwardRef(
     };
 
     const renderSuffix = (suffixIcon) => {
-      if (!suffixIcon) {
-        return;
-      }
       const _suffix =
         typeof suffixIcon === "object" ? (
           suffixIcon
@@ -136,13 +142,14 @@ const Input = forwardRef(
         );
 
       return (
-        <div
+        <span
           // @ts-ignore
           disabled={disabled}
           className={suffixClassNames}
         >
+          {hasClearIcon && clearIcon}
           {_suffix}
-        </div>
+        </span>
       );
     };
 
@@ -183,6 +190,27 @@ const Input = forwardRef(
      * ====================================
      */
 
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      setValue(value);
+      onChange?.(event);
+    };
+
+    const handleClearClick = () => {
+      if (disabled) return;
+      setValue("");
+      _ref.current.focus();
+    };
+
+    const hasClearIcon = allowClear && _value.length > 0;
+    const clearIcon = (
+      <Icon
+        icon="xmark-circle"
+        onClick={handleClearClick}
+        style={{ cursor: disabled ? "not-allowed" : "pointer" }}
+      />
+    );
+
     return (
       <div style={{ width: "100%" }}>
         {_size === "small" && renderLabel()}
@@ -198,14 +226,16 @@ const Input = forwardRef(
               {_size !== "small" && renderLabel()}
               <input
                 id={id || label || "input-label"}
-                ref={ref}
+                ref={_ref}
                 defaultValue={defaultValue}
                 disabled={disabled}
                 className={inputClassNames}
+                value={_value}
+                onChange={handleChange}
                 {...rest}
               />
             </span>
-            {renderSuffix(allowClear ? "xmark-circle" : suffixIcon)}
+            {renderSuffix(suffixIcon)}
           </span>
         </div>
         {renderMessage()}
