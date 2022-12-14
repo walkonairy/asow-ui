@@ -147,9 +147,11 @@
   line-height: 12px;
   font-weight: 400;
   margin-left: 12px;
+  margin-right: 12px;
   margin-top: 4px;
   color: $disabled-color-text;
   display: flex;
+  justify-content: space-between;
 
   &[disabled] {
     cursor: not-allowed;

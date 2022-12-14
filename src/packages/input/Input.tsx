@@ -13,14 +13,14 @@ import classNames from "classnames";
 import { useOnClickOutside } from "@/hooks/useOnclickOutSide";
 
 // size：sm、md、lg 🌟
-// type：outline、unstyled
+// type：outline、unstyled 🌟
 // hover、focus 动画 🌟
 // disabled 🌟
-// error
+// error 🌟
 // 前缀（prefix）、后缀（suffix）🌟
 // TextArea、Password
 // allow clear 🌟
-// 输入数量  1 / 30
+// 输入数量  1 / 30 🌟
 // autocomplete、远程搜索
 
 export interface InputProps
@@ -37,6 +37,8 @@ export interface InputProps
   suffixIcon?: IconProps["icon"] | React.ReactNode;
   defaultValue?: string;
   value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  maxLength?: number;
 }
 
 const Input = forwardRef(
@@ -56,12 +58,15 @@ const Input = forwardRef(
       toolTip,
       value,
       onChange,
+      maxLength,
       ...rest
     } = props;
 
     const _size = useSize<Size>(size);
 
     const _ref = ref || useRef<HTMLInputElement>(null);
+    const isInChinese = useRef(false);
+
     const [_value, setValue] = useState(defaultValue || value);
 
     /**
@@ -134,6 +139,7 @@ const Input = forwardRef(
     };
 
     const renderSuffix = (suffixIcon) => {
+      if (!suffixIcon) return;
       const _suffix =
         typeof suffixIcon === "object" ? (
           suffixIcon
@@ -167,7 +173,16 @@ const Input = forwardRef(
         message = hasError;
       }
 
-      return <span className={messageClassNames}>{message}</span>;
+      return (
+        <div className={messageClassNames}>
+          <span>{message}</span>
+          {maxLength && (
+            <span>
+              {_value?.length || 0} / {maxLength}
+            </span>
+          )}
+        </div>
+      );
     };
 
     /**
@@ -190,11 +205,56 @@ const Input = forwardRef(
      * ====================================
      */
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.target;
-      setValue(value);
-      onChange?.(event);
+    const fixEmojiLength = (value: string, maxLength: number) => {
+      return [...(value || "")].slice(0, maxLength).join("");
     };
+
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
+      let input = e.target.value;
+      // 在输入非中文的情况下，截取允许最大输入
+      if (!isInChinese.current) {
+        setLimitLenInput(input);
+        return;
+      }
+      // 需要触发onChange才会触发onCompositionEnd
+      setValue(input);
+      onChange?.(e);
+    }
+
+    // 当用户使用拼音输入法开始输入汉字触发
+    function handleCompositionStart() {
+      isInChinese.current = true;
+    }
+
+    // 当用户使用拼音输入法输入汉字或者使用语音输入完毕或者取消时触发
+    function handleCompositionEnd(e: any) {
+      isInChinese.current = false;
+      const input = e.target.value;
+      setLimitLenInput(input);
+    }
+
+    function setLimitLenInput(input: string) {
+      const oldInputSelectionPos = _ref.current!.selectionStart;
+      const result = fixEmojiLength(input, maxLength);
+      setValue(result);
+      setTimeout(() => {
+        setLimitLenInputSelectionPos(oldInputSelectionPos);
+      });
+    }
+
+    function setLimitLenInputSelectionPos(oldInputSelectionPos: any) {
+      const currentInputSelectionPos = _ref.current!.selectionStart;
+      if (!oldInputSelectionPos || !currentInputSelectionPos) {
+        return;
+      }
+      if (oldInputSelectionPos <= currentInputSelectionPos) {
+        _ref.current!.setSelectionRange(
+          oldInputSelectionPos,
+          oldInputSelectionPos
+        );
+        return;
+      }
+    }
 
     const handleClearClick = () => {
       if (disabled) return;
@@ -202,7 +262,7 @@ const Input = forwardRef(
       _ref.current.focus();
     };
 
-    const hasClearIcon = allowClear && _value.length > 0;
+    const hasClearIcon = allowClear && _value?.length > 0;
     const clearIcon = (
       <Icon
         icon="xmark-circle"
@@ -232,6 +292,8 @@ const Input = forwardRef(
                 className={inputClassNames}
                 value={_value}
                 onChange={handleChange}
+                onCompositionStart={handleCompositionStart}
+                onCompositionEnd={handleCompositionEnd}
                 {...rest}
               />
             </span>

@@ -26,6 +26,7 @@ const ExInput = () => {
           }}
           allowClear={true}
           toolTip="*账号只能是字母加数字的组合"
+          maxLength={20}
         />
 
         <Input
