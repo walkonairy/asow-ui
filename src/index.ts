@@ -17,4 +17,8 @@ export type {
 export { default as Icon } from "@/packages/icon";
 export type { IconProps } from "@/packages/icon";
 
+export { default as DatePicker } from "@/packages/date-picker";
+
+export { default as Trigger } from "@/packages/trigger";
+
 export * from "@/utils";

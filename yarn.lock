@@ -10,10 +10,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@asow/ui@^0.3.6":
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.3.6.tgz#543d8b157481206f2178e71c896f1076f72b57b2"
-  integrity sha512-YLkytaqkCLZOf9S1JyoxNmLzlz9RFMwAck1H1pDBJydZw1kcZM6ACxWPknaP2TcKrZwUyVsr7o0nYJtDggij8g==
+"@asow/ui@^0.3.7":
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.3.7.tgz#9a3a92111ba1d8be2161bd4ea7d5c237cd76e158"
+  integrity sha512-+K9tdt6FKYfuQ4Z4G5kTaP+iqKEGqblmnB4tktuVnkL/E2LKUWWhfEeusLYZ3A1S20zjkf6abtbSt5MImGYtrA==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.2.0"
     "@fortawesome/free-solid-svg-icons" "^6.2.0"
@@ -4968,6 +4968,11 @@ cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha512-NJGVKPS81XejHcLhaLJS7plab0fK3slPh11mESeeDq2W4ZI5kUKK/LRRdVDvjJseojbPB7ZwjnyOybg3Igea/A==
+
+dayjs@^1.11.7:
+  version "1.11.7"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.7.tgz#4b296922642f70999544d1144a2c25730fce63e2"
+  integrity sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"

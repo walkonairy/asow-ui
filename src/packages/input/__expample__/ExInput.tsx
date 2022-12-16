@@ -29,46 +29,46 @@ const ExInput = () => {
           maxLength={20}
         />
 
-        {/*<Input*/}
-        {/*  disabled*/}
-        {/*  placeholder="请输入"*/}
-        {/*  label="密码"*/}
-        {/*  defaultValue={"Hello World! 123~"}*/}
-        {/*  size={"middle"}*/}
-        {/*  suffixIcon="eye"*/}
-        {/*  allowClear={true}*/}
-        {/*/>*/}
+        <Input
+          disabled
+          placeholder="请输入"
+          label="密码"
+          defaultValue={"Hello World! 123~"}
+          size={"middle"}
+          suffixIcon="eye"
+          allowClear={true}
+        />
 
-        {/*<Input*/}
-        {/*  placeholder="请输入"*/}
-        {/*  label="二次密码"*/}
-        {/*  defaultValue={"Hello World! 123~"}*/}
-        {/*  size={"small"}*/}
-        {/*  suffixIcon="eye-slash"*/}
-        {/*/>*/}
+        <Input
+          placeholder="请输入"
+          label="二次密码"
+          defaultValue={"Hello World! 123~"}
+          size={"small"}
+          suffixIcon="eye-slash"
+        />
 
-        {/*<Input.Password*/}
-        {/*  placeholder="请输入"*/}
-        {/*  label="密码类型"*/}
-        {/*  defaultValue={"Hello World! 123~"}*/}
-        {/*  size={"large"}*/}
-        {/*  disabled={false}*/}
-        {/*  allowClear={true}*/}
-        {/*/>*/}
+        <Input.Password
+          placeholder="请输入"
+          label="密码类型"
+          defaultValue={"Hello World! 123~"}
+          size={"large"}
+          disabled={false}
+          allowClear={true}
+        />
 
-        {/*{["large", "middle", "small"].map((size: Size) => (*/}
-        {/*  <Input*/}
-        {/*    id={size}*/}
-        {/*    placeholder="请输入"*/}
-        {/*    label="错误 Error"*/}
-        {/*    defaultValue={"Hello World! 123~"}*/}
-        {/*    size={size}*/}
-        {/*    suffixIcon="eye-slash"*/}
-        {/*    hasError={true}*/}
-        {/*    allowClear={true}*/}
-        {/*    toolTip="Tool tip message"*/}
-        {/*  />*/}
-        {/*))}*/}
+        {["large", "middle", "small"].map((size: Size) => (
+          <Input
+            id={size}
+            placeholder="请输入"
+            label="错误 Error"
+            defaultValue={"Hello World! 123~"}
+            size={size}
+            suffixIcon="eye-slash"
+            hasError={true}
+            allowClear={true}
+            toolTip="Tool tip message"
+          />
+        ))}
       </div>
     </>
   );
