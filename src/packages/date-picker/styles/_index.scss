@@ -1,0 +1,60 @@
+@import "./src/styles/core/prefixcls";
+
+.#{$prefix-cls}picker-wrapper {
+  border-radius: 8px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 2px 12px 0px;
+  background: #333643;
+  color: #ffffff;
+  padding: 16px;
+  font-size: 14px;
+  user-select: none;
+}
+
+.#{$prefix-cls}picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.#{$prefix-cls}picker-header-prev-btn {
+  cursor: pointer;
+  border: 0;
+  background: 0;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.#{$prefix-cls}picker-header-next-btn {
+  cursor: pointer;
+  border: 0;
+  background: 0;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.#{$prefix-cls}picker-body {
+  margin-top: 12px;
+}
+
+.#{$prefix-cls}picker-td {
+  padding: 0;
+
+  &:hover {
+    border-radius: 30px;
+    //background: linear-gradient(180deg, #2af598 0%, #009efd 100%);
+    background: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  }
+}
+
+.#{$prefix-cls}picker-cell {
+  text-align: center;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 22px;
+  //background: linear-gradient(180deg, #2af598 0%, #009efd 100%);
+}

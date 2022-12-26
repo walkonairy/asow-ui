@@ -79,12 +79,11 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
     className
   );
 
-  const iconNode =
-    icon && !innerLoading ? (
-      <span style={{ marginRight: 8 }}>{icon}</span>
-    ) : (
-      <LoadingIcon loading={innerLoading} />
-    );
+  const iconNode = innerLoading ? (
+    <LoadingIcon loading={innerLoading} />
+  ) : (
+    <span style={{ marginRight: 8 }}>{icon}</span>
+  );
 
   const debounceClick = useDebounce(
     (e: React.MouseEvent) => onClick?.(e),
@@ -106,7 +105,7 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
   if (type === "link" && href) {
     return (
       <a href={href} className={_classNames} onClick={handleClick} {...rest}>
-        {iconNode}
+        {(icon || innerLoading) && iconNode}
         {children}
       </a>
     );
@@ -121,7 +120,7 @@ const Button = forwardRef((props: ButtonProps, ref: React.RefObject<any>) => {
       disabled={disabled}
       onClick={handleClick}
     >
-      {iconNode}
+      {(icon || innerLoading) && iconNode}
       <span>{children}</span>
     </button>
   );

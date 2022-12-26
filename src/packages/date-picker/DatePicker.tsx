@@ -1,64 +1,127 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
-import dayjs from "dayjs";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
+import dayjs, { Dayjs } from "dayjs";
 import Trigger from "@/packages/trigger";
+import { getPrefixCls } from "@/utils";
 
-const DatePicker = forwardRef((props: any, ref: React.RefObject<any>) => {
+type DateItem = { type: "pre" | "cur" | "next"; text: string; value: string };
+
+interface DateProps {
+  value: string;
+}
+const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
+  const prefixCls: string = getPrefixCls("picker");
+
+  const { value } = props;
+
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLDivElement>(null);
   const triggeredRef = useRef<HTMLDivElement>(null);
 
+  const [days, setDays] = useState<DateItem[][]>([]);
+  const [month, setMonth] = useState(
+    value ? dayjs(value).format("YYYY-MM") : dayjs().format("YYYY-MM")
+  );
+  const [selectedValue, setSelectedValue] = useState(null);
+
   useEffect(() => {
-    // 展示当前页的日期
-    const days = [];
+    setSelectedValue(value);
+  }, [value]);
 
-    const year = dayjs().year();
-    console.log("year", year);
-    const month = dayjs().month() + 1;
-    // const month = 4;
-    console.log("month", month);
-    const yAndM = `${year}-${month}`;
-    console.log("yAndM", yAndM);
+  useEffect(() => {
+    computePanelDate();
+  }, [month]);
 
-    // 这个月有多少天
-    const a = dayjs(yAndM).daysInMonth();
-    console.log("这个月有多少天", a);
-    for (let i = 1; i <= a; i++) {
-      days.push(i);
+  const computePanelDate = () => {
+    const _days = [];
+    computeCurrentMonth(_days);
+    computePreMonth(_days);
+    computeNextMonth(_days);
+
+    let newArr: any[] = [];
+    while (_days.length > 0) {
+      newArr.push(_days.splice(0, 7));
     }
+    setDays(newArr);
+  };
 
-    // 这个月第一天是星期几
-    const b = dayjs(yAndM).day() || 7;
-    console.log("这个月第一天是星期几", b);
-    // 上个月有多少天
-    const b1 = dayjs(yAndM).subtract(1, "month").daysInMonth();
-    console.log("上个月有多少天", b1);
-    for (let i = 0; i < b - 1; i++) {
-      days.unshift(b1 - i);
+  /**
+   * 计算当前月的展示天数
+   * @param _days
+   */
+  const computeCurrentMonth = (_days) => {
+    const currentMonthDays = dayjs(month).daysInMonth();
+    for (let i = 1; i <= currentMonthDays; i++) {
+      _days.push({
+        type: "cur",
+        text: i,
+        value: dayjs(`${month}-${i}`).format("YYYY-MM-DD"),
+      });
     }
+  };
 
-    // 这个月最后一天是星期几
-    const c = dayjs(`${yAndM}-${a}`).day() || 7;
-    console.log("这个月最后一天是星期几", c);
-    // 下个月有多少天
-    const c1 = dayjs(`${yAndM}-${a}`).add(1, "month").daysInMonth();
-    console.log("下个月有多少天", c1);
+  /**
+   * 计算上个月的展示天数
+   * @param _days
+   */
+  const computePreMonth = (_days) => {
+    const currentMonthFirstIndex = dayjs(month).day() || 7;
+    const lastMonth = dayjs(month).subtract(1, "month");
+    const lastMonthDays = lastMonth.daysInMonth();
+    for (let i = 0; i < currentMonthFirstIndex - 1; i++) {
+      _days.unshift({
+        type: "pre",
+        text: lastMonthDays - i,
+        value: dayjs(
+          `${lastMonth.format("YYYY-MM")}-${lastMonthDays - i}`
+        ).format("YYYY-MM-DD"),
+      });
+    }
+  };
 
-    for (let i = 1; i <= 14 - c; i++) {
-      console.log("=====", i);
-      if (days.length === 42) {
+  /**
+   * 计算下个月的展示天数
+   * @param _days
+   */
+  const computeNextMonth = (_days) => {
+    const currentMonthDays = dayjs(month).daysInMonth();
+    const currentMonthLastIndex =
+      dayjs(`${month}-${currentMonthDays}`).day() || 7;
+    const nextMonth = dayjs(`${month}-${currentMonthDays}`).add(1, "month");
+
+    for (let i = 1; i <= 14 - currentMonthLastIndex; i++) {
+      if (_days.length === 42) {
         break;
       }
-      days.push(i);
+      _days.push({
+        type: "next",
+        text: i,
+        value: dayjs(`${nextMonth.format("YYYY-MM")}-${i}`).format(
+          "YYYY-MM-DD"
+        ),
+      });
     }
+  };
 
-    console.log(days);
-  }, []);
+  const onPreMonth = () => {
+    const now = dayjs(month).subtract(1, "month").format("YYYY-MM");
+    setMonth(now);
+  };
+
+  const onNextMonth = () => {
+    const now = dayjs(month).add(1, "month").format("YYYY-MM");
+    setMonth(now);
+  };
+
+  const onSelectDay = (day: DateItem) => {
+    if (day.type === "pre") {
+      onPreMonth();
+    }
+    if (day.type === "next") {
+      onNextMonth();
+    }
+    setSelectedValue(day.value);
+    console.log(day);
+  };
 
   return (
     <>
@@ -86,38 +149,84 @@ const DatePicker = forwardRef((props: any, ref: React.RefObject<any>) => {
         triggeredRef={triggeredRef}
         isOpen={isOpen}
       >
-        <div
-          ref={triggeredRef}
-          style={{
-            border: "1px solid #eaeaea",
-            borderRadius: 8,
-            boxShadow: "rgb(0 0 0 / 10%) 0px 2px 12px 0px",
-            background: "#fff",
-            padding: "8px 16px",
-            height: 300,
-            width: 300,
-            fontSize: 14,
-          }}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span> 上一月 </span>
-            <span>2022年12月</span>
-            <span> 下一月 </span>
+        <div ref={triggeredRef} className={`${prefixCls}-wrapper`}>
+          <div className={`${prefixCls}-header`}>
+            <button
+              className={`${prefixCls}-header-prev-btn`}
+              onClick={onPreMonth}
+            >
+              上一月
+            </button>
+            <div>{month}</div>
+            <button
+              className={`${prefixCls}-header-next-btn`}
+              onClick={onNextMonth}
+            >
+              下一月
+            </button>
           </div>
-          <table style={{ marginTop: 8 }}>
-            <thead>
-              <tr>
-                {["一", "二", "三", "四", "五", "六", "日"].map((item) => (
-                  <th style={{ width: 40 }}>{item}</th>
+          <div className={`${prefixCls}-body`}>
+            <table
+              style={{
+                borderCollapse: "collapse",
+                borderSpacing: 0,
+                tableLayout: "fixed",
+              }}
+            >
+              <thead>
+                <tr>
+                  {["一", "二", "三", "四", "五", "六", "日"].map((item) => (
+                    <th
+                      style={{
+                        color: ["六", "日"].includes(item) ? "#00e5ae" : "#fff",
+                      }}
+                    >
+                      {item}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {days.map((dayMap, i) => (
+                  <tr key={i}>
+                    {dayMap.map((day, index) => {
+                      const isWeekend =
+                        (index + 1) % 6 === 0 || (index + 1) % 7 === 0;
+
+                      return (
+                        <td
+                          className={`${prefixCls}-td`}
+                          key={day.text}
+                          title={day.value}
+                          style={{
+                            color:
+                              day.type === "cur"
+                                ? isWeekend
+                                  ? "#00e5ae"
+                                  : ""
+                                : "#777777",
+                          }}
+                          onClick={() => onSelectDay(day)}
+                        >
+                          <div
+                            className={`${prefixCls}-cell`}
+                            style={{
+                              background:
+                                day.value === selectedValue
+                                  ? "linear-gradient(180deg, #2af598 0%, #009efd 100%)"
+                                  : "",
+                            }}
+                          >
+                            {day.text}
+                          </div>
+                        </td>
+                      );
+                    })}
+                  </tr>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style={{ width: 40 }}>1</td>
-              </tr>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </Trigger>
     </>
