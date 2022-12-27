@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import Trigger from "@/packages/trigger";
 import { getPrefixCls } from "@/utils";
+import { Wrapper } from "@/packages/date-picker/styles/DatePicker.style";
 
 type DateItem = { type: "pre" | "cur" | "next"; text: string; value: string };
 
@@ -133,7 +134,9 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
           position: "relative",
         }}
       >
-        <div>icon</div>
+        <Wrapper ok>
+          <div>icon</div>
+        </Wrapper>
         <input
           readOnly
           onFocus={() => {
