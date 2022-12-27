@@ -10,10 +10,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@asow/ui@^0.3.7":
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.3.7.tgz#9a3a92111ba1d8be2161bd4ea7d5c237cd76e158"
-  integrity sha512-+K9tdt6FKYfuQ4Z4G5kTaP+iqKEGqblmnB4tktuVnkL/E2LKUWWhfEeusLYZ3A1S20zjkf6abtbSt5MImGYtrA==
+"@asow/ui@^0.3.8":
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/@asow/ui/-/ui-0.3.8.tgz#0d202778b8e3e52caf65c62bca2aeb8c02970874"
+  integrity sha512-TdVAPC+sdjSPFzkWDQt4m4DgdvTqgQ6ewsIVN2FWbQV9dj25jFxcuuYIK9cVlXDPXqerm36qDUmt78gn5J9AVQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.2.0"
     "@fortawesome/free-solid-svg-icons" "^6.2.0"
@@ -21,6 +21,7 @@
     "@types/node" "^17.0.21"
     "@types/react" "^17.0.33"
     classnames "^2.3.1"
+    dayjs "^1.11.7"
     react "^17.0.2"
     react-dom "^17.0.2"
     react-is "^18.0.0"
