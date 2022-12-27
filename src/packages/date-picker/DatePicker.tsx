@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import Trigger from "@/packages/trigger";
 import { getPrefixCls } from "@/utils";
-import { Wrapper } from "@/packages/date-picker/styles/DatePicker.style";
+import { Wrapper } from "@/packages/date-picker/DatePicker.style";
 
 type DateItem = { type: "pre" | "cur" | "next"; text: string; value: string };
 
