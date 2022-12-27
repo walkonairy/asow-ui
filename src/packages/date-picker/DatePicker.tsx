@@ -6,8 +6,8 @@ import { Wrapper } from "@/packages/date-picker/styles/DatePicker.style";
 
 type DateItem = { type: "pre" | "cur" | "next"; text: string; value: string };
 
-interface DateProps {
-  value: string;
+export interface DateProps {
+  value?: string;
 }
 const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
   const prefixCls: string = getPrefixCls("picker");
