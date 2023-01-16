@@ -1,18 +1,31 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
+import classNames from "classnames";
 import Trigger from "@/packages/trigger";
 import { getPrefixCls } from "@/utils";
-import { Wrapper } from "@/packages/date-picker/DatePicker.style";
+import {
+  Td,
+  TdDiv,
+  Th,
+  Wrapper,
+} from "@/packages/date-picker/DatePicker.style";
 
-type DateItem = { type: "pre" | "cur" | "next"; text: string; value: string };
+const Days = ["一", "二", "三", "四", "五", "六", "日"];
+
+export type DateItem = {
+  type: "pre" | "cur" | "next";
+  text: string;
+  value: string;
+};
 
 export interface DateProps {
   value?: string;
+  disabledDate?: (currentDate: Dayjs) => boolean;
 }
 const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
   const prefixCls: string = getPrefixCls("picker");
 
-  const { value } = props;
+  const { value, disabledDate } = props;
 
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLDivElement>(null);
@@ -31,6 +44,18 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
   useEffect(() => {
     computePanelDate();
   }, [month]);
+
+  const tdClassNames = (day: DateItem) => {
+    return classNames(`${prefixCls}-td`, {
+      [`${prefixCls}-td-disabled`]: disabledDate?.(dayjs(day.value)),
+    });
+  };
+
+  const cellClassNames = (day: DateItem) => {
+    return classNames(`${prefixCls}-cell`, {
+      [`${prefixCls}-cell-today`]: dayjs().format("YYYY-MM-DD") === day.value,
+    });
+  };
 
   const computePanelDate = () => {
     const _days = [];
@@ -169,23 +194,11 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
             </button>
           </div>
           <div className={`${prefixCls}-body`}>
-            <table
-              style={{
-                borderCollapse: "collapse",
-                borderSpacing: 0,
-                tableLayout: "fixed",
-              }}
-            >
+            <table className={`${prefixCls}-table`}>
               <thead>
                 <tr>
-                  {["一", "二", "三", "四", "五", "六", "日"].map((item) => (
-                    <th
-                      style={{
-                        color: ["六", "日"].includes(item) ? "#00e5ae" : "#fff",
-                      }}
-                    >
-                      {item}
-                    </th>
+                  {Days.map((item) => (
+                    <Th item={item}>{item}</Th>
                   ))}
                 </tr>
               </thead>
@@ -197,32 +210,23 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
                         (index + 1) % 6 === 0 || (index + 1) % 7 === 0;
 
                       return (
-                        <td
-                          className={`${prefixCls}-td`}
+                        <Td
+                          className={tdClassNames(day)}
                           key={day.text}
                           title={day.value}
-                          style={{
-                            color:
-                              day.type === "cur"
-                                ? isWeekend
-                                  ? "#00e5ae"
-                                  : ""
-                                : "#777777",
-                          }}
                           onClick={() => onSelectDay(day)}
+                          isWeekend={isWeekend}
+                          day={day}
+                          disable={disabledDate?.(dayjs(day.value))}
                         >
-                          <div
-                            className={`${prefixCls}-cell`}
-                            style={{
-                              background:
-                                day.value === selectedValue
-                                  ? "linear-gradient(180deg, #2af598 0%, #009efd 100%)"
-                                  : "",
-                            }}
+                          <TdDiv
+                            className={cellClassNames(day)}
+                            selectedDay={selectedValue}
+                            day={day}
                           >
                             {day.text}
-                          </div>
-                        </td>
+                          </TdDiv>
+                        </Td>
                       );
                     })}
                   </tr>

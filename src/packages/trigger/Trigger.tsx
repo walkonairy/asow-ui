@@ -42,11 +42,17 @@ const Trigger: React.FC<TriggerProps> = (props) => {
     if (triggeredRef.current) {
       triggeredRef.current.style.position = "absolute";
       triggeredRef.current.style.top = "36px";
-      triggeredRef.current.style.display = isOpen ? "block" : "none";
+      triggeredRef.current.style.display = isOpen && "block";
       setTimeout(() => {
         triggeredRef.current.style.opacity = isOpen ? "1" : "0";
-        triggeredRef.current.style.transition = "all .5s";
+        triggeredRef.current.style.transition = "all .3s";
       });
+
+      if (!isOpen) {
+        setTimeout(() => {
+          triggeredRef.current.style.display = "none";
+        }, 300);
+      }
     }
 
     // triggeredRef.current.style.top = "10px";
