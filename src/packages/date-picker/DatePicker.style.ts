@@ -1,11 +1,6 @@
 import styled from "@emotion/styled";
 import { DateItem } from "@/packages/date-picker/DatePicker";
 
-export const Wrapper = styled.div<{ ok?: boolean }>`
-  background: #fff;
-  cursor: ${(props) => (props.ok ? "pointer" : "text")};
-`;
-
 export const Th = styled.th<{ item: string }>`
   color: ${({ item }) => (["六", "日"].includes(item) ? "#00e5ae" : "#ffffff")};
 `;

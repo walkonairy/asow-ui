@@ -1,78 +1,115 @@
-import React, { forwardRef, useRef } from "react";
-import { ScrollUL, UL, LI } from "@/packages/date-picker/TimePicker.style";
+import React, {
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import classNames from "classnames";
+import { getPrefixCls } from "@/utils";
+import { PickContext } from "@/packages/date-picker/Calendar";
+import dayjs from "dayjs";
+import { DateItem } from "@/packages/date-picker/DatePicker";
 
-export interface TimeProps {}
+export interface TimeProps {
+  value?: string;
+  isOpen?: boolean;
+}
 
 const TimePicker = forwardRef((props: TimeProps, ref: React.RefObject<any>) => {
+  const { value } = props;
+
+  const datePrefixCls: string = getPrefixCls("picker");
+  const prefixCls: string = getPrefixCls("picker-time");
+
   const sixty: string[] = [];
   for (let i = 0; i <= 59; i++) {
     sixty.push(String(i < 10 ? `0${i}` : i));
   }
 
-  const hRef = useRef(null);
-  const mRef = useRef(null);
-  const sRef = useRef(null);
+  const twelve: string[] = [];
+  for (let i = 0; i <= 23; i++) {
+    twelve.push(String(i < 10 ? `0${i}` : i));
+  }
+
+  const hRef = useRef<HTMLDivElement>(null);
+  const mRef = useRef<HTMLDivElement>(null);
+  const sRef = useRef<HTMLDivElement>(null);
+
+  const [h, setH] = useState("14");
+  const [m, setM] = useState("07");
+  const [s, setS] = useState("50");
+
+  const onClickH = (v) => {
+    setH(v);
+  };
+
+  const onClickM = (v) => {
+    setM(v);
+  };
+
+  const onClickS = (v) => {
+    setS(v);
+  };
 
   return (
-    <>
-      <div
-        style={{
-          background: "#333643",
-          height: 354,
-          width: 168,
-          borderRadius: 8,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          color: "#fff",
-          fontSize: 14,
-        }}
-      >
-        <div style={{ display: "flex", height: "100%" }}>
-          <ScrollUL ref={hRef}>
-            <UL>
-              {Array.from({ length: 24 }).map((v, i) => (
-                <LI
-                  onClick={() => {
-                    hRef.current.scrollTo({ top: i * 28, behavior: "smooth" });
-                  }}
-                >
-                  {i < 10 ? `0${i}` : i}
-                </LI>
-              ))}
-            </UL>
-          </ScrollUL>
-          <ScrollUL ref={mRef}>
-            <UL>
-              {sixty.map((v, i) => (
-                <LI
-                  onClick={() => {
-                    mRef.current.scrollTo({ top: i * 28, behavior: "smooth" });
-                  }}
-                >
-                  {v}
-                </LI>
-              ))}
-            </UL>
-          </ScrollUL>
-          <ScrollUL ref={sRef}>
-            <UL>
-              {sixty.map((v, i) => (
-                <LI
-                  onClick={() => {
-                    sRef.current.scrollTo({ top: i * 28, behavior: "smooth" });
-                  }}
-                >
-                  {v}
-                </LI>
-              ))}
-            </UL>
-          </ScrollUL>
-        </div>
-        <div>2</div>
+    <div>
+      <div className={`${datePrefixCls}-header`}>
+        <div className={`${datePrefixCls}-header-view`}>{`${h}:${m}:${s}`}</div>
       </div>
-    </>
+      <div className={`${prefixCls}-body`}>
+        <TimeItem ref={hRef} data={twelve} value={h} onClick={onClickH} />
+        <TimeItem ref={mRef} data={sixty} value={m} onClick={onClickM} />
+        <TimeItem ref={sRef} data={sixty} value={s} onClick={onClickS} />
+      </div>
+    </div>
   );
 });
+
+interface TimeItemProps {
+  data: string[];
+  value?: string;
+  onClick?: (value: string, index: number) => void;
+}
+const TimeItem = forwardRef(
+  (props: TimeItemProps, ref: React.RefObject<HTMLDivElement>) => {
+    const { data, onClick, value } = props;
+    const { isOpen } = useContext(PickContext);
+
+    useEffect(() => {
+      if (!isOpen) return;
+
+      ref.current.scrollTo({
+        top: Number(value) * 30,
+        behavior: "smooth",
+      });
+    }, [isOpen, value]);
+
+    const prefixCls: string = getPrefixCls("picker-time");
+
+    const liClassNames = (v: string) => {
+      return classNames(`${prefixCls}-li`, {
+        [`${prefixCls}-li-selected`]: v === value,
+      });
+    };
+
+    const _onClick = (e, v, i) => {
+      ref.current.scrollTo({ top: i * 30, behavior: "smooth" });
+      onClick?.(v, i);
+    };
+
+    return (
+      <div ref={ref} className={`${prefixCls}-scroll`}>
+        <ul className={`${prefixCls}-ul`}>
+          {data.map((v, i) => (
+            <li className={liClassNames(v)} onClick={(e) => _onClick(e, v, i)}>
+              {v}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+);
 
 export default TimePicker;

@@ -1,11 +1,12 @@
 @import "./src/styles/core/prefixcls";
+@import "./time";
 
 .#{$prefix-cls}picker-wrapper {
   border-radius: 8px;
   box-shadow: rgb(0 0 0 / 10%) 0px 2px 12px 0px;
   background: #333643;
   color: #ffffff;
-  padding: 16px;
+  //padding: 16px;
   font-size: 14px;
   user-select: none;
 }
@@ -18,10 +19,15 @@
 
 .#{$prefix-cls}picker-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 16px;
+  padding: 0 8px;
+  line-height: 42px;
+}
+
+.#{$prefix-cls}picker-header-view {
+  flex: auto;
+  text-align: center;
 }
 
 .#{$prefix-cls}picker-header-prev-btn {
@@ -41,7 +47,7 @@
 }
 
 .#{$prefix-cls}picker-body {
-  margin-top: 12px;
+  padding: 8px 12px;
 }
 
 .#{$prefix-cls}picker-td {
@@ -61,7 +67,7 @@
     inset-inline-start: 0;
     inset-inline-end: 0;
     z-index: 1;
-    height: 40px;
+    height: 36px;
     transform: translateY(-50%);
     transition: all .3s;
     content: "";

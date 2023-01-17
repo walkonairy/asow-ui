@@ -3,12 +3,7 @@ import dayjs, { Dayjs } from "dayjs";
 import classNames from "classnames";
 import Trigger from "@/packages/trigger";
 import { getPrefixCls } from "@/utils";
-import {
-  Td,
-  TdDiv,
-  Th,
-  Wrapper,
-} from "@/packages/date-picker/DatePicker.style";
+import { Td, TdDiv, Th } from "@/packages/date-picker/DatePicker.style";
 
 const Days = ["一", "二", "三", "四", "五", "六", "日"];
 
@@ -26,10 +21,6 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
   const prefixCls: string = getPrefixCls("picker");
 
   const { value, disabledDate } = props;
-
-  const [isOpen, setIsOpen] = useState(false);
-  const triggerRef = useRef<HTMLDivElement>(null);
-  const triggeredRef = useRef<HTMLDivElement>(null);
 
   const [days, setDays] = useState<DateItem[][]>([]);
   const [month, setMonth] = useState(
@@ -150,93 +141,61 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
   };
 
   return (
-    <>
-      <div
-        ref={triggerRef}
-        style={{
-          display: "inline-flex",
-          border: "1px solid",
-          position: "relative",
-        }}
-      >
-        <Wrapper ok>
-          <div>icon</div>
-        </Wrapper>
-        <input
-          readOnly
-          onFocus={() => {
-            setIsOpen(true);
-          }}
-          onDoubleClick={() => {
-            setIsOpen(false);
-          }}
-        />
+    <div>
+      <div className={`${prefixCls}-header`}>
+        <button className={`${prefixCls}-header-prev-btn`} onClick={onPreMonth}>
+          上一月
+        </button>
+        <div className={`${prefixCls}-header-view`}>{month}</div>
+        <button
+          className={`${prefixCls}-header-next-btn`}
+          onClick={onNextMonth}
+        >
+          下一月
+        </button>
       </div>
-      <Trigger
-        triggerRef={triggerRef}
-        triggeredRef={triggeredRef}
-        isOpen={isOpen}
-      >
-        <div ref={triggeredRef} className={`${prefixCls}-wrapper`}>
-          <div className={`${prefixCls}-header`}>
-            <button
-              className={`${prefixCls}-header-prev-btn`}
-              onClick={onPreMonth}
-            >
-              上一月
-            </button>
-            <div>{month}</div>
-            <button
-              className={`${prefixCls}-header-next-btn`}
-              onClick={onNextMonth}
-            >
-              下一月
-            </button>
-          </div>
-          <div className={`${prefixCls}-body`}>
-            <table className={`${prefixCls}-table`}>
-              <thead>
-                <tr>
-                  {Days.map((item) => (
-                    <Th item={item}>{item}</Th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {days.map((dayMap, i) => (
-                  <tr key={i}>
-                    {dayMap.map((day, index) => {
-                      const isWeekend =
-                        (index + 1) % 6 === 0 || (index + 1) % 7 === 0;
+      <div className={`${prefixCls}-body`}>
+        <table className={`${prefixCls}-table`}>
+          <thead>
+            <tr>
+              {Days.map((item) => (
+                <Th item={item}>{item}</Th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {days.map((dayMap, i) => (
+              <tr key={i}>
+                {dayMap.map((day, index) => {
+                  const isWeekend =
+                    (index + 1) % 6 === 0 || (index + 1) % 7 === 0;
 
-                      return (
-                        <Td
-                          className={tdClassNames(day)}
-                          key={day.text}
-                          title={day.value}
-                          onClick={() => onSelectDay(day)}
-                          isWeekend={isWeekend}
-                          day={day}
-                          disable={disabledDate?.(dayjs(day.value))}
-                        >
-                          <TdDiv
-                            className={cellClassNames(day)}
-                            selectedDay={selectedValue}
-                            day={day}
-                          >
-                            {day.text}
-                          </TdDiv>
-                        </Td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </Trigger>
-    </>
+                  return (
+                    <Td
+                      className={tdClassNames(day)}
+                      key={day.text}
+                      title={day.value}
+                      onClick={() => onSelectDay(day)}
+                      isWeekend={isWeekend}
+                      day={day}
+                      disable={disabledDate?.(dayjs(day.value))}
+                    >
+                      <TdDiv
+                        className={cellClassNames(day)}
+                        selectedDay={selectedValue}
+                        day={day}
+                      >
+                        {day.text}
+                      </TdDiv>
+                    </Td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 });
 

@@ -1,0 +1,52 @@
+@import "./src/styles/core/prefixcls";
+
+.#{$prefix-cls}picker-time-body {
+  display: flex;
+  flex: auto;
+  height: 280px;
+}
+
+.#{$prefix-cls}picker-time-scroll {
+  height: 100%;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    width: 0;
+  }
+}
+
+.#{$prefix-cls}picker-time-ul {
+  width: 50px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+
+  &::after {
+    display: block;
+    height: 250px;
+    content: "";
+  }
+}
+
+.#{$prefix-cls}picker-time-li {
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 4px;
+  transition: all 0.2s ease 0s;
+  margin: 0 2px;
+
+  &:hover {
+    background: #f5f7fa;
+    color: #000000;
+  }
+}
+
+.#{$prefix-cls}picker-time-li-selected {
+  background: linear-gradient(180deg, #2af598 0%, #009efd 100%);
+}
