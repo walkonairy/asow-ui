@@ -5,19 +5,25 @@ import { getPrefixCls } from "@/utils";
 import DatePicker from "@/packages/date-picker/DatePicker";
 import DateTimePicker from "@/packages/date-picker/DateTimePicker";
 import TimePicker from "@/packages/date-picker/TimePicker";
+import RangeDatePicker from "@/packages/date-picker/RangeDatePicker";
+import DatePickerWithPresets, {
+  Presets,
+} from "@/packages/date-picker/DatePickerWithPresets";
 
 interface PickContextProps {
   isOpen?: boolean;
+  type?: PickerType;
 }
 export const PickContext = createContext<PickContextProps>({});
 
-type PickerType = "date" | "time" | "dateTime";
+type PickerType = "date" | "time" | "dateTime" | "rangeDate";
 interface CalendarProps {
   type: PickerType;
+  presets?: Presets[];
 }
 
 const Calendar = (props: CalendarProps) => {
-  const { type } = props;
+  const { type, presets } = props;
   const prefixCls: string = getPrefixCls("picker");
 
   const [isOpen, setIsOpen] = useState(false);
@@ -56,12 +62,16 @@ const Calendar = (props: CalendarProps) => {
         triggeredRef={triggeredRef}
         isOpen={isOpen}
       >
-        <PickContext.Provider value={{ isOpen }}>
+        <PickContext.Provider value={{ isOpen, type }}>
           <div ref={triggeredRef}>
             <div className={`${prefixCls}-wrapper`}>
-              {type === "date" && <DatePicker />}
+              {type === "date" && !presets && <DatePicker />}
+              {type === "date" && presets && (
+                <DatePickerWithPresets presets={presets} />
+              )}
               {type === "time" && <TimePicker />}
               {type === "dateTime" && <DateTimePicker />}
+              {type === "rangeDate" && <RangeDatePicker />}
             </div>
           </div>
         </PickContext.Provider>

@@ -119,3 +119,31 @@
     content: "";
   }
 }
+
+.#{$prefix-cls}picker-presets {
+  min-width: 100px;
+  max-width: 200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.#{$prefix-cls}picker-presets-ul {
+  list-style: none;
+  flex: auto;
+  height: 0;
+  margin: 0;
+  padding: 8px;
+}
+
+.#{$prefix-cls}picker-presets-li {
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+
+  &:hover {
+    background: #f5f7fa;
+    color: #000000;
+  }
+}

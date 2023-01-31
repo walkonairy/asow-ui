@@ -102,7 +102,11 @@ const TimeItem = forwardRef(
       <div ref={ref} className={`${prefixCls}-scroll`}>
         <ul className={`${prefixCls}-ul`}>
           {data.map((v, i) => (
-            <li className={liClassNames(v)} onClick={(e) => _onClick(e, v, i)}>
+            <li
+              key={v}
+              className={liClassNames(v)}
+              onClick={(e) => _onClick(e, v, i)}
+            >
               {v}
             </li>
           ))}

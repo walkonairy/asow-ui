@@ -1,9 +1,16 @@
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import dayjs, { Dayjs } from "dayjs";
 import classNames from "classnames";
 import Trigger from "@/packages/trigger";
 import { getPrefixCls } from "@/utils";
 import { Td, TdDiv, Th } from "@/packages/date-picker/DatePicker.style";
+import { PickContext } from "@/packages/date-picker/Calendar";
 
 const Days = ["一", "二", "三", "四", "五", "六", "日"];
 
@@ -21,6 +28,8 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
   const prefixCls: string = getPrefixCls("picker");
 
   const { value, disabledDate } = props;
+  const { type } = useContext(PickContext);
+  console.log(type);
 
   const [days, setDays] = useState<DateItem[][]>([]);
   const [month, setMonth] = useState(
@@ -159,7 +168,9 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
           <thead>
             <tr>
               {Days.map((item) => (
-                <Th item={item}>{item}</Th>
+                <Th item={item} key={item}>
+                  {item}
+                </Th>
               ))}
             </tr>
           </thead>
