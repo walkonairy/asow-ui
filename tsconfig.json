@@ -1,45 +1,48 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
-    "declaration": false,
-    "noEmit": true,
-    "emitDeclarationOnly": false,
-    "outDir": "dist",
     "target": "esnext",
-    "module": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    "sourceMap": true,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
+    // ******* 生成*.d.ts 文件 ********
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dist",
+    // *******************************
+    "allowJs": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "removeComments": true, //删除注释
-    // "downlevelIteration": true,
-    // "allowJs": true,
-    // "skipLibCheck": true,
-    // "strict": true,
-    // "forceConsistentCasingInFileNames": true,
-    // "resolveJsonModule": true,
-    // "noEmit": true,
-    // "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    // 严格模式
+    "strict": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
     "baseUrl": ".",
+    // 路径别名
     "paths": {
-      "@/*": ["src/*"]
-    },
+      "@/*": [
+        "src/*"
+      ]
+    }
   },
   "include": [
     "src"
   ],
+  // 排除打包编译的文件
   "exclude": [
     "node_modules",
-    "lib",
     "stories/**",
-    "packages/**/*.stories.tsx",
-    "packages/**/*.test.tsx",
-    "packages/**/__example__"
+    "src/packages/**/*.stories.tsx",
+    "src/packages/**/*.test.tsx",
+    "src/packages/**/__expample__",
+    "src/main.tsx"
   ]
 }
