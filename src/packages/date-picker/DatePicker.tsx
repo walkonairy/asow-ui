@@ -9,7 +9,7 @@ import dayjs, { Dayjs } from "dayjs";
 import classNames from "classnames";
 import Trigger from "@/packages/trigger";
 import { getPrefixCls } from "@/utils";
-import { Td, TdDiv, Th } from "@/packages/date-picker/DatePicker.style";
+import { Td, TdDiv, Th } from "@/packages/date-picker/styles/DatePicker.style";
 import { PickContext } from "@/packages/date-picker/Calendar";
 
 const Days = ["一", "二", "三", "四", "五", "六", "日"];
@@ -28,7 +28,7 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
   const prefixCls: string = getPrefixCls("picker");
 
   const { value, disabledDate } = props;
-  const { type } = useContext(PickContext);
+  const { type, onChangeValue } = useContext(PickContext);
   console.log(type);
 
   const [days, setDays] = useState<DateItem[][]>([]);
@@ -146,7 +146,7 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
       onNextMonth();
     }
     setSelectedValue(day.value);
-    console.log(day);
+    onChangeValue(day.value);
   };
 
   return (

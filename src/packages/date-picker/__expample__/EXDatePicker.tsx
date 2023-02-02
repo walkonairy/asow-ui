@@ -12,18 +12,13 @@ const EXDatePicker = () => {
   ];
 
   return (
-    <div>
+    <div style={{ height: "200vh" }}>
+      {/*<div style={{ height: "100vh" }} />*/}
       <Calendar type="date" />
       <Calendar type="date" presets={presets} />
       <Calendar type="time" />
       <Calendar type="dateTime" />
       <Calendar type="rangeDate" />
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
     </div>
   );
 };

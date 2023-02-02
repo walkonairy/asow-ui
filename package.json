@@ -38,8 +38,8 @@
     "update": "yarn run build:esm && npm publish",
     "build:pub": "yarn build && yarn pub",
     "build:esm": "yarn run clean && cross-env BABEL_ENV=esm rollup -c",
-    "build:typed": "tsc --declaration --emitDeclarationOnly --noEmit false --outDir dist/types",
-    "build-css": "sass ./src/style/index.scss ./dist/index.css",
+    "build:typed": "tsc --declaration --emitDeclarationOnly --noEmit false --outDir dist/",
+    "build:css": "sass ./src/styles/index.scss ./dist/index.css",
     "pub": "node ./scripts/publish.js"
   },
   "peerDependencies": {

@@ -9,10 +9,14 @@ import RangeDatePicker from "@/packages/date-picker/RangeDatePicker";
 import DatePickerWithPresets, {
   Presets,
 } from "@/packages/date-picker/DatePickerWithPresets";
+import { findDOMNode } from "react-dom";
+import { Input } from "@/index";
+import { Icon } from "@asow/ui";
 
 interface PickContextProps {
   isOpen?: boolean;
   type?: PickerType;
+  onChangeValue?: (value: string) => void;
 }
 export const PickContext = createContext<PickContextProps>({});
 
@@ -26,35 +30,46 @@ const Calendar = (props: CalendarProps) => {
   const { type, presets } = props;
   const prefixCls: string = getPrefixCls("picker");
 
-  const [isOpen, setIsOpen] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const triggeredRef = useRef<HTMLDivElement>(null);
 
-  // useOnClickOutside(() => {
-  //   setIsOpen(false);
-  // }, triggeredRef);
+  const [isOpen, setIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
+  useOnClickOutside((e) => {
+    const child = triggerRef.current;
+    const isClickChild = findDOMNode(child)?.contains(e.target) || false;
+    if (!isClickChild) {
+      setIsOpen(false);
+    }
+  }, triggeredRef);
+
+  const onChangeValue = (value) => {
+    console.log(value);
+    setInputValue(value);
+  };
 
   return (
     <>
       <div
         ref={triggerRef}
-        style={{
-          display: "inline-flex",
-          border: "1px solid",
-          position: "relative",
+        style={{ display: "inline-flex" }}
+        onClick={() => {
+          setIsOpen(!isOpen);
         }}
       >
-        <div>icon</div>
-        <input
-          ref={inputRef}
+        {/*<div>icon</div>*/}
+        <Input
           readOnly
-          onFocus={() => {
-            setIsOpen(true);
-          }}
-          onDoubleClick={() => {
-            setIsOpen(false);
-          }}
+          size={"middle"}
+          value={inputValue}
+          suffixIcon={
+            <Icon
+              icon={["fas", "calendar-days"]}
+              cursor="pointer"
+              size={"lg"}
+            />
+          }
         />
       </div>
       <Trigger
@@ -62,7 +77,7 @@ const Calendar = (props: CalendarProps) => {
         triggeredRef={triggeredRef}
         isOpen={isOpen}
       >
-        <PickContext.Provider value={{ isOpen, type }}>
+        <PickContext.Provider value={{ isOpen, type, onChangeValue }}>
           <div ref={triggeredRef}>
             <div className={`${prefixCls}-wrapper`}>
               {type === "date" && !presets && <DatePicker />}

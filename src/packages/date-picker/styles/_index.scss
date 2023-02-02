@@ -54,11 +54,14 @@
   position: relative;
   padding: 0;
   cursor: pointer;
+  transition: background .3s ;
+  border-radius: 30px;
 
   &:hover {
     border-radius: 30px;
-    //background: linear-gradient(180deg, #2af598 0%, #009efd 100%);
-    background: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    // 渐变色不支持动画
+    //background: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    background: #585b69;
   }
 
   &::before {
@@ -143,7 +146,6 @@
   cursor: pointer;
 
   &:hover {
-    background: #f5f7fa;
-    color: #000000;
+    background: #585b69;
   }
 }

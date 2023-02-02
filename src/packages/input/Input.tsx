@@ -5,6 +5,7 @@ import React, {
   InputHTMLAttributes,
   ChangeEvent,
   useState,
+  useEffect,
 } from "react";
 import { getPrefixCls, Size, str2size } from "@/utils";
 import { Token, useSize } from "@/hooks/useSize";
@@ -67,7 +68,11 @@ const Input = forwardRef(
     const _ref = ref || useRef<HTMLInputElement>(null);
     const isInChinese = useRef(false);
 
-    const [_value, setValue] = useState(defaultValue || value);
+    const [_value, setValue] = useState(value || defaultValue);
+
+    useEffect(() => {
+      setValue(value || defaultValue);
+    }, [value, defaultValue]);
 
     /**
      * Wrapper ClassName
@@ -155,6 +160,7 @@ const Input = forwardRef(
           // @ts-ignore
           disabled={disabled}
           className={suffixClassNames}
+          onClick={onClickInside}
         >
           {hasClearIcon && clearIcon}
           {_suffix && _suffix}

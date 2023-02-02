@@ -18,6 +18,7 @@ const Trigger: React.FC<TriggerProps> = (props) => {
     isOpen,
   } = props;
   const [wrapperElement, setWrapperElement] = useState(null);
+  const delayMs = 200;
 
   function createWrapperAndAppendToBody(wrapperId) {
     const wrapperElement = document.createElement("div");
@@ -26,7 +27,7 @@ const Trigger: React.FC<TriggerProps> = (props) => {
     return wrapperElement;
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let element = document.getElementById(wrapperId);
     // if element is not found with wrapperId or wrapperId is not provided,
     // create and append to body
@@ -37,26 +38,39 @@ const Trigger: React.FC<TriggerProps> = (props) => {
   }, [wrapperId]);
 
   useLayoutEffect(() => {
-    // console.log(triggerRef.current.getBoundingClientRect().top);
-
-    if (triggeredRef.current) {
-      triggeredRef.current.style.position = "absolute";
-      triggeredRef.current.style.top = "36px";
-      triggeredRef.current.style.display = isOpen ? "block" : "none";
-      setTimeout(() => {
-        triggeredRef.current.style.opacity = isOpen ? "1" : "0";
-        triggeredRef.current.style.transition = "all .3s";
-      });
-
-      // if (!isOpen) {
-      //   setTimeout(() => {
-      //     triggeredRef.current.style.display = "none";
-      //   }, 300);
-      // }
-    }
-
-    // triggeredRef.current.style.top = "10px";
+    computePosition();
   }, [isOpen, triggerRef.current, triggeredRef.current]);
+
+  const computePosition = () => {
+    if (!triggerRef.current || !triggeredRef.current) {
+      return;
+    }
+    const rect = triggerRef.current.getBoundingClientRect();
+    let documentH = document.documentElement.clientHeight;
+    const scrollTop = document.documentElement.scrollTop;
+
+    triggeredRef.current.style.position = "absolute";
+    triggeredRef.current.style.opacity = "0";
+    triggeredRef.current.style.display = "block";
+
+    setTimeout(() => {
+      let height = triggeredRef.current?.getBoundingClientRect().height || 0;
+
+      if (height > documentH - rect.height - rect.y) {
+        triggeredRef.current.style.top = rect.y - height + scrollTop + "px";
+      } else {
+        triggeredRef.current.style.top =
+          rect.y + rect.height + scrollTop + "px";
+      }
+
+      triggeredRef.current.style.opacity = isOpen ? "1" : "0";
+      triggeredRef.current.style.transition = `opacity ${delayMs}ms`;
+    });
+
+    setTimeout(() => {
+      triggeredRef.current.style.display = !isOpen && "none";
+    }, delayMs);
+  };
 
   // wrapperElement state will be null on the very first render.
   if (
