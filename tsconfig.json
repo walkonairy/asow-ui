@@ -42,7 +42,7 @@
     "stories/**",
     "src/packages/**/*.stories.tsx",
     "src/packages/**/*.test.tsx",
-    "src/packages/**/__expample__",
+    "src/packages/**/__example__",
     "src/main.tsx"
   ]
 }

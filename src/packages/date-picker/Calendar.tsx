@@ -55,7 +55,7 @@ const Calendar = (props: CalendarProps) => {
         ref={triggerRef}
         style={{ display: "inline-flex" }}
         onClick={() => {
-          setIsOpen(!isOpen);
+          setIsOpen(true);
         }}
       >
         {/*<div>icon</div>*/}

@@ -43,6 +43,7 @@
     "pub": "node ./scripts/publish.js"
   },
   "peerDependencies": {
+    "@asow/ui": "*",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",

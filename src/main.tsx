@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./styles/index.scss";
 
-import ExButton from "@/packages/button/__expample__/ExButton";
-import ExInput from "@/packages/input/__expample__/ExInput";
-import EXIcon from "@/packages/icon/__expample__/EXIcon";
-import EXDatePicker from "@/packages/date-picker/__expample__/EXDatePicker";
+import ExButton from "@/packages/button/__example__/ExButton";
+import ExInput from "@/packages/input/__example__/ExInput";
+import EXIcon from "@/packages/icon/__example__/EXIcon";
+import EXDatePicker from "@/packages/date-picker/__example__/EXDatePicker";
 
 // ReactDOM.render(
 //   <div style={{ gap: 32, display: "flex", flexDirection: "column" }}>
