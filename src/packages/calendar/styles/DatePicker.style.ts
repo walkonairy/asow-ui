@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { DateItem } from "@/packages/date-picker/DatePicker";
+import { DateItem } from "@/packages/calendar/DatePicker";
 
 export const Th = styled.th<{ item: string }>`
   color: ${({ item }) => (["六", "日"].includes(item) ? "#00e5ae" : "#ffffff")};

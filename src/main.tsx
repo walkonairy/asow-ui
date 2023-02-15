@@ -5,7 +5,7 @@ import "./styles/index.scss";
 import ExButton from "@/packages/button/__example__/ExButton";
 import ExInput from "@/packages/input/__example__/ExInput";
 import EXIcon from "@/packages/icon/__example__/EXIcon";
-import EXDatePicker from "@/packages/date-picker/__example__/EXDatePicker";
+import ExCalendar from "./packages/calendar/__example__/ExCalendar";
 
 // ReactDOM.render(
 //   <div style={{ gap: 32, display: "flex", flexDirection: "column" }}>
@@ -25,7 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/*<ExInput />*/}
       {/*<ExButton />*/}
       {/*<EXIcon />*/}
-      <EXDatePicker />
+      <ExCalendar />
     </div>
   </div>
 );

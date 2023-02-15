@@ -7,9 +7,9 @@ import React, {
 } from "react";
 import classNames from "classnames";
 import { getPrefixCls } from "@/utils";
-import { PickContext } from "@/packages/date-picker/Calendar";
+import { PickContext } from "@/packages/calendar/Calendar";
 import dayjs from "dayjs";
-import { DateItem } from "@/packages/date-picker/DatePicker";
+import { DateItem } from "@/packages/calendar/DatePicker";
 
 export interface TimeProps {
   value?: string;

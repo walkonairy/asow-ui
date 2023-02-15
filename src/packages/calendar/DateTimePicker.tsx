@@ -1,7 +1,7 @@
 import React from "react";
 import { getPrefixCls } from "@/utils";
-import DatePicker from "@/packages/date-picker/DatePicker";
-import TimePicker from "@/packages/date-picker/TimePicker";
+import DatePicker from "@/packages/calendar/DatePicker";
+import TimePicker from "@/packages/calendar/TimePicker";
 import dayjs from "dayjs";
 
 const DateTimePicker = () => {

@@ -1,9 +1,8 @@
 import React from "react";
 import dayjs from "dayjs";
-import DatePicker from "@/packages/date-picker";
-import Calendar from "@/packages/date-picker/Calendar";
+import Calendar from "@/packages/calendar";
 
-const EXDatePicker = () => {
+const ExCalendar = () => {
   const presets = [
     { label: "今天", value: dayjs() },
     { label: "昨天", value: dayjs().add(-1, "d") },
@@ -13,7 +12,7 @@ const EXDatePicker = () => {
 
   return (
     <div style={{ height: "200vh" }}>
-      <div style={{ height: "100vh" }} />
+      {/*<div style={{ height: "100vh" }} />*/}
       <Calendar type="date" />
       <Calendar type="date" presets={presets} />
       <Calendar type="time" />
@@ -23,4 +22,4 @@ const EXDatePicker = () => {
   );
 };
 
-export default EXDatePicker;
+export default ExCalendar;

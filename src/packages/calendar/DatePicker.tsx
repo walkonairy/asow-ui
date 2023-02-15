@@ -1,16 +1,9 @@
-import React, {
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useContext, useEffect, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import classNames from "classnames";
-import Trigger from "@/packages/trigger";
 import { getPrefixCls } from "@/utils";
-import { Td, TdDiv, Th } from "@/packages/date-picker/styles/DatePicker.style";
-import { PickContext } from "@/packages/date-picker/Calendar";
+import { Td, TdDiv, Th } from "@/packages/calendar/styles/DatePicker.style";
+import { PickContext } from "@/packages/calendar/Calendar";
 
 const Days = ["一", "二", "三", "四", "五", "六", "日"];
 

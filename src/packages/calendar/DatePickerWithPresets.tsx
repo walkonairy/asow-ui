@@ -1,5 +1,5 @@
 import React from "react";
-import DatePicker from "@/packages/date-picker/DatePicker";
+import DatePicker from "@/packages/calendar/DatePicker";
 import { getPrefixCls } from "@/utils";
 import { Dayjs } from "dayjs";
 
