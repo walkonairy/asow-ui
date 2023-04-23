@@ -243,7 +243,7 @@ const Input = forwardRef(
     }
 
     function setLimitLenInput(input: string) {
-      const oldInputSelectionPos = _ref.current!.selectionStart;
+      const oldInputSelectionPos = _ref.current?.selectionStart;
       const result = fixEmojiLength(input, maxLength);
       setValue(result);
       setTimeout(() => {
@@ -252,7 +252,7 @@ const Input = forwardRef(
     }
 
     function setLimitLenInputSelectionPos(oldInputSelectionPos: any) {
-      const currentInputSelectionPos = _ref.current!.selectionStart;
+      const currentInputSelectionPos = _ref.current?.selectionStart;
       if (!oldInputSelectionPos || !currentInputSelectionPos) {
         return;
       }

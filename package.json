@@ -40,6 +40,7 @@
     "build:esm": "yarn run clean && cross-env BABEL_ENV=esm rollup -c",
     "build:typed": "tsc --declaration --emitDeclarationOnly --noEmit false --outDir dist/",
     "build:css": "sass ./src/styles/index.scss ./dist/index.css",
+    "create-pkg": "node ./scripts/createPkg.js",
     "pub": "node ./scripts/publish.js"
   },
   "peerDependencies": {
@@ -96,6 +97,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.7",
     "fs": "^0.0.1-security",
+    "fs-extra": "^11.1.0",
     "postcss": "^8.1.9",
     "postcss-import": "12.0.1",
     "react-router-dom": "^6.3.0",
