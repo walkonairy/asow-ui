@@ -5,7 +5,7 @@ import { Mask } from "./styles/Modal.style";
 interface ModalProps {
   title?: string;
   isOpen?: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   customize?: boolean;
   mask?: boolean;
   children: React.ReactNode;
