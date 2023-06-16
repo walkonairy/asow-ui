@@ -15,6 +15,8 @@ interface TriggerProps {
   triggerRef?: React.RefObject<HTMLDivElement>;
   triggeredRef?: React.RefObject<HTMLDivElement>;
   isOpen?: boolean;
+  type?: "calendar" | "modal";
+  renderParent?: (children) => React.ReactElement;
   children?: React.ReactNode;
 }
 
@@ -22,12 +24,13 @@ const Trigger: React.FC<TriggerProps> = (props) => {
   const {
     children,
     wrapperId = "asow_portal",
+    type = "calendar",
     triggerRef,
     triggeredRef,
     isOpen,
+    renderParent,
   } = props;
   const [wrapperElement, setWrapperElement] = useState(null);
-  const delayMs = 300;
 
   function createWrapperAndAppendToBody(wrapperId) {
     const wrapperElement = document.createElement("div");
@@ -54,56 +57,53 @@ const Trigger: React.FC<TriggerProps> = (props) => {
     if (!triggerRef.current || !triggeredRef.current) {
       return;
     }
-    const rect = triggerRef.current.getBoundingClientRect();
 
-    let documentH = document.documentElement.clientHeight;
-    let documentW = document.documentElement.clientWidth;
+    const triggeredElem = triggeredRef.current;
+
+    const documentH = document.documentElement.clientHeight;
+    const documentW = document.documentElement.clientWidth;
+
+    const height = triggeredElem.getBoundingClientRect().height || 0;
+    const width = triggeredElem.getBoundingClientRect().width || 0;
 
     const scrollTop =
       document.documentElement.scrollTop || document.body.scrollTop || 0;
     const scrollLeft =
       document.documentElement.scrollLeft || document.body.scrollLeft || 0;
 
-    triggeredRef.current.style.position = "absolute";
-    triggeredRef.current.style.opacity = "0";
-    triggeredRef.current.style.display = isOpen ? "block" : "none";
-    triggeredRef.current.style.zIndex = getMaxIndex();
+    triggeredElem.classList.add("triggered-element");
 
-    setTimeout(() => {
-      let height = triggeredRef.current?.getBoundingClientRect().height || 0;
-      let width = triggeredRef.current?.getBoundingClientRect().width || 0;
-
-      if (height > documentH - rect.height - rect.y) {
-        triggeredRef.current.style.top = rect.y - height + scrollTop + "px";
-      } else {
-        triggeredRef.current.style.top =
-          rect.y + rect.height + scrollTop + "px";
-      }
-
-      if (width > documentW - rect.width - rect.x - 10) {
-        triggeredRef.current.style.left =
-          rect.x + rect.width - width + scrollLeft + "px";
-      } else {
-        triggeredRef.current.style.left = rect.x + scrollLeft + "px";
-      }
-
-      triggeredRef.current.style.opacity = isOpen ? "1" : "0";
-      triggeredRef.current.style.transition = `opacity ${delayMs}ms`;
-    });
-
-    // setTimeout(() => {
-    //   triggeredRef.current.style.display = !isOpen && "none";
-    // }, delayMs);
+    if (type === "calendar") {
+      const rect = triggerRef.current.getBoundingClientRect();
+      triggeredElem.style.display = isOpen ? "block" : "none";
+      triggeredElem.style.zIndex = getMaxIndex();
+      triggeredElem.style.opacity = isOpen ? "1" : "0";
+      triggeredElem.style.top =
+        height > documentH - rect.height - rect.y
+          ? rect.y - height + scrollTop + "px"
+          : rect.y + rect.height + scrollTop + "px";
+      triggeredElem.style.left =
+        width > documentW - rect.width - rect.x - 10
+          ? rect.x + rect.width - width + scrollLeft + "px"
+          : rect.x + scrollLeft + "px";
+    } else if (type === "modal") {
+      triggeredElem.style.display = isOpen ? "block" : "none";
+      triggeredElem.style.zIndex = getMaxIndex();
+      triggeredElem.style.opacity = isOpen ? "1" : "0";
+      triggeredElem.style.top = "38%";
+      triggeredElem.style.left = "50%";
+      triggeredElem.style.transform = "translate(-50%, -50%)";
+    }
   };
 
   // wrapperElement state will be null on the very first render.
-  if (
-    wrapperElement === null
-    // || !isOpen
-  )
-    return null;
+  if (!wrapperElement) return null;
 
-  return createPortal(children, wrapperElement);
+  if (renderParent) {
+    return createPortal(renderParent(children), wrapperElement);
+  } else {
+    return createPortal(children, wrapperElement);
+  }
 };
 
 export default Trigger;

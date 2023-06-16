@@ -21,4 +21,4 @@ export { default as DatePicker } from "@/packages/calendar";
 
 export { default as Trigger } from "@/packages/trigger";
 
-export * from "@/utils";
+// export * from "@/utils";

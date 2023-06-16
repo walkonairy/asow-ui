@@ -40,7 +40,7 @@ const Calendar = (props: CalendarProps) => {
 
   useOnClickOutside((e) => {
     const child = triggerRef.current;
-    const isClickChild = findDOMNode(child)?.contains(e.target) || false;
+    const isClickChild = findDOMNode(child)?.contains(e.target as any) || false;
     if (!isClickChild) {
       setIsOpen(false);
     }

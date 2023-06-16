@@ -11,7 +11,7 @@ const ExCalendar = () => {
   ];
 
   return (
-    <div style={{ height: "200vh" }}>
+    <div>
       {/*<div style={{ height: "100vh" }} />*/}
       <Calendar type="date" />
       <Calendar type="date" presets={presets} />
