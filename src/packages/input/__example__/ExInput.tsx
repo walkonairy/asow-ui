@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "@/packages/input";
-import { Icon, Size } from "@/index";
+import { Icon } from "@/index";
+import { Size } from "@asow/ui";
 
 const ExInput = () => {
   const [value, setValue] = React.useState("");

@@ -23,7 +23,7 @@ import EXModal from "./packages/modal/__example__/EXModal";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <div style={{ gap: 32, display: "flex", flexDirection: "column" }}>
     <div>
-      {/*<ExInput />*/}
+      <ExInput />
       {/*<ExButton />*/}
       {/*<EXIcon />*/}
       <ExCalendar />

@@ -223,7 +223,7 @@ const Input = forwardRef(
       // 在输入非中文的情况下，截取允许最大输入
       if (!isInChinese.current) {
         setLimitLenInput(input);
-        return;
+        // return;
       }
       // 需要触发onChange才会触发onCompositionEnd
       setValue(input);
@@ -300,6 +300,7 @@ const Input = forwardRef(
                 disabled={disabled}
                 className={inputClassNames}
                 value={_value}
+                maxLength={maxLength}
                 onChange={handleChange}
                 onCompositionStart={handleCompositionStart}
                 onCompositionEnd={handleCompositionEnd}
