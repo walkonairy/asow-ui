@@ -3,6 +3,7 @@
 @import "./core/variabel";
 @import "./core/prefixcls";
 @import "./core/theme";
+@import "./core/global";
 
 // button
 @import "../packages/button/styles/index";
@@ -18,3 +19,6 @@
 
 // trigger
 @import "../packages/trigger/styles/index";
+
+// text
+@import "../packages/text/styles/index";

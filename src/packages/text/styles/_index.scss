@@ -1,0 +1,203 @@
+@import "./src/styles/core/prefixcls";
+@import "./mixins";
+
+// t代表p   h代表h
+// 从a往后面的字母推代表从细到粗
+// 从1往后面的数字推代表从小到大
+
+.#{$prefix-cls}text {
+
+  font-family: Lota, serif;
+
+  &-ta-default {
+    @include text-font(16px, 400, 16px);
+  }
+
+  //  ************************** ta  **************************
+  &-ta-1 {
+    @include text-font(12px, 400, 12px);
+  }
+
+  &-ta-2 {
+    @include text-font(14px, 400, 14px);
+  }
+
+  &-ta-3 {
+    @include text-font(16px, 400, 16px);
+  }
+
+  &-ta-4 {
+    @include text-font(18px, 400, 18px);
+  }
+
+  &-ta-5 {
+    @include text-font(20px, 400, 20px);
+  }
+
+  &-ta-6 {
+    @include text-font(22px, 400, 22px);
+  }
+
+
+  //  ************************** tb  **************************
+  &-tb-1 {
+    @include text-font(12px, 600, 12px);
+  }
+
+  &-tb-2 {
+    @include text-font(14px, 600, 14px);
+  }
+
+  &-tb-3 {
+    @include text-font(16px, 600, 16px);
+  }
+
+  &-tb-4 {
+    @include text-font(18px, 600, 18px);
+  }
+
+  &-tb-5 {
+    @include text-font(20px, 600, 20px);
+  }
+
+  &-tb-6 {
+    @include text-font(22px, 600, 22px);
+  }
+
+  //  ************************** tc  **************************
+  &-tc-1 {
+    @include text-font(12px, 700, 12px);
+  }
+
+  &-tc-2 {
+    @include text-font(14px, 700, 14px);
+  }
+
+  &-tc-3 {
+    @include text-font(16px, 700, 16px);
+  }
+
+  &-tc-4 {
+    @include text-font(18px, 700, 18px);
+  }
+
+  &-tc-5 {
+    @include text-font(20px, 700, 20px);
+  }
+
+  &-tc-6 {
+    @include text-font(22px, 700, 22px);
+  }
+
+  //  ************************** td  **************************
+  &-td-1 {
+    @include text-font(12px, 900, 12px);
+  }
+
+  &-td-2 {
+    @include text-font(14px, 900, 14px);
+  }
+
+  &-td-3 {
+    @include text-font(16px, 900, 16px);
+  }
+
+  &-td-4 {
+    @include text-font(18px, 900, 18px);
+  }
+
+  &-td-5 {
+    @include text-font(20px, 900, 20px);
+  }
+
+  &-td-6 {
+    @include text-font(22px, 900, 22px);
+  }
+
+  //  ************************** ha  **************************
+  &-ha-1 {
+    @include text-font(24px, 400, 24px);
+  }
+
+  &-ha-2 {
+    @include text-font(28px, 400, 28px);
+  }
+
+  &-ha-3 {
+    @include text-font(32px, 400, 32px);
+  }
+
+  &-ha-4 {
+    @include text-font(40px, 400, 40px);
+  }
+
+  &-ha-5 {
+    @include text-font(60px, 400, 60px);
+  }
+
+  &-ha-6 {
+    @include text-font(64px, 400, 64px);
+  }
+
+  &-ha-7 {
+    @include text-font(80px, 400, 80px);
+  }
+
+  //  ************************** hb  **************************
+  &-hb-1 {
+    @include text-font(24px, 600, 24px);
+  }
+
+  &-hb-2 {
+    @include text-font(28px, 600, 28px);
+  }
+
+  &-hb-3 {
+    @include text-font(32px, 600, 32px);
+  }
+
+  &-hb-4 {
+    @include text-font(40px, 600, 40px);
+  }
+
+  &-hb-5 {
+    @include text-font(60px, 600, 60px);
+  }
+
+  &-hb-6 {
+    @include text-font(64px, 600, 64px);
+  }
+
+  &-hb-7 {
+    @include text-font(80px, 600, 80px);
+  }
+
+  //  ************************** hc  **************************
+  &-hc-1 {
+    @include text-font(24px, 900, 24px);
+  }
+
+  &-hc-2 {
+    @include text-font(28px, 900, 28px);
+  }
+
+  &-hc-3 {
+    @include text-font(32px, 900, 32px);
+  }
+
+  &-hc-4 {
+    @include text-font(40px, 900, 40px);
+  }
+
+  &-hc-5 {
+    @include text-font(60px, 900, 60px);
+  }
+
+  &-hc-6 {
+    @include text-font(64px, 900, 64px);
+  }
+
+  &-hc-7 {
+    @include text-font(80px, 900, 80px);
+  }
+}

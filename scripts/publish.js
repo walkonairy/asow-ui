@@ -4,6 +4,7 @@ const packageInfo = require("../package.json");
 const { exec } = require("child_process");
 
 const { name } = packageInfo;
+const pubTag = process.argv[2];
 
 const runCommand = (command, cwd) => {
   return new Promise((resolve, reject) => {
@@ -34,9 +35,16 @@ const writeJson = (targetPath, obj) =>
 
   await writeJson(targetPath, newPackageData);
 
-  // await runCommand("git add .");
-  // await runCommand("git commit -m 'publish to npm'");
-
-  await runCommand("npm version patch");
-  await runCommand("npm publish");
+  if (pubTag === "beta") {
+    console.log("请输入beta版本号：");
+    process.stdin.on("data", async (data) => {
+      const betaVersion = data.toString().trim();
+      await runCommand(`npm version ${betaVersion}`);
+      await runCommand("npm publish");
+      process.exit();
+    });
+  } else {
+    await runCommand("npm version patch");
+    await runCommand("npm publish");
+  }
 })();
