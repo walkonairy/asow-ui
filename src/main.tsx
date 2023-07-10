@@ -28,7 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/*<ExButton />*/}
       {/*<EXIcon />*/}
       {/*<ExCalendar />*/}
-      {/*<EXModal />*/}
+      <EXModal />
       <ExText />
     </div>
   </div>

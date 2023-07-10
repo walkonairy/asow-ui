@@ -5,7 +5,7 @@ export type ResponsiveObj<T> = Partial<Record<ResponsiveType, T>>;
 export type Token<T> = T | ResponsiveObj<T>;
 
 const computeSizeObj = (obj) => {
-  const SIZE = {
+  const sizeObj = {
     base: "",
     sm: "",
     md: "",
@@ -13,32 +13,24 @@ const computeSizeObj = (obj) => {
     xl: "",
   };
 
-  const SIZE_ARRAY = Object.keys(SIZE);
-  const sizeIterator = SIZE_ARRAY[Symbol.iterator]();
-  let iterator = sizeIterator.next();
+  const sizeKeys = Object.keys(sizeObj);
 
   for (let objKey in obj) {
-    for (let sizeKey in SIZE) {
-      if (objKey === sizeKey) {
-        SIZE[sizeKey] = obj[objKey];
-      }
+    if (sizeKeys.includes(objKey)) {
+      sizeObj[objKey] = obj[objKey];
     }
   }
 
-  let key = "";
-  while (!iterator.done) {
-    if (SIZE[iterator.value]) {
-      key = iterator.value;
-      iterator = sizeIterator.next();
+  let prevKey = "";
+  for (let key of sizeKeys) {
+    if (!sizeObj[key] && prevKey) {
+      sizeObj[key] = sizeObj[prevKey];
     } else {
-      if (key) {
-        SIZE[iterator.value] = SIZE[key];
-      } else {
-        iterator = sizeIterator.next();
-      }
+      prevKey = key;
     }
   }
-  return SIZE;
+
+  return sizeObj;
 };
 
 export const useSize = <T>(size: Token<T>) => {

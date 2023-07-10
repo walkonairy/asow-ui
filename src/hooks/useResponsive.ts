@@ -17,19 +17,13 @@ let responsiveConfig: ResponsiveConfig = {
   xl: 1440,
 };
 
-const isBrowser = !!(
-  typeof window !== "undefined" &&
-  window.document &&
-  window.document.createElement
-);
+const isBrowser = typeof window !== "undefined" && !!window.document;
 
 function handleResize() {
   const oldInfo = info;
   calculate();
   if (oldInfo === info) return;
-  for (const subscriber of subscribers) {
-    subscriber();
-  }
+  subscribers.forEach((subscriber) => subscriber());
 }
 
 let listening = false;
@@ -39,12 +33,13 @@ function calculate() {
   const newInfo = {} as ResponsiveInfo;
   let shouldUpdate = false;
 
-  for (const key of Object.keys(responsiveConfig)) {
-    newInfo[key] = width >= responsiveConfig[key];
-    if (newInfo[key] !== info[key]) {
+  Object.entries(responsiveConfig).forEach(([key, value]) => {
+    const newInfoValue = width >= value;
+    newInfo[key] = newInfoValue;
+    if (newInfoValue !== info[key]) {
       shouldUpdate = true;
     }
-  }
+  });
 
   if (shouldUpdate) {
     info = newInfo;
@@ -68,7 +63,7 @@ export function useResponsive() {
   useEffect(() => {
     if (!isBrowser) return;
 
-    const subscriber = () => {
+    const subscriber: Subscriber = () => {
       setState(info);
     };
     subscribers.add(subscriber);
