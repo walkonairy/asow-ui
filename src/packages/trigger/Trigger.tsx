@@ -50,6 +50,7 @@ const Trigger: React.FC<TriggerProps> = (props) => {
   }, [wrapperId]);
 
   useLayoutEffect(() => {
+    console.log(triggeredRef.current);
     computePosition();
   }, [isOpen, triggerRef.current, triggeredRef.current]);
 
@@ -71,8 +72,6 @@ const Trigger: React.FC<TriggerProps> = (props) => {
     const scrollLeft =
       document.documentElement.scrollLeft || document.body.scrollLeft || 0;
 
-    console.log(triggeredElem);
-    console.log(type);
     triggeredElem.classList.add("triggered-element");
 
     if (type === "calendar") {

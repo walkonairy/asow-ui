@@ -40,7 +40,7 @@ const writeJson = (targetPath, obj) =>
     process.stdin.on("data", async (data) => {
       const betaVersion = data.toString().trim();
       await runCommand(`npm version ${betaVersion}`);
-      await runCommand("npm publish");
+      await runCommand("npm publish --tag beta");
       process.exit();
     });
   } else {
