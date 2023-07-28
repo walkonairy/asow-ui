@@ -1,0 +1,75 @@
+@import "./src/styles/core/prefixcls";
+@import "./mixins";
+
+.#{$prefix-cls}modal {
+  &-mask {
+    @include modal-mask
+  }
+
+  &-wrap {
+    @include modal-wrapper
+  }
+
+  &-content {
+    @include modal-content
+  }
+
+
+  /* modal 出场动画 */
+  &-fade-enter {
+    transform: scale(0.6) translate(0, -24px);
+    opacity: 0;
+  }
+
+  &-fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in-out, transform 300ms;
+    transform: scale(1) translate(0, 0);
+  }
+
+  &-fade-exit {
+    opacity: 1;
+  }
+
+  &-fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out, background 300ms, transform 300ms;
+    transform: scale(0.6) translate(0, -24px);
+  }
+
+  &-fade-exit-done {
+    display: none;
+  }
+
+  /* 当设置 unmountOnExit = false时 避免初始化就展示元素 */
+  &-anm:not(&-applied) {
+    display: none;
+  }
+
+
+  /* mask出场 动画 */
+  &-mask-fade-enter {
+    opacity: 0;
+  }
+
+  &-mask-fade-enter-active {
+    @include modal-mask;
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+
+  &-mask-fade-enter-done {
+    @include modal-mask;
+  }
+
+  &-mask-fade-exit {
+    @include modal-mask;
+    opacity: 1;
+  }
+
+  &-mask-fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+}

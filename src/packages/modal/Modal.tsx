@@ -1,41 +1,99 @@
-import React, { forwardRef, useRef } from "react";
-import Trigger from "@/packages/trigger";
-import { Mask } from "./styles/Modal.style";
+import React, { CSSProperties, useEffect, useRef } from "react";
+import { getPrefixCls } from "@/utils";
+import classNames from "classnames";
+import Portal from "@/packages/portal";
+import { CSSTransition } from "react-transition-group";
 
-interface ModalProps {
-  title?: string;
-  isOpen?: boolean;
+export interface ModalProps {
+  isOpen: boolean;
   onClose?: () => void;
+  unmountOnClose?: boolean;
   customize?: boolean;
   mask?: boolean;
-  children: React.ReactNode;
+  maskStyle?: CSSProperties;
 }
-const Modal = forwardRef((props: ModalProps, ref: React.RefObject<any>) => {
-  const { isOpen, title, onClose, customize, mask, children } = props;
 
-  const triggerRef = useRef<HTMLDivElement>(null);
-  const triggeredRef = useRef<HTMLDivElement>(null);
+const Modal: React.FC<ModalProps> = (props) => {
+  const {
+    isOpen,
+    mask,
+    maskStyle,
+    onClose,
+    customize,
+    children,
+    unmountOnClose,
+  } = props;
 
-  const renderParent = (children) => {
-    return <Mask show={mask && isOpen}>{children}</Mask>;
-  };
+  const prefixCls: string = getPrefixCls("modal");
+
+  const maskClassNames = classNames(`${prefixCls}-mask-fade`);
+  const wrapClassNames = classNames(`${prefixCls}-anm`, `${prefixCls}-wrap`);
+  const contentClassNames = classNames(`${prefixCls}-content`);
+
+  const overflowRef = useRef("");
+
+  /**
+   * 缓存原始的overflow属性值
+   */
+  useEffect(() => {
+    overflowRef.current = document.body.style.overflow;
+  }, []);
+
+  /**
+   * 当打开modal时禁止滚动屏幕，关闭时恢复至缓存值
+   */
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = overflowRef.current;
+    }
+  }, [isOpen]);
+
+  /**
+   * 键盘Esc关闭modal
+   */
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape" || event.key === "Esc") {
+        onClose?.();
+      }
+    };
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isOpen]);
 
   return (
-    <>
-      <div ref={triggerRef} onClick={onClose} style={{ display: "none" }} />
-      <Trigger
-        type="modal"
-        isOpen={isOpen}
-        triggerRef={triggerRef}
-        triggeredRef={triggeredRef}
-        renderParent={renderParent}
-      >
-        <div ref={triggeredRef}>
-          {customize ? children : <div>{title}</div>}
-        </div>
-      </Trigger>
-    </>
+    <Portal>
+      <div>
+        {mask && (
+          <CSSTransition
+            in={isOpen}
+            timeout={300}
+            classNames={maskClassNames}
+            unmountOnExit
+          >
+            <div style={maskStyle} />
+          </CSSTransition>
+        )}
+        <CSSTransition
+          in={isOpen}
+          timeout={300}
+          classNames={`${prefixCls}-applied ${prefixCls}-fade`}
+          unmountOnExit={unmountOnClose}
+        >
+          <>
+            <div className={wrapClassNames}>
+              <div className={contentClassNames}>{children}</div>
+            </div>
+          </>
+        </CSSTransition>
+      </div>
+    </Portal>
   );
-});
+};
 
 export default Modal;
