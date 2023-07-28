@@ -23,4 +23,6 @@ export { default as Trigger } from "@/packages/trigger";
 
 export { default as Modal } from "@/packages/modal";
 
+export { default as Text } from "@/packages/text";
+
 // export * from "@/utils";

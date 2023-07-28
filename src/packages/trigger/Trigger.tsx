@@ -50,6 +50,7 @@ const Trigger: React.FC<TriggerProps> = (props) => {
   }, [wrapperId]);
 
   useLayoutEffect(() => {
+    console.log(triggeredRef.current);
     computePosition();
   }, [isOpen, triggerRef.current, triggeredRef.current]);
 

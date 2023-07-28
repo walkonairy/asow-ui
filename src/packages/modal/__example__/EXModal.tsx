@@ -13,6 +13,7 @@ const EXModal = () => {
         title="test aaa"
         onClose={() => setOpen(false)}
         customize={false}
+        mask
       >
         <div>
           <div>title</div>
