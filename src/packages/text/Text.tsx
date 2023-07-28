@@ -91,4 +91,4 @@ const Text = <T extends keyof JSX.IntrinsicElements = "p">(
   );
 };
 
-export default forwardRef(Text);
+export default Text;
