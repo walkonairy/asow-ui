@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useRef } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import { getPrefixCls } from "@/utils";
 import classNames from "classnames";
 import Portal from "@/packages/portal";
@@ -31,6 +31,16 @@ const Modal: React.FC<ModalProps> = (props) => {
   const contentClassNames = classNames(`${prefixCls}-content`);
 
   const overflowRef = useRef("");
+  const [modalOpen, setModalOpen] = useState(false);
+
+  /**
+   * 避免isOpen初始值为true时没有弹出modal
+   */
+  useEffect(() => {
+    setTimeout(() => {
+      setModalOpen(isOpen);
+    });
+  }, [isOpen]);
 
   /**
    * 缓存原始的overflow属性值
@@ -71,7 +81,7 @@ const Modal: React.FC<ModalProps> = (props) => {
       <div>
         {mask && (
           <CSSTransition
-            in={isOpen}
+            in={modalOpen}
             timeout={300}
             classNames={maskClassNames}
             unmountOnExit
@@ -80,16 +90,14 @@ const Modal: React.FC<ModalProps> = (props) => {
           </CSSTransition>
         )}
         <CSSTransition
-          in={isOpen}
+          in={modalOpen}
           timeout={300}
           classNames={`${prefixCls}-applied ${prefixCls}-fade`}
           unmountOnExit={unmountOnClose}
         >
-          <>
-            <div className={wrapClassNames}>
-              <div className={contentClassNames}>{children}</div>
-            </div>
-          </>
+          <div className={wrapClassNames}>
+            <div className={contentClassNames}>{children}</div>
+          </div>
         </CSSTransition>
       </div>
     </Portal>

@@ -10,10 +10,10 @@ const EXModal = () => {
       <Button onClick={() => setOpen(true)}>点我</Button>
       <Modal
         isOpen={open}
-        title="test aaa"
         onClose={() => setOpen(false)}
         customize={false}
         mask
+        unmountOnClose
       >
         <div>
           <div>title</div>

@@ -1,0 +1,40 @@
+@import "./src/styles/core/prefixcls";
+@import "./mixins";
+
+.#{$prefix-cls}message {
+
+  &-wrap {
+    @include messages-wrapper;
+  }
+
+  &-content {
+    @include messages-content;
+  }
+
+  /* message 出场动画 */
+  &-fade-enter {
+    transform: translate(0, -24px);
+    opacity: 0;
+    max-height: 0;
+  }
+
+  &-fade-enter-active {
+    opacity: 1;
+    max-height: 200px;
+    transition: opacity 300ms ease-in-out, transform 300ms, max-height 300ms;
+    transform: translate(0, 0);
+  }
+
+  &-fade-exit {
+    opacity: 1;
+    max-height: 200px;
+  }
+
+  &-fade-exit-active {
+    opacity: 0;
+    max-height: 0;
+    transition:max-height 300ms, opacity 300ms ease-in-out, transform 300ms;
+    transform: translate(0, -24px);
+  }
+
+}

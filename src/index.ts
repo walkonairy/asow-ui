@@ -25,4 +25,6 @@ export { default as Modal } from "@/packages/modal";
 
 export { default as Text } from "@/packages/text";
 
+export { MessageProvider, useMessage } from "@/packages/message";
+
 // export * from "@/utils";
