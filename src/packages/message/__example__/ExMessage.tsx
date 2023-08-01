@@ -9,8 +9,9 @@ const Some = () => {
     message.info({
       title: "info",
       content: "info content",
-      autoClose: true,
+      autoClose: false,
       duration: 3000,
+      maxCount: 4,
     });
   };
   return (
@@ -24,7 +25,6 @@ const Some2 = () => {
   const message = useMessage();
 
   const handleShowMessage = () => {
-    // message.show({ type: "info", title: "test", content: "test content" });
     message.error("test");
   };
   return (
@@ -36,7 +36,7 @@ const Some2 = () => {
 
 const ExMessage = () => {
   return (
-    <MessageProvider>
+    <MessageProvider config={{ maxCount: 3 }}>
       <Some />
       <Some2 />
     </MessageProvider>

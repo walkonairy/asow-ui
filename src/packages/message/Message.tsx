@@ -15,15 +15,19 @@ interface MessageLists {
   remove?: (e: any) => void;
 }
 
-export interface MessageProps {
+export interface MessageProps extends MessageConfig {
   id?: number;
   title?: string;
   content: string;
-  duration?: number;
   closable?: boolean;
   autoClose?: boolean;
   onClose?: () => void;
-  // placement?: 'top' | 'tl' | 'tr' | 'bottom' | 'bl' | 'br';
+  // todo ~  placement?: 'top' | 'tl' | 'tr' | 'bottom' | 'bl' | 'br';
+}
+
+interface MessageConfig {
+  duration?: number;
+  maxCount?: number;
 }
 
 export interface MessageContextValue {
@@ -43,7 +47,12 @@ export const useMessage = () => {
   return context;
 };
 
-export const MessageProvider: React.FC = ({ children }) => {
+export const MessageProvider: React.FC<{ config?: MessageConfig }> = (
+  props
+) => {
+  const { config, children } = props;
+  const { maxCount: globalMaxCount, duration: globalDuration } = config;
+
   const prefixCls: string = getPrefixCls("message");
   const wrapClassnames = classNames(`${prefixCls}-wrap`);
   const contentClassnames = classNames(`${prefixCls}-content`);
@@ -68,14 +77,20 @@ export const MessageProvider: React.FC = ({ children }) => {
       }
       if (arr.some((item: MessageProps) => item.id === messageProps.id)) return;
     }
-    const { autoClose = true, onClose, duration } = messageProps;
+    const { autoClose = true, onClose, duration, maxCount } = messageProps;
+    const _maxCount = maxCount || globalMaxCount || 3;
+    const _duration = duration || globalDuration || 3000;
+
     setList((pre: MessageLists[]) => {
       let obj = [...pre, option];
+      if (_maxCount && obj.length > _maxCount) {
+        obj = obj.slice(obj.length - _maxCount);
+      }
       if (autoClose) {
         option.timer = setTimeout(() => {
           onRemove(option.id);
           onClose && onClose();
-        }, duration || 3000);
+        }, _duration);
       }
       return obj;
     });
@@ -104,7 +119,7 @@ export const MessageProvider: React.FC = ({ children }) => {
       if (!item.message.autoClose) return;
       selfTimer.current = setTimeout(() => {
         _onClose(item);
-      }, item.message.duration || 3000);
+      }, item.message.duration || globalDuration || 3000);
     }, 100);
   };
 
