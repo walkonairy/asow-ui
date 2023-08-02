@@ -54,7 +54,8 @@ export const MessageProvider: React.FC<{ config?: MessageConfig }> = (
   props
 ) => {
   const { config, children } = props;
-  const { maxCount: globalMaxCount, duration: globalDuration } = config;
+  const _config = config || { maxCount: 3, duration: 3000 };
+  const { maxCount: globalMaxCount, duration: globalDuration } = _config;
 
   const prefixCls: string = getPrefixCls("message");
   const wrapClassnames = classNames(`${prefixCls}-wrap`);
