@@ -5,10 +5,80 @@
   transform: translateX(-50%);
 }
 
-@mixin messages-content {
+@mixin messages-container {
   margin-bottom: 16px;
-  padding: 9px 12px;
+  padding: 12px 8px 12px 12px;
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.04), 0 3px 3px -6px rgba(0, 0, 0, 0.12), 0 9px 28px 2px rgba(0, 0, 0, 0.05);
+  width: 300px;
+  display: flex;
+  align-items: start;
+  transition: width .3s;
+
+  @media screen and (min-width: 1024px) {
+    width: 500px;
+  }
+}
+
+@mixin messages-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+  padding: 0 8px 0 12px;
+}
+
+@mixin message-info {
+  @include message-type(#4682B4, #FFFFFF);
+}
+
+@mixin message-success {
+  @include message-type(#2E8B57, #FFFFFF);
+}
+
+@mixin message-warning {
+  @include message-type(#EADB6E, #4B0082);
+}
+
+@mixin message-error {
+  @include message-type(#CD5C5C, #FFFFFF);
+}
+
+@mixin message-close {
+  padding: 0;
+  position: relative;
+  top: -6px;
+  right: -2px;
+}
+
+@mixin message-info-close {
+  @include message-type-close(#2976B5, #FFFFFF)
+}
+
+@mixin message-success-close {
+  @include message-type-close(#1B7040, #FFFFFF)
+}
+
+@mixin message-warning-close {
+  @include message-type-close(#EAE96A, #4B0082)
+}
+
+@mixin message-error-close {
+  @include message-type-close(#BA4B4B, #FFFFFF)
+}
+
+@mixin message-type-close($hover-bg-color, $color) {
+  color: $color;
+
+  &:hover, &:active, &:focus {
+    background: $hover-bg-color;
+  }
+}
+
+@mixin message-type(
+  $bg-color, $color, $hover-bg-color : null
+) {
+  background: $bg-color;
+  color: $color;
 }

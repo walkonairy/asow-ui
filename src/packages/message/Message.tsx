@@ -1,8 +1,11 @@
 import React, { createContext, useContext, useRef, useState } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Portal from "@/packages/portal";
+import Text from "@/packages/text";
 import { getPrefixCls } from "@/utils";
 import classNames from "classnames";
+import { Button, Icon } from "@asow/ui";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 type MessageType = "info" | "success" | "error" | "warning";
 
@@ -55,7 +58,13 @@ export const MessageProvider: React.FC<{ config?: MessageConfig }> = (
 
   const prefixCls: string = getPrefixCls("message");
   const wrapClassnames = classNames(`${prefixCls}-wrap`);
-  const contentClassnames = classNames(`${prefixCls}-content`);
+  const containerClassnames = (type: MessageType) => {
+    return classNames(`${prefixCls}-container`, `${prefixCls}-${type}`);
+  };
+  const contentWrapClassnames = classNames(`${prefixCls}-content-wrap`);
+  const closeButtonClassnames = (type: MessageType) => {
+    return classNames(`${prefixCls}-close`, `${prefixCls}-${type}-close`);
+  };
 
   const [lists, setList] = useState<MessageLists[]>([]);
   const selfTimer = useRef<any>(null);
@@ -85,6 +94,9 @@ export const MessageProvider: React.FC<{ config?: MessageConfig }> = (
       let obj = [...pre, option];
       if (_maxCount && obj.length > _maxCount) {
         obj = obj.slice(obj.length - _maxCount);
+      }
+      if (option.message.autoClose === undefined) {
+        option.message.autoClose = true;
       }
       if (autoClose) {
         option.timer = setTimeout(() => {
@@ -123,6 +135,19 @@ export const MessageProvider: React.FC<{ config?: MessageConfig }> = (
     }, 100);
   };
 
+  const renderTypeIcon = (type: MessageType): IconProp => {
+    switch (type) {
+      case "info":
+        return "info-circle";
+      case "success":
+        return "check-circle";
+      case "warning":
+        return "warning";
+      case "error":
+        return "xmark-circle";
+    }
+  };
+
   return (
     <Message.Provider
       value={{
@@ -144,14 +169,28 @@ export const MessageProvider: React.FC<{ config?: MessageConfig }> = (
                 classNames={`${prefixCls}-fade`}
               >
                 <div
-                  className={contentClassnames}
+                  className={containerClassnames(item.type)}
                   onMouseEnter={() => onMouseEnter(item)}
                   onMouseLeave={() => onMouseLeave(item)}
                 >
-                  {item.message.title && <div>{item.message.title}</div>}
-                  <div>{item.message.content + item.id}</div>
+                  <div>
+                    <Icon icon={renderTypeIcon(item.type)} />
+                  </div>
+                  <div className={contentWrapClassnames}>
+                    {item.message.title && (
+                      <Text tag="tc-3">{item.message.title}</Text>
+                    )}
+                    <Text>{item.message.content}</Text>
+                  </div>
                   {item.message.closable && (
-                    <button onClick={() => _onClose(item)}>Close</button>
+                    <Button
+                      type={"text"}
+                      size={"small"}
+                      onClick={() => _onClose(item)}
+                      className={closeButtonClassnames(item.type)}
+                    >
+                      <Icon icon="close" fontSize="15px" />
+                    </Button>
                   )}
                 </div>
               </CSSTransition>

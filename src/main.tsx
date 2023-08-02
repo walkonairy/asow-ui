@@ -30,6 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       display: "flex",
       flexDirection: "column",
       height: "200vh",
+      background: "#191a1f",
     }}
   >
     <div>

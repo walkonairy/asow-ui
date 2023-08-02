@@ -52,8 +52,7 @@ export type TextProps<T extends keyof JSX.IntrinsicElements = "p"> = {
 } & JSX.IntrinsicElements[T];
 
 const Text = <T extends keyof JSX.IntrinsicElements = "p">(
-  props: TextProps<T>,
-  ref: React.Ref<HTMLElement>
+  props: TextProps<T>
 ) => {
   const {
     // @ts-ignore
@@ -83,7 +82,6 @@ const Text = <T extends keyof JSX.IntrinsicElements = "p">(
     Element,
     {
       ...rest,
-      ref,
       className: _classNames,
       style: { ..._style, ...style },
     },

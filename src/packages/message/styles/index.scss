@@ -7,9 +7,50 @@
     @include messages-wrapper;
   }
 
-  &-content {
-    @include messages-content;
+  &-container {
+    @include messages-container;
   }
+
+  &-content-wrap {
+    @include messages-content-wrapper;
+  }
+
+  &-info {
+    @include message-info;
+  }
+
+  &-success {
+    @include message-success;
+  }
+
+  &-warning {
+    @include message-warning;
+  }
+
+  &-error {
+    @include message-error;
+  }
+
+  &-close {
+    @include message-close;
+  }
+
+  &-info-close {
+    @include message-info-close;
+  }
+
+  &-success-close {
+    @include message-success-close;
+  }
+
+  &-warning-close {
+    @include message-warning-close;
+  }
+
+  &-error-close {
+    @include message-error-close;
+  }
+
 
   /* message 出场动画 */
   &-fade-enter {
@@ -33,7 +74,7 @@
   &-fade-exit-active {
     opacity: 0;
     max-height: 0;
-    transition:max-height 300ms, opacity 300ms ease-in-out, transform 300ms;
+    transition: max-height 300ms, opacity 300ms ease-in-out, transform 300ms;
     transform: translate(0, -24px);
   }
 

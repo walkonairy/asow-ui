@@ -4,20 +4,58 @@ import { MessageProvider, useMessage } from "../Message";
 const Some = () => {
   const message = useMessage();
 
-  const handleShowMessage = () => {
-    // message.show({ type: "info", title: "test", content: "test content" });
+  const handleShowMessageInfo = () => {
     message.info({
-      title: "info",
-      content: "info content",
+      title: "标题",
+      content: "这是内容...",
       autoClose: false,
       duration: 3000,
       maxCount: 4,
+      closable: true,
+    });
+  };
+
+  const handleShowMessageSuccess = () => {
+    message.success({
+      title:
+        "标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题",
+      content:
+        "这是内容...这是内容...这是内容...这是内容...这是内容...这是内容...这是内容...这是内容...这是内容...这是内容...这是内容...",
+      autoClose: false,
+      duration: 3000,
+      maxCount: 4,
+      closable: true,
+    });
+  };
+
+  const handleShowMessageWarning = () => {
+    message.warning({
+      title: "标题",
+      content: "这是内容...",
+      autoClose: false,
+      duration: 3000,
+      maxCount: 4,
+      closable: true,
+    });
+  };
+
+  const handleShowMessageError = () => {
+    message.error({
+      title: "标题",
+      content: "这是内容...",
+      autoClose: false,
+      duration: 3000,
+      maxCount: 4,
+      closable: true,
     });
   };
   return (
-    <>
-      <button onClick={handleShowMessage}>Show Info Message</button>
-    </>
+    <div style={{ marginTop: 600 }}>
+      <button onClick={handleShowMessageInfo}>Show Info Message</button>
+      <button onClick={handleShowMessageSuccess}>Show Success Message</button>
+      <button onClick={handleShowMessageWarning}>Show Warning Message</button>
+      <button onClick={handleShowMessageError}>Show Error Message</button>
+    </div>
   );
 };
 
@@ -25,7 +63,7 @@ const Some2 = () => {
   const message = useMessage();
 
   const handleShowMessage = () => {
-    message.error("test");
+    message.success("写点内容吧");
   };
   return (
     <>
