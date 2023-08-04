@@ -37,10 +37,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/*<ExInput />*/}
       {/*<ExButton />*/}
       {/*<EXIcon />*/}
-      {/*<ExCalendar />*/}
-      <EXModal />
-      <ExPortal />
-      <ExMessage />
+      <ExCalendar />
+      {/*<EXModal />*/}
+      {/*<ExPortal />*/}
+      {/*<ExMessage />*/}
     </div>
   </div>
 );

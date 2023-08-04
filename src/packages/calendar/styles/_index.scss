@@ -1,6 +1,43 @@
 @import "./src/styles/core/prefixcls";
 @import "./time";
 
+.#{$prefix-cls}picker {
+  /* modal 出场动画 */
+  &-fade-enter {
+    transform: translate(0, -24px);
+    opacity: 0;
+  }
+
+  &-fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in-out, transform 300ms;
+    transform: translate(0, 0);
+  }
+
+  &-fade-exit {
+    opacity: 1;
+  }
+
+  &-fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out, background 300ms, transform 300ms;
+    transform: translate(0, -6px);
+  }
+
+  &-fade-exit-done {
+    display: none;
+  }
+
+  /* 当设置 unmountOnExit = false时 避免初始化就展示元素 */
+  &-anm:not(&-applied) {
+    display: none;
+  }
+}
+
+.#{$prefix-cls}picker-dropdown {
+  position: absolute;
+}
+
 .#{$prefix-cls}picker-wrapper {
   border-radius: 8px;
   box-shadow: rgb(0 0 0 / 10%) 0px 2px 12px 0px;
@@ -54,7 +91,7 @@
   position: relative;
   padding: 0;
   cursor: pointer;
-  transition: background .3s ;
+  transition: background .3s;
   border-radius: 30px;
 
   &:hover {

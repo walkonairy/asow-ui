@@ -1,5 +1,6 @@
 import React from "react";
 import { MessageProvider, useMessage } from "../Message";
+import { Button } from "@asow/ui";
 
 const Some = () => {
   const message = useMessage();
@@ -51,10 +52,10 @@ const Some = () => {
   };
   return (
     <div style={{ marginTop: 600 }}>
-      <button onClick={handleShowMessageInfo}>Show Info Message</button>
-      <button onClick={handleShowMessageSuccess}>Show Success Message</button>
-      <button onClick={handleShowMessageWarning}>Show Warning Message</button>
-      <button onClick={handleShowMessageError}>Show Error Message</button>
+      <Button onClick={handleShowMessageInfo}>Show Info Message</Button>
+      <Button onClick={handleShowMessageSuccess}>Show Success Message</Button>
+      <Button onClick={handleShowMessageWarning}>Show Warning Message</Button>
+      <Button onClick={handleShowMessageError}>Show Error Message</Button>
     </div>
   );
 };
@@ -67,7 +68,7 @@ const Some2 = () => {
   };
   return (
     <>
-      <button onClick={handleShowMessage}>Show Error Message</button>
+      <Button onClick={handleShowMessage}>Show Error Message</Button>
     </>
   );
 };
