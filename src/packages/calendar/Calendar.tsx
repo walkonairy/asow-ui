@@ -36,7 +36,7 @@ interface CalendarProps {
   presets?: Presets[];
 }
 
-const Calendar = (props: CalendarProps) => {
+const Calendar: React.FC<CalendarProps> = (props) => {
   const { type, presets } = props;
   const prefixCls: string = getPrefixCls("picker");
 
@@ -47,7 +47,6 @@ const Calendar = (props: CalendarProps) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [dropdownStyle, setDropdownStyle] = useState<CSSProperties>({});
 
   const dropClassNames = classNames(
     `${prefixCls}-anm`,
@@ -67,28 +66,54 @@ const Calendar = (props: CalendarProps) => {
     setInputValue(value);
   };
 
+  const onOpenCalendar = () => {
+    setIsOpen(true);
+    computePosition();
+  };
+
+  const computePosition = () => {
+    const scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const scrollLeft =
+      document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+
+    const rect = inputRef.current.getBoundingClientRect();
+
+    const documentW = document.documentElement.clientWidth;
+    const documentH = document.documentElement.clientHeight;
+
+    setTimeout(() => {
+      const calendarRect = triggeredRef.current.getBoundingClientRect();
+
+      const isOutsideRight = calendarRect.x + calendarRect.width > documentW;
+      const isOutsideBottom = calendarRect.y + calendarRect.height > documentH;
+
+      let top;
+      let left;
+
+      if (isOutsideRight) {
+        left = rect.x + rect.width - calendarRect.width;
+      } else {
+        left = rect.x + scrollLeft - 16;
+      }
+
+      if (isOutsideBottom) {
+        top = rect.y - calendarRect.height + scrollTop - 8;
+      } else {
+        top = rect.y + rect.height + scrollTop + 8;
+      }
+
+      triggeredRef.current.style.top = top + "px";
+      triggeredRef.current.style.left = left + "px";
+    });
+  };
+
   return (
     <>
       <div
         ref={triggerRef}
         style={{ display: "inline-flex" }}
-        onClick={() => {
-          setIsOpen(true);
-          console.log(inputRef.current.getBoundingClientRect());
-
-          const scrollTop =
-            document.documentElement.scrollTop || document.body.scrollTop || 0;
-          const scrollLeft =
-            document.documentElement.scrollLeft ||
-            document.body.scrollLeft ||
-            0;
-
-          const rect = inputRef.current.getBoundingClientRect();
-          const top = rect.y + rect.height + scrollTop + 8 + "px";
-          const left = rect.x + scrollLeft - 16 + "px";
-
-          setDropdownStyle({ top, left });
-        }}
+        onClick={onOpenCalendar}
       >
         <Input
           ref={inputRef}
@@ -112,11 +137,7 @@ const Calendar = (props: CalendarProps) => {
           unmountOnExit={false}
         >
           <PickContext.Provider value={{ isOpen, type, onChangeValue }}>
-            <div
-              className={dropClassNames}
-              ref={triggeredRef}
-              style={dropdownStyle}
-            >
+            <div className={dropClassNames} ref={triggeredRef}>
               <div className={`${prefixCls}-wrapper`}>
                 {type === "date" && !presets && <DatePicker />}
                 {type === "date" && presets && (

@@ -1,0 +1,148 @@
+@mixin calendar-wrapper {
+  border-radius: 8px;
+  box-shadow: rgb(0 0 0 / 10%) 0 2px 12px 0;
+  background: #333643;
+  color: #ffffff;
+  //padding: 16px;
+  font-size: 14px;
+  user-select: none;
+}
+
+@mixin calender-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+@mixin calendar-header {
+  display: flex;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0 8px;
+  line-height: 42px;
+
+  &-view {
+    flex: auto;
+    text-align: center;
+  }
+
+  &-prev-btn {
+    cursor: pointer;
+    border: 0;
+    background: 0;
+    color: #ffffff;
+    font-size: 16px;
+  }
+
+  &-next-btn {
+    cursor: pointer;
+    border: 0;
+    background: 0;
+    color: #ffffff;
+    font-size: 16px;
+  }
+}
+
+@mixin calendar-body {
+  padding: 8px 12px;
+}
+
+@mixin calendar-td {
+  position: relative;
+  padding: 0;
+  cursor: pointer;
+  transition: background .3s;
+  border-radius: 30px;
+
+  &-disabled {
+    pointer-events: none;
+    color: rgba(205, 205, 205, 0.6);
+
+    &::before {
+      background: rgba(205, 205, 205, 0.1);
+    }
+  }
+
+  &:hover {
+    border-radius: 30px;
+    // 渐变色不支持动画
+    //background: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    background: #585b69;
+  }
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    z-index: 1;
+    height: 36px;
+    transform: translateY(-50%);
+    transition: all .3s;
+    content: "";
+  }
+}
+
+@mixin calendar-cell {
+  position: relative;
+  text-align: center;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  padding: 2px;
+  border-radius: 22px;
+  transition: background .2s, border .2s;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
+    z-index: 1;
+    border-radius: 4px;
+    content: "";
+  }
+
+  &-today {
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      inset-inline-end: 0;
+      inset-inline-start: 0;
+      z-index: 1;
+      border: 1px dashed #ffffff;
+      border-radius: 22px;
+      margin: 4px;
+      content: "";
+    }
+  }
+}
+
+@mixin calendar-presets {
+  min-width: 100px;
+  max-width: 200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  &-ul {
+    list-style: none;
+    flex: auto;
+    height: 0;
+    margin: 0;
+    padding: 8px;
+  }
+
+  &-li {
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+
+    &:hover {
+      background: #585b69;
+    }
+  }
+}
