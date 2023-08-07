@@ -19,8 +19,6 @@ export type { IconProps } from "@/packages/icon";
 
 export { default as Calendar } from "@/packages/calendar";
 
-export { default as Trigger } from "@/packages/trigger";
-
 export { default as Modal } from "@/packages/modal";
 
 export { default as Text } from "@/packages/text";
