@@ -22,7 +22,6 @@ const DatePicker = forwardRef((props: DateProps, ref: React.RefObject<any>) => {
 
   const { value, disabledDate } = props;
   const { type, onChangeValue } = useContext(PickContext);
-  console.log(type);
 
   const [days, setDays] = useState<DateItem[][]>([]);
   const [month, setMonth] = useState(

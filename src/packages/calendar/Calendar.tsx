@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  CSSProperties,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "@/hooks/useOnclickOutSide";
 import { getPrefixCls } from "@/utils";
 
@@ -61,6 +55,15 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     }
   }, triggeredRef);
 
+  useEffect(() => {
+    window.addEventListener("resize", computePosition);
+    window.addEventListener("scroll", computePosition);
+    return () => {
+      window.removeEventListener("resize", computePosition);
+      window.removeEventListener("scroll", computePosition);
+    };
+  }, []);
+
   const onChangeValue = (value) => {
     console.log(value);
     setInputValue(value);
@@ -85,14 +88,16 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     setTimeout(() => {
       const calendarRect = triggeredRef.current.getBoundingClientRect();
 
-      const isOutsideRight = calendarRect.x + calendarRect.width > documentW;
-      const isOutsideBottom = calendarRect.y + calendarRect.height > documentH;
+      const isOutsideRight =
+        calendarRect.width > documentW - rect.width - rect.x - 10;
+      const isOutsideBottom =
+        calendarRect.height > documentH - rect.height - rect.y;
 
       let top;
       let left;
 
       if (isOutsideRight) {
-        left = rect.x + rect.width - calendarRect.width;
+        left = rect.x + rect.width - calendarRect.width + scrollLeft + 50;
       } else {
         left = rect.x + scrollLeft - 16;
       }
