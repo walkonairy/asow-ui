@@ -25,4 +25,6 @@ export { default as Text } from "@/packages/text";
 
 export { MessageProvider, useMessage } from "@/packages/message";
 
+export { default as Drawer } from "@/packages/drawer";
+
 // export * from "@/utils";

@@ -10,6 +10,7 @@ import EXModal from "./packages/modal/__example__/EXModal";
 import ExPortal from "./packages/portal/__example__/ExPortal";
 import ExText from "./packages/text/__example__/ExText";
 import ExMessage from "./packages/message/__example__/ExMessage";
+import EXDrawer from "./packages/drawer/__example__/EXDrawer";
 
 // ReactDOM.render(
 //   <div style={{ gap: 32, display: "flex", flexDirection: "column" }}>
@@ -38,9 +39,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/*<ExButton />*/}
       {/*<EXIcon />*/}
       <ExCalendar />
-      {/*<EXModal />*/}
+      <EXModal />
       {/*<ExPortal />*/}
       {/*<ExMessage />*/}
+      <EXDrawer />
     </div>
   </div>
 );

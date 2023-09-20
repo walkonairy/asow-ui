@@ -1,39 +1,45 @@
 import React, { CSSProperties, useRef } from "react";
-import { getPrefixCls } from "@/utils";
-import classNames from "classnames";
 import Portal from "@/packages/portal";
 import { CSSTransition } from "react-transition-group";
-import { usePressEsc } from "@/hooks/usePressEsc";
-import { useRollbackOverflow } from "@/hooks/useRollbackOverflow";
+import { getPrefixCls } from "@/utils";
+import classNames from "classnames";
 import { useOnClickOutside } from "@/hooks/useOnclickOutSide";
+import { useRollbackOverflow } from "@/hooks/useRollbackOverflow";
+import { usePressEsc } from "@/hooks/usePressEsc";
 import { useTimeoutState } from "@/hooks/useTimeoutState";
 
-export interface ModalProps {
+export interface DrawerProps {
+  title?: string;
   isOpen: boolean;
   onClose?: () => void;
-  unmountOnClose?: boolean;
-  customize?: boolean;
+  width?: string;
+  height?: string;
+  placement?: "top" | "right" | "bottom" | "left";
   mask?: boolean;
   maskStyle?: CSSProperties;
   maskClosable?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = (props) => {
+const Drawer: React.FC<DrawerProps> = (props) => {
   const {
     isOpen,
+    placement = "right",
+    width = 375,
+    height = 375,
     mask,
     maskStyle,
     maskClosable,
     onClose,
-    customize,
     children,
-    unmountOnClose,
   } = props;
 
-  const prefixCls: string = getPrefixCls("modal");
+  const prefixCls: string = getPrefixCls("drawer");
 
   const maskClassNames = classNames(`${prefixCls}-mask-fade`);
-  const wrapClassNames = classNames(`${prefixCls}-anm`, `${prefixCls}-wrap`);
+  const wrapClassNames = classNames(
+    `${prefixCls}-anm`,
+    `${prefixCls}-${placement}-wrap`
+  );
   const contentClassNames = classNames(`${prefixCls}-content`);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -50,6 +56,16 @@ const Modal: React.FC<ModalProps> = (props) => {
     }
   }, wrapperRef);
 
+  const computeW_H = () => {
+    let sty_w_h;
+    if (placement === "top" || placement === "bottom") {
+      sty_w_h = { height };
+    } else {
+      sty_w_h = { width };
+    }
+    return sty_w_h;
+  };
+
   return (
     <Portal>
       <div className={prefixCls}>
@@ -65,14 +81,12 @@ const Modal: React.FC<ModalProps> = (props) => {
         )}
         <CSSTransition
           in={modalOpen}
-          timeout={300}
-          classNames={`${prefixCls}-applied ${prefixCls}-fade`}
-          unmountOnExit={unmountOnClose}
+          timeout={modalOpen ? 10 : 300}
+          classNames={`${prefixCls}-applied ${prefixCls}-${placement}-fade`}
+          unmountOnExit={false}
         >
-          <div className={wrapClassNames}>
-            <div className={contentClassNames} ref={wrapperRef}>
-              {children}
-            </div>
+          <div className={wrapClassNames} style={computeW_H()} ref={wrapperRef}>
+            <div className={contentClassNames}>{children}</div>
           </div>
         </CSSTransition>
       </div>
@@ -80,4 +94,4 @@ const Modal: React.FC<ModalProps> = (props) => {
   );
 };
 
-export default Modal;
+export default Drawer;

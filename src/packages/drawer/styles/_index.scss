@@ -1,0 +1,121 @@
+@import "./src/styles/core/prefixcls";
+@import "./mixins";
+
+.#{$prefix-cls}drawer {
+  @include drawer();
+
+  &-mask {
+    @include drawer-mask
+  }
+
+  &-top-wrap {
+    @include drawer-top-wrapper
+  }
+
+  &-right-wrap {
+    @include drawer-right-wrapper
+  }
+
+  &-bottom-wrap {
+    @include drawer-bottom-wrapper
+  }
+
+  &-left-wrap {
+    @include drawer-left-wrapper
+  }
+
+  &-content {
+    @include drawer-content
+  }
+
+
+  /* drawer 出场动画 */
+
+  // *************************************** top ***************************************
+  &-top-fade-enter {
+    transform: translate(0, -100%);
+  }
+
+  &-top-fade-exit-active {
+    transition: transform 300ms;
+    transform: translate(0, -100%);
+  }
+
+  &-top-fade-exit-done {
+    display: none;
+  }
+
+  // *************************************** bottom ***************************************
+  &-bottom-fade-enter {
+    transform: translate(0, 100%);
+  }
+
+  &-bottom-fade-exit-active {
+    transition: transform 300ms;
+    transform: translate(0, 100%);
+  }
+
+  &-bottom-fade-exit-done {
+    display: none;
+  }
+
+  // *************************************** right ***************************************
+  &-right-fade-enter {
+    transform: translate(100%, 0px);
+  }
+
+  &-right-fade-exit-active {
+    transition: transform 300ms;
+    transform: translate(100%, 0px);
+  }
+
+  &-right-fade-exit-done {
+    display: none;
+  }
+
+  // *************************************** left ***************************************
+  &-left-fade-enter {
+    transform: translate(-100%, 0px);
+  }
+
+  &-left-fade-exit-active {
+    transition: transform 300ms;
+    transform: translate(-100%, 0px);
+  }
+
+  &-left-fade-exit-done {
+    display: none;
+  }
+
+  /* 当设置 unmountOnExit = false时 避免初始化就展示元素 */
+  &-anm:not(&-applied) {
+    display: none;
+  }
+
+
+  /* mask出场 动画 */
+  &-mask-fade-enter {
+    opacity: 0;
+  }
+
+  &-mask-fade-enter-active {
+    @include drawer-mask;
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+
+  &-mask-fade-enter-done {
+    @include drawer-mask;
+  }
+
+  &-mask-fade-exit {
+    @include drawer-mask;
+    opacity: 1;
+  }
+
+  &-mask-fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+}
