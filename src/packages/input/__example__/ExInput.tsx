@@ -1,7 +1,7 @@
 import React from "react";
+import { IoCloudyOutline, IoCartSharp } from "react-icons/io5";
 import Input from "@/packages/input";
-import { Icon } from "@/index";
-import { Size } from "@asow/ui";
+import { Size } from "@asow/ui/dist/utils";
 
 const ExInput = () => {
   const [value, setValue] = React.useState("");
@@ -20,7 +20,6 @@ const ExInput = () => {
           label="账号"
           placeholder="请输入"
           size={{ base: "small", md: "large" }}
-          // suffixIcon={<Icon icon="xmark-circle" />}
           value={value}
           onChange={(event) => {
             setValue(event.target.value);
@@ -36,7 +35,7 @@ const ExInput = () => {
           label="密码"
           defaultValue={"Hello World! 123~"}
           size={"middle"}
-          suffixIcon="eye"
+          suffixIcon={<IoCloudyOutline size="22px" />}
           allowClear={true}
         />
 
@@ -45,7 +44,7 @@ const ExInput = () => {
           label="二次密码"
           defaultValue={"Hello World! 123~"}
           size={"small"}
-          suffixIcon="eye-slash"
+          suffixIcon="icon"
         />
 
         <Input.Password
@@ -64,7 +63,7 @@ const ExInput = () => {
             label="错误 Error"
             defaultValue={"Hello World! 123~"}
             size={size}
-            suffixIcon="eye-slash"
+            suffixIcon={<IoCartSharp size="20px" />}
             hasError={true}
             allowClear={true}
             toolTip="Tool tip message"

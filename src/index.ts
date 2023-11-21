@@ -1,9 +1,5 @@
 import "./styles/index.scss";
 
-import { library } from "@fortawesome/fontawesome-svg-core"; // 导入图标仓库
-import { fas } from "@fortawesome/free-solid-svg-icons"; // 全部图标
-library.add(fas); // 把图标添加进仓库
-
 export { default as Button } from "@/packages/button";
 export type { ButtonProps } from "@/packages/button";
 
@@ -13,9 +9,6 @@ export type {
   PasswordProps,
   TextAreaProps,
 } from "@/packages/input";
-
-export { default as Icon } from "@/packages/icon";
-export type { IconProps } from "@/packages/icon";
 
 export { default as Calendar } from "@/packages/calendar";
 
@@ -28,3 +21,12 @@ export { MessageProvider, useMessage } from "@/packages/message";
 export { default as Drawer } from "@/packages/drawer";
 
 // export * from "@/utils";
+
+// const getMaxIndex = () => {
+//   const bodyElement = [...document.body.querySelectorAll("*")];
+//   const indexArr: any = [];
+//   for (let item of bodyElement) {
+//     indexArr.push(Number(window.getComputedStyle(item).zIndex) || 0);
+//   }
+//   return String(Math.max(...indexArr) + 1);
+// };

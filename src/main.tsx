@@ -4,7 +4,6 @@ import "./styles/index.scss";
 
 import ExButton from "@/packages/button/__example__/ExButton";
 import ExInput from "@/packages/input/__example__/ExInput";
-import EXIcon from "@/packages/icon/__example__/EXIcon";
 import ExCalendar from "./packages/calendar/__example__/ExCalendar";
 import EXModal from "./packages/modal/__example__/EXModal";
 import ExPortal from "./packages/portal/__example__/ExPortal";
@@ -35,13 +34,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     }}
   >
     <div>
-      {/*<ExInput />*/}
-      {/*<ExButton />*/}
-      {/*<EXIcon />*/}
+      <ExInput />
+      <ExButton />
       <ExCalendar />
       <EXModal />
-      {/*<ExPortal />*/}
-      {/*<ExMessage />*/}
+      <ExPortal />
+      <ExMessage />
       <EXDrawer />
     </div>
   </div>

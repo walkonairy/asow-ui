@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useRef, useState } from "react";
+import { IoCalendarClearOutline } from "react-icons/io5";
 import { useOnClickOutside } from "@/hooks/useOnclickOutSide";
 import { getPrefixCls } from "@/utils";
 
@@ -12,7 +13,6 @@ import DatePickerWithPresets, {
 
 import { findDOMNode } from "react-dom";
 import { Input } from "@/index";
-import { Icon } from "@asow/ui";
 import Portal from "@/packages/portal";
 import { CSSTransition } from "react-transition-group";
 import classNames from "classnames";
@@ -125,13 +125,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
           readOnly
           size={"middle"}
           value={inputValue}
-          suffixIcon={
-            <Icon
-              icon={["fas", "calendar-days"]}
-              cursor="pointer"
-              size={"lg"}
-            />
-          }
+          suffixIcon={<IoCalendarClearOutline size="20px" cursor="pointer" />}
         />
       </div>
       <Portal>

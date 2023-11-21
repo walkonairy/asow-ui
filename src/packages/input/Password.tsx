@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from "react";
 import Input, { InputProps } from "@/packages/input/Input";
-import { Icon } from "@/index";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 type VisibilityToggle = {
   visible?: boolean;
@@ -38,21 +38,25 @@ const Password = forwardRef(
       });
     };
 
-    const icon = visible ? "eye" : "eye-slash";
+    const getIcon = (visible) => {
+      const Icon = visible ? IoEyeOutline : IoEyeOffOutline;
+      return (
+        <Icon
+          size="20px"
+          onClick={onVisibleChange}
+          style={{ cursor: props.disabled ? "not-allowed" : "pointer" }}
+        />
+      );
+    };
 
-    const suffixNode = (
-      <Icon
-        icon={icon}
-        onClick={onVisibleChange}
-        style={{ cursor: props.disabled ? "not-allowed" : "pointer" }}
-      />
-    );
+    const suffixNode = getIcon(visible);
 
     const renderPassword = () => {
       const omittedProps: InputProps = {
         ...rest,
         type: visible ? "text" : "password",
         suffixIcon: suffixNode,
+        size: "large",
       };
       return <Input ref={ref} {...omittedProps} />;
     };

@@ -1,6 +1,6 @@
 import React from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { getPrefixCls } from "@/utils";
-import { Icon } from "@/index";
 
 export type LoadingProps = { loading: boolean };
 
@@ -10,7 +10,7 @@ const LoadingIcon = (props: LoadingProps) => {
 
   return (
     <>
-      <Icon icon={["fas", "spinner"]} className={className} />
+      <AiOutlineLoading3Quarters className={className} />
     </>
   );
 };

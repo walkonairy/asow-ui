@@ -7,9 +7,9 @@ import React, {
   useState,
   useEffect,
 } from "react";
+import { IoCloseCircleOutline } from "react-icons/io5";
 import { getPrefixCls, Size, str2size } from "@/utils";
 import { Token, useSize } from "@/hooks/useSize";
-import { Icon, IconProps } from "@/index";
 import classNames from "classnames";
 import { useOnClickOutside } from "@/hooks/useOnclickOutSide";
 
@@ -35,7 +35,7 @@ export interface InputProps
   allowClear?: boolean;
   hasError?: boolean | string;
   toolTip?: string;
-  suffixIcon?: IconProps["icon"] | React.ReactNode;
+  suffixIcon?: React.ReactNode;
   defaultValue?: string;
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -144,17 +144,6 @@ const Input = forwardRef(
     };
 
     const renderSuffix = (suffixIcon) => {
-      let _suffix = null;
-
-      if (suffixIcon) {
-        _suffix =
-          typeof suffixIcon === "object" ? (
-            suffixIcon
-          ) : (
-            <Icon icon={suffixIcon as IconProps["icon"]} />
-          );
-      }
-
       return (
         <span
           // @ts-ignore
@@ -163,7 +152,7 @@ const Input = forwardRef(
           onClick={onClickInside}
         >
           {hasClearIcon && clearIcon}
-          {_suffix && _suffix}
+          {suffixIcon}
         </span>
       );
     };
@@ -273,8 +262,8 @@ const Input = forwardRef(
 
     const hasClearIcon = allowClear && _value?.length > 0;
     const clearIcon = (
-      <Icon
-        icon="xmark-circle"
+      <IoCloseCircleOutline
+        size="20px"
         onClick={handleClearClick}
         style={{ cursor: disabled ? "not-allowed" : "pointer" }}
       />
