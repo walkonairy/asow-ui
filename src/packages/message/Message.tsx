@@ -1,11 +1,16 @@
 import React, { createContext, useContext, useRef, useState } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import {
+  IoCloseCircleOutline,
+  IoInformationCircleOutline,
+  IoCheckmarkCircleOutline,
+  IoWarningOutline,
+} from "react-icons/io5";
 import Portal from "@/packages/portal";
 import Text from "@/packages/text";
 import { getPrefixCls } from "@/utils";
 import classNames from "classnames";
-import { Button, Icon } from "@asow/ui";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { Button } from "@asow/ui";
 
 type MessageType = "info" | "success" | "error" | "warning";
 
@@ -136,16 +141,16 @@ export const MessageProvider: React.FC<{ config?: MessageConfig }> = (
     }, 100);
   };
 
-  const renderTypeIcon = (type: MessageType): IconProp => {
+  const renderTypeIcon = (type: MessageType) => {
     switch (type) {
       case "info":
-        return "info-circle";
+        return <IoInformationCircleOutline size="20px" />;
       case "success":
-        return "check-circle";
+        return <IoCheckmarkCircleOutline size="20px" />;
       case "warning":
-        return "warning";
+        return <IoWarningOutline size="20px" />;
       case "error":
-        return "xmark-circle";
+        return <IoCloseCircleOutline size="20px" />;
     }
   };
 
@@ -174,9 +179,7 @@ export const MessageProvider: React.FC<{ config?: MessageConfig }> = (
                   onMouseEnter={() => onMouseEnter(item)}
                   onMouseLeave={() => onMouseLeave(item)}
                 >
-                  <div>
-                    <Icon icon={renderTypeIcon(item.type)} />
-                  </div>
+                  <div>{renderTypeIcon(item.type)}</div>
                   <div className={contentWrapClassnames}>
                     {item.message.title && (
                       <Text tag="tc-3">{item.message.title}</Text>
@@ -190,7 +193,7 @@ export const MessageProvider: React.FC<{ config?: MessageConfig }> = (
                       onClick={() => _onClose(item)}
                       className={closeButtonClassnames(item.type)}
                     >
-                      <Icon icon="close" fontSize="15px" />
+                      <IoCloseCircleOutline size="20px" />
                     </Button>
                   )}
                 </div>
