@@ -1,4 +1,5 @@
 import React, { CSSProperties, useRef } from "react";
+import { Button } from "@/index";
 import { getPrefixCls } from "@/utils";
 import classNames from "classnames";
 import Portal from "@/packages/portal";
@@ -10,24 +11,34 @@ import { useTimeoutState } from "@/hooks/useTimeoutState";
 
 export interface ModalProps {
   isOpen: boolean;
-  onClose?: () => void;
+  title?: React.ReactNode;
+  cancelText?: string;
+  confirmText?: string;
   unmountOnClose?: boolean;
   customize?: boolean;
   mask?: boolean;
   maskStyle?: CSSProperties;
+  onClose?: () => void;
   maskClosable?: boolean;
+  onCancel?: () => void;
+  onConfirm?: () => void;
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
   const {
     isOpen,
+    title,
+    cancelText,
+    confirmText,
     mask,
     maskStyle,
     maskClosable,
-    onClose,
     customize,
     children,
     unmountOnClose,
+    onClose,
+    onCancel,
+    onConfirm,
   } = props;
 
   const prefixCls: string = getPrefixCls("modal");
@@ -50,6 +61,82 @@ const Modal: React.FC<ModalProps> = (props) => {
     }
   }, wrapperRef);
 
+  /**
+   * ================= render footer start =================
+   */
+  const renderDefaultFooter = () => {
+    if (cancelText && confirmText) {
+      return (
+        <>
+          {renderCancelBtn()} {renderConfirmBtn(confirmText, onConfirm)}
+        </>
+      );
+    }
+    if (!cancelText && confirmText) {
+      return renderConfirmBtn(confirmText, onConfirm);
+    }
+    if (cancelText && !confirmText) {
+      return renderConfirmBtn(cancelText, onCancel);
+    }
+  };
+
+  const renderCancelBtn = () => {
+    return (
+      <Button
+        size={"large"}
+        style={{ background: "#191f1f", color: "#fff" }}
+        onClick={() => {
+          onCancel ? onCancel() : onClose();
+        }}
+      >
+        {cancelText}
+      </Button>
+    );
+  };
+
+  const renderConfirmBtn = (text, onClick) => {
+    return (
+      <Button
+        size={"large"}
+        style={{ background: "#5b9ddb", color: "#fff" }}
+        onClick={onClick}
+      >
+        {text}
+      </Button>
+    );
+  };
+  /**
+   * ================= render footer end =================
+   */
+
+  const renderDefault = () => {
+    return (
+      <div className={wrapClassNames}>
+        <div className={contentClassNames} ref={wrapperRef}>
+          <div className={`${prefixCls}-body`}>
+            {title && <div className={`${prefixCls}-body-title`}>{title}</div>}
+            <div className={`${prefixCls}-body-content`}>{children}</div>
+            {(cancelText || confirmText) && (
+              <div className={`${prefixCls}-body-footer`}>
+                {renderDefaultFooter()}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderCustomize = () => {
+    return (
+      <div className={wrapClassNames}>
+        <div className={contentClassNames} ref={wrapperRef}>
+          {children}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Portal>
       <div className={prefixCls}>
@@ -69,11 +156,7 @@ const Modal: React.FC<ModalProps> = (props) => {
           classNames={`${prefixCls}-applied ${prefixCls}-fade`}
           unmountOnExit={unmountOnClose}
         >
-          <div className={wrapClassNames}>
-            <div className={contentClassNames} ref={wrapperRef}>
-              {children}
-            </div>
-          </div>
+          {customize ? renderCustomize() : renderDefault()}
         </CSSTransition>
       </div>
     </Portal>

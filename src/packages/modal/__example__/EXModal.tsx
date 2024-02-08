@@ -14,6 +14,15 @@ const EXModal = () => {
         customize={false}
         mask
         unmountOnClose
+        title="你好"
+        cancelText="取消"
+        confirmText="确定"
+        onCancel={() => {
+          console.log("cancel");
+        }}
+        onConfirm={() => {
+          console.log("confirm");
+        }}
       >
         <div>
           <div>title</div>

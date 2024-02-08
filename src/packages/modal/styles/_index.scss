@@ -14,6 +14,10 @@
     @include modal-content
   }
 
+  &-body {
+    @include modal-body
+  }
+
 
   /* modal 出场动画 */
   &-fade-enter {

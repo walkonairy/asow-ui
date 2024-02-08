@@ -16,11 +16,44 @@
   width: 480px;
   max-width: calc(100vw - 32px);
   background-color: #fff;
-  padding: 20px 24px;
   background-clip: padding-box;
   border: 0;
   border-radius: 8px;
   box-shadow: 0 6px 16px 0 rgba(0, 0, 0, .08), 0 3px 6px -4px rgba(0, 0, 0, .12), 0 9px 28px 8px rgba(0, 0, 0, .05);
+}
+
+@mixin modal-body {
+  border-radius: 6px;
+  width: 520px;
+  max-width: calc(100vw - 32px);
+  border: 0;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+  0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(to right, #191f1f, #262536);
+  padding: 20px 24px;
+
+  &-title {
+    color: #ffffffd4;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &-content {
+    padding-right: 8px;
+    max-height: 360px;
+    color: #fff;
+    transition: all 0.3s linear;
+    overflow: auto;
+  }
+
+  &-footer {
+    display: flex;
+    margin-top: 24px;
+    justify-content: flex-end;
+    gap: 12px;
+  }
 }
 
 @mixin modal-mask {
