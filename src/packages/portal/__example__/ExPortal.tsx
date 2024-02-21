@@ -21,6 +21,7 @@ const ExPortal = () => {
         onClose={handleCloseModal}
         unmountOnClose={false}
         mask={true}
+        width={700}
       >
         <div>这是一个 Modal</div>
         <p>你可以在这里添加 Modal 的内容。</p>

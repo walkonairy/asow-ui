@@ -17,6 +17,7 @@ export interface ModalProps {
   unmountOnClose?: boolean;
   customize?: boolean;
   mask?: boolean;
+  width?: string | number;
   maskStyle?: CSSProperties;
   onClose?: () => void;
   maskClosable?: boolean;
@@ -31,6 +32,7 @@ const Modal: React.FC<ModalProps> = (props) => {
     cancelText,
     confirmText,
     mask,
+    width,
     maskStyle,
     maskClosable,
     customize,
@@ -112,8 +114,8 @@ const Modal: React.FC<ModalProps> = (props) => {
   const renderDefault = () => {
     return (
       <div className={wrapClassNames}>
-        <div className={contentClassNames} ref={wrapperRef}>
-          <div className={`${prefixCls}-body`}>
+        <div className={contentClassNames} style={{ width }} ref={wrapperRef}>
+          <div className={`${prefixCls}-body`} style={{ width }}>
             {title && <div className={`${prefixCls}-body-title`}>{title}</div>}
             <div className={`${prefixCls}-body-content`}>{children}</div>
             {(cancelText || confirmText) && (

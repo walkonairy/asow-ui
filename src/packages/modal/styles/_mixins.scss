@@ -13,7 +13,7 @@
   position: relative;
   top: 100px;
   margin: 0 auto;
-  width: 480px;
+  width: 520px;
   max-width: calc(100vw - 32px);
   background-color: #fff;
   background-clip: padding-box;
@@ -31,6 +31,7 @@
   0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   background: linear-gradient(to right, #191f1f, #262536);
   padding: 20px 24px;
+  box-sizing: border-box;
 
   &-title {
     color: #ffffffd4;
