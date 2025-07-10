@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export function useRollbackOverflow(isOpen) {
+export function useRollbackOverflow(isOpen: boolean) {
   const overflowRef = useRef("");
 
   /**

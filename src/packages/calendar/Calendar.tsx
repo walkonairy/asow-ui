@@ -110,6 +110,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 
       triggeredRef.current.style.top = top + "px";
       triggeredRef.current.style.left = left + "px";
+      triggeredRef.current.style.zIndex = '99';
     });
   };
 
